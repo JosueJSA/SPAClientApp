@@ -1,0 +1,81 @@
+﻿<Window x:Class="SPAClientApp.InsumosContenedor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SPAClientApp"
+        mc:Ignorable="d"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="#FF3F51B5"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        x:Name="insumoContainer"
+        
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ShowInTaskbar="True"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"
+        Title="InsumoContainer" Height="523" Width="902">
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="10"/>
+    </Window.Effect>
+    <DockPanel>
+        
+
+        <DockPanel DockPanel.Dock="Top" Height="25" Background="#FF3F51B5" MouseLeftButtonDown="Move">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+                <Label Content="SAP" Background="{x:Null}" Margin="5,0,5,0" Foreground="#DDFFFFFF" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Label Content="INSUMO" VerticalAlignment="Center" Foreground="#DDFFFFFF"/>
+                <materialDesign:PackIcon Margin="8,0,0,0" Kind="AccountCircle" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" />
+                <Label Content="User Name" Foreground="#DDFFFFFF" VerticalAlignment="Center" FontSize="11"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Height="24" Width="23" Padding="0,0,0,0" Click="Minimizar">
+                    <materialDesign:PackIcon Kind="WindowMinimize" />
+                </Button>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Height="24" Width="27" Padding="0,0,0,0" Click="Maximizar">
+                    <materialDesign:PackIcon Kind="WindowMaximize" />
+                </Button>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Height="24" Width="28" Padding="0,0,0,0" Click="Salir">
+                    <materialDesign:PackIcon Kind="Close" />
+                </Button>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- the transitioner will manage your transitions. notice how SelectedIndex is set to zero: the first slide (instead of the default of -1) -->
+        <materialDesign:Transitioner x:Name="transitioner" SelectedIndex="0" AutoApplyTransitionOrigins="True">
+            <materialDesign:Transitioner.InputBindings>
+                <KeyBinding Key="F5" Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" />
+                <KeyBinding Key="F6" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
+            </materialDesign:Transitioner.InputBindings>
+            <!-- you can use a slide for each page, let's add a touch of fade for our first page  -->
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.BackwardWipe>
+                    <materialDesign:FadeWipe />
+                </materialDesign:TransitionerSlide.BackwardWipe>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:CircleWipe/>
+                </materialDesign:TransitionerSlide.ForwardWipe>
+                <local:WListaInsumos x:Name ="wListaInsumos"  xmlns:local="clr-namespace:SPAClientApp"/>
+            </materialDesign:TransitionerSlide>
+            <!-- you can control (and create your own) wipes -->
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.BackwardWipe>
+                    <materialDesign:FadeWipe />
+                </materialDesign:TransitionerSlide.BackwardWipe>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:CircleWipe/>
+                </materialDesign:TransitionerSlide.ForwardWipe>
+                <local:WInsumo x:Name ="wInsumo" xmlns:local="clr-namespace:SPAClientApp"/>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+
+
+    </DockPanel>
+</Window>

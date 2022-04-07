@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="InsumosService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6666/InsumosService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6666/InsumosService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6666/InsumosService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IInsumosService_GetInsumosList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInsumosList" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_GetInsumosList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInsumosListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_AddInsumo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddInsumo" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_AddInsumo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddInsumoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_UpdateInsumo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateInsumo" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_UpdateInsumo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateInsumoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_ChangeInsumoStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeInsumoStatus" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_ChangeInsumoStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeInsumoStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_ActualizarCantidades_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarCantidades" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_ActualizarCantidades_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarCantidadesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_IsDuplicated_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsDuplicated" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_IsDuplicated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsDuplicatedResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IInsumosService">
+    <wsdl:operation name="GetInsumosList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/GetInsumosList" message="tns:IInsumosService_GetInsumosList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/GetInsumosListResponse" message="tns:IInsumosService_GetInsumosList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddInsumo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/AddInsumo" message="tns:IInsumosService_AddInsumo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/AddInsumoResponse" message="tns:IInsumosService_AddInsumo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateInsumo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/UpdateInsumo" message="tns:IInsumosService_UpdateInsumo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/UpdateInsumoResponse" message="tns:IInsumosService_UpdateInsumo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeInsumoStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/ChangeInsumoStatus" message="tns:IInsumosService_ChangeInsumoStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/ChangeInsumoStatusResponse" message="tns:IInsumosService_ChangeInsumoStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarCantidades">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/ActualizarCantidades" message="tns:IInsumosService_ActualizarCantidades_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/ActualizarCantidadesResponse" message="tns:IInsumosService_ActualizarCantidades_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsDuplicated">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/IsDuplicated" message="tns:IInsumosService_IsDuplicated_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/IsDuplicatedResponse" message="tns:IInsumosService_IsDuplicated_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IInsumosService" type="tns:IInsumosService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetInsumosList">
+      <soap:operation soapAction="http://tempuri.org/IInsumosService/GetInsumosList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddInsumo">
+      <soap:operation soapAction="http://tempuri.org/IInsumosService/AddInsumo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateInsumo">
+      <soap:operation soapAction="http://tempuri.org/IInsumosService/UpdateInsumo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeInsumoStatus">
+      <soap:operation soapAction="http://tempuri.org/IInsumosService/ChangeInsumoStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarCantidades">
+      <soap:operation soapAction="http://tempuri.org/IInsumosService/ActualizarCantidades" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsDuplicated">
+      <soap:operation soapAction="http://tempuri.org/IInsumosService/IsDuplicated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InsumosService">
+    <wsdl:port name="BasicHttpBinding_IInsumosService" binding="tns:BasicHttpBinding_IInsumosService">
+      <soap:address location="http://localhost:6666/InsumosService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
