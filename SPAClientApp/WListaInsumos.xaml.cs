@@ -1,11 +1,17 @@
-﻿using MaterialDesignThemes.Wpf.Transitions;
-using SPAClientApp.InsumosService;
+﻿using SPAClientApp.InsumosService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
@@ -14,27 +20,24 @@ using ToastNotifications.Position;
 namespace SPAClientApp
 {
     /// <summary>
-    /// Interaction logic for UserControl2.xaml
+    /// Interaction logic for WListaInsumos.xaml
     /// </summary>
-    public partial class WListaInsumos : UserControl
+    public partial class WListaInsumos : Window
     {
-        private readonly InsumosServiceClient client = new InsumosServiceClient();
-        private InsumosContenedor Contenedor { get; set; }
-        private readonly Notifier notifier;
+        private readonly InsumosServiceClient  client = new InsumosServiceClient();
+        private Notifier notifier;
+        private string Status { get; set; } = string.Empty; 
+        private DateTime Fecha { get; set; } = DateTime.Now;
+        private string Valor { get; set; } = string.Empty;  
+        private string CriterioSeleccionado { get; set; } = "Todos";   
+        private WHome HomeWindow { get; set; }
+        private DateTime Tiempo { get; set; }
 
-        public WListaInsumos()
+        public WListaInsumos(WHome home)
         {
             InitializeComponent();
-            this.Loaded += (s, e) =>
-            {
-                Contenedor = Window.GetWindow(this) as InsumosContenedor;
-            };
-            notifier = new Notifier(cfg =>
-            {
-                cfg.PositionProvider = new WindowPositionProvider(parentWindow: Window.GetWindow(this), corner: Corner.BottomRight, offsetX: 10, offsetY: 10);
-                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(3), maximumNotificationCount: MaximumNotificationCount.FromCount(3));
-                cfg.Dispatcher = Application.Current.Dispatcher;
-            });
+            HomeWindow = home;
+            ConfigurarToastNotifier(Window.GetWindow(this), 3); // 3 -> Número de segundos para mostrar una notificacion en la ventana.
         }
 
         private void BuscarInsumos(object sender, RoutedEventArgs e)
@@ -42,14 +45,15 @@ namespace SPAClientApp
             try
             {
                 ValidarFiltro();
-                string status = ((bool)CheckBoxActivos.IsChecked) ? "Activo" : "Dado de baja";
-                DateTime fecha = ((bool)CheckBoxConFecha.IsChecked) ? Convert.ToDateTime(FechaLimite.Text) : Convert.ToDateTime("1/1/1900 00:00:00");
-                string valor = (Criterio.Text == "Nombre") ? $"%{ValorBusqueda.Text}%" : ValorBusqueda.Text;
+                CriterioSeleccionado = Criterio.Text;
+                Status = ((bool)CheckBoxActivos.IsChecked) ? "Activo" : "Dado de baja";
+                Fecha = ((bool)CheckBoxConFecha.IsChecked) ? Convert.ToDateTime(FechaLimite.Text) : Convert.ToDateTime("1/1/1900 00:00:00");
+                Valor = (Criterio.Text == "Nombre") ? $"%{ValorBusqueda.Text}%" : ValorBusqueda.Text;
                 if (Criterio.Text == "Todos")
-                    valor = null;
+                    Valor = null;
                 string criterio = Criterio.Text;
-                var result = client.GetInsumosList(criterio, valor, fecha, status).ToList();
-                ActualizarTablaInsumos(result); 
+                var result = client.GetInsumosList(CriterioSeleccionado, Valor, Fecha, Status).ToList();
+                ActualizarTablaInsumos(result);
             }
             catch (ArgumentException ae)
             {
@@ -70,55 +74,12 @@ namespace SPAClientApp
                     throw new ArgumentException("Debes escribir un nombre en el valor de búsqueda");
         }
 
-        private void LimpiarFiltro(object sender, RoutedEventArgs e)
-        {
-            CheckBoxConFecha.IsChecked = false;
-            FechaLimite.Text = String.Empty;
-            ValorBusqueda.Text = String.Empty;  
-            Criterio.SelectedIndex = 1;
-            CheckBoxActivos.IsChecked = true;
-        }
-
-        private void ConsultarInsumo(object sender, MouseButtonEventArgs e)
-        {
-            var item = (EInsumo)tablaDatos.SelectedItem;
-            if (item != null)
-            {
-                Contenedor.Insumo = client.GetInsumosList("Código", item.Codigo.ToString(), item.Registro, item.Status).First();
-                if (Contenedor.Insumo != null)
-                {
-                    Transitioner.MoveNextCommand.Execute(1, this);
-                    Contenedor.InsumoPage.ActivarModoLectura();
-                }
-                else
-                {
-                    MostrarToastMessage("Error", "Hubo un error en el servidor, si los " +
-                    "problemas persisten, favor de contactar a soporte técnico");
-                }
-            }
-        }
-
-        private void AgregarInsumo(object sender, RoutedEventArgs e)
-        {
-            Contenedor.Insumo = null;
-            Contenedor.InsumoPage.ActivarModoEdicion("Registro");
-            Transitioner.MoveNextCommand.Execute(1, this);
-        }
-
         private void SeleccionarCriterio(object sender, MouseButtonEventArgs e)
         {
             if (Criterio.Text == "Todos")
                 ValorBusqueda.IsEnabled = false;
             else
                 ValorBusqueda.IsEnabled = true;
-        }
-
-        private void MostrarToastMessage(string tipo, string mensaje)
-        {
-            if (tipo == "Warning")
-                notifier.ShowWarning(mensaje);
-            else
-                notifier.ShowError(mensaje);
         }
 
         private void ActualizarTablaInsumos(List<EInsumo> insumos)
@@ -128,11 +89,169 @@ namespace SPAClientApp
             else
                 MostrarToastMessage("Error", "Hubo un error en el servidor, si los " +
                     "problemas persisten, favor de contactar a soporte técnico");
+            if ((bool)CheckBoxActivos.IsChecked)
+            {
+                ColumnActive.Visibility = Visibility.Collapsed;
+                ColumnEliminate.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ColumnActive.Visibility = Visibility.Visible;
+                ColumnEliminate.Visibility = Visibility.Collapsed;
+            }
+            Tiempo = DateTime.Now;
         }
 
         private void Salir(object sender, RoutedEventArgs e)
         {
-            Contenedor.Close();
+            Close();
+        }
+
+        private void DarDeBaja(object sender, RoutedEventArgs e)
+        {
+            if (TablaActualizada())
+            {
+                var insumo = ((FrameworkElement)sender).DataContext as EInsumo;
+                string mensaje = "¿Seguro(a) que deseas dar de baja el Insumo seleccionado?";
+                if (MostrarCuadroConfirmacion(mensaje))
+                {
+                    AnswerMessage response = client.ChangeInsumoStatus(insumo.Codigo, "Dado de baja");
+                    if (response.Key >= 0)
+                    {
+                        MostrarToastMessage("Exito", "El Insumo ha sido dado de baja");
+                        var result = client.GetInsumosList(CriterioSeleccionado, Valor, Fecha, Status).ToList();
+                        ActualizarTablaInsumos(result);
+                    }
+                    else
+                    {
+                        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
+                    }
+                }
+            }
+            else
+            {
+                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
+            }
+        }
+
+        private void Activar(object sender, RoutedEventArgs e)
+        {
+            if (TablaActualizada())
+            {
+                var insumo = ((FrameworkElement)sender).DataContext as EInsumo;
+                string mensaje = "¿Seguro(a) que deseas dar de alta el Insumo seleccionado?";
+                if (MostrarCuadroConfirmacion(mensaje))
+                {
+                    AnswerMessage response = client.ChangeInsumoStatus(insumo.Codigo, "Activo");
+                    if (response.Key >= 0)
+                    {
+                        MostrarToastMessage("Exito", "El Insumo ha sido dado de alta");
+                        RefrescarTablaInsumos();
+                    }
+                    else
+                    {
+                        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
+                    }
+                }
+            }
+            else
+            {
+                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
+            }
+        }
+
+        private void MostrarToastMessage(string tipo, string mensaje)
+        {
+            if (tipo == "Warning")
+                notifier.ShowWarning(mensaje);
+            if (tipo == "Exito")
+                notifier.ShowSuccess(mensaje);
+            if (tipo == "Error")
+            {
+                ConfigurarToastNotifier(HomeWindow, 5);
+                notifier.ShowError(mensaje);
+                Close();
+            }
+        }
+
+        public void RefrescarTablaInsumos()
+        {
+            var result = client.GetInsumosList(CriterioSeleccionado, Valor, Fecha, Status).ToList();
+            ActualizarTablaInsumos(result);
+        }
+
+        private void Consultar(object sender, RoutedEventArgs e)
+        {
+            if (TablaActualizada())
+            {
+                var insumo = ((FrameworkElement)sender).DataContext as EInsumo;
+                var window = new WInsumo(this);
+                window.ActivarModoLectura(insumo);
+                window.Show();
+            }
+            else
+            {
+                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
+            }
+        }
+
+        private void Modificar(object sender, RoutedEventArgs e)
+        {
+            if (TablaActualizada())
+            {
+                var insumo = ((FrameworkElement)sender).DataContext as EInsumo;
+                var window = new WInsumo(this);
+                window.ActivarModoEdicion("Actualizacion", insumo);
+                window.Show();
+            }
+            else
+            {
+                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
+            }
+        }
+
+        private bool MostrarCuadroConfirmacion(string message)
+        {
+            MessageBoxResult boxResult = MessageBox.Show(message, "Advertencia", MessageBoxButton.YesNoCancel);
+            return MessageBoxResult.Yes == boxResult;
+        }
+
+        private void AgregarInsumo(object sender, RoutedEventArgs e)
+        {
+            var window = new WInsumo(this);
+            window.ActivarModoEdicion("Registro", new EInsumo());
+            window.Show();
+        }
+
+        private void LimpiarFiltro(object sender, RoutedEventArgs e)
+        {
+            ValorBusqueda.Text = String.Empty;
+            FechaLimite.Text = String.Empty;    
+            CheckBoxActivos.IsChecked = true;
+            CheckBoxConFecha.IsChecked = false;
+            Criterio.SelectedIndex = 0;
+        }
+
+        private void ConfigurarToastNotifier(Window ventana, int segundos)
+        {
+            notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(parentWindow: ventana, corner: Corner.BottomRight, offsetX: 10, offsetY: 10);
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(segundos), maximumNotificationCount: MaximumNotificationCount.FromCount(segundos));
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
+        }
+
+        private bool TablaActualizada()
+        {
+            bool isCurrent = true;
+            if((DateTime.Now - Tiempo).TotalMinutes > 5)
+            {
+                isCurrent = false;
+                RefrescarTablaInsumos();
+            }
+            return isCurrent;
         }
     }
 }
+

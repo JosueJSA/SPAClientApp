@@ -84,19 +84,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="InsumosContenedor.xaml.cs">
-      <DependentUpon>InsumosContenedor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WInsumo.xaml.cs">
       <DependentUpon>WInsumo.xaml</DependentUpon>
     </Compile>
     <Compile Include="WListaInsumos.xaml.cs">
       <DependentUpon>WListaInsumos.xaml</DependentUpon>
     </Compile>
-    <Page Include="InsumosContenedor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="WInsumo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +158,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\img\" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\InsumosService\" />
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +177,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\img\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,12 +1,21 @@
-﻿<UserControl x:Class="SPAClientApp.WListaInsumos"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:SPAClientApp" xmlns:insumosservice="clr-namespace:SPAClientApp.InsumosService" d:DataContext="{d:DesignInstance Type=insumosservice:EInsumo}"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<Window x:Class="SPAClientApp.WListaInsumos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SPAClientApp"
+        mc:Ignorable="d"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Title="WListaInsumos" Height="523" Width="902"
+        WindowStartupLocation="CenterScreen">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="180"/>
@@ -95,14 +104,72 @@
 
         </materialDesign:Card>
 
-        <DataGrid Margin="15" Grid.Row="1" SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaDatos" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="ConsultarInsumo" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <DataGrid Margin="15,15,15,15" Grid.Row="1" SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaDatos" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="ColumnEliminate">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="ElminarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF8A0707" BorderBrush="#FF7D0909" Click="DarDeBaja">
+                                <materialDesign:PackIcon Kind="ArrowDownBold" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  x:Name="ColumnActive">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="ActivarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF14841B" BorderBrush="#FF117D2B" Click="Activar">
+                                <materialDesign:PackIcon Kind="ArrowUpBold" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="ConsultarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="Consultar">
+                                <materialDesign:PackIcon Kind="Eye" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Name="EditarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="Modificar">
+                                <materialDesign:PackIcon Kind="Pencil" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Codigo}" Header="#Código" Width="90"/>
-                <DataGridTextColumn Binding="{Binding Nombre}" Width="*" Header="Nombre"/>
+                <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre"/>
                 <DataGridTextColumn Binding="{Binding Cantidad}" Width="90" Header="Cantidad"/>
-                <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Estado"/>
-                <DataGridTextColumn Binding="{Binding PrecioCompra}" Width="*" Header="Precio de compra $"/>
-                <DataGridTextColumn Binding="{Binding Registro}" Width="*" Header="Fecha registro"/>
+                <DataGridTextColumn Binding="{Binding UnidadMedida}" Width="90" Header="Unidad"/>
+                <DataGridTextColumn Binding="{Binding Status}" Header="Estado"/>
+                <DataGridTextColumn Binding="{Binding PrecioCompra}" Header="Precio de compra $"/>
+                <DataGridTextColumn Binding="{Binding Descripcion}" Width="100" Header="Descripcion"/>
+                <DataGridTextColumn Binding="{Binding Restricciones}" Width="100" Header="Restricciones"/>
+                <DataGridTextColumn Binding="{Binding Registro}" Header="Fecha registro"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -113,7 +180,6 @@
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Volver atrás"
               Content="Salir"
-              Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}"
               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Salir" />
 
             <Button
@@ -125,4 +191,4 @@
         </DockPanel>
 
     </Grid>
-</UserControl>
+</Window>

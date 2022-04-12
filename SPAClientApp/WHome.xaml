@@ -12,40 +12,12 @@
          TextElement.FontSize="13"
          TextOptions.TextFormattingMode="Ideal"
          TextOptions.TextRenderingMode="Auto"
-         Background="#FF3F51B5"
          FontFamily="{DynamicResource MaterialDesignFont}"
 
         Title="Home" Height="523" Width="902"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        ShowInTaskbar="True"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize">
-    <Window.Effect>
-        <DropShadowEffect BlurRadius="10"/>
-    </Window.Effect>
     <DockPanel>
-
-        <DockPanel DockPanel.Dock="Top" Height="25" Background="#FF3F51B5" MouseLeftButtonDown="Move">
-            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Stretch" >
-                <Label Content="SAP" Background="{x:Null}" Margin="5,0,5,0" Foreground="#DDFFFFFF" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <Label Content="HOME" VerticalAlignment="Center" Foreground="#DDFFFFFF"/>
-                <materialDesign:PackIcon Margin="8,0,0,0" Kind="AccountCircle" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" />
-                <Label Content="User Name" Foreground="#DDFFFFFF" VerticalAlignment="Center" FontSize="11"/>
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Height="24" Width="23" Padding="0,0,0,0" Click="Minimizar">
-                    <materialDesign:PackIcon Kind="WindowMinimize" />
-                </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Height="24" Width="27" Padding="0,0,0,0" Click="Maximizar">
-                    <materialDesign:PackIcon Kind="WindowMaximize" />
-                </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Height="24" Width="28" Padding="0,0,0,0" Click="Salir">
-                    <materialDesign:PackIcon Kind="Close" />
-                </Button>
-            </StackPanel>
-        </DockPanel>
-
         <DockPanel Background="White">
             <materialDesign:DrawerHost 
               x:Name="DrawerHost"

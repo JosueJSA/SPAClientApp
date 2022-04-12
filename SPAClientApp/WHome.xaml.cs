@@ -47,7 +47,7 @@ namespace SPAClientApp
 
         private void VerInsumos(object sender, RoutedEventArgs e)
         {
-            new InsumosContenedor().Show();
+            new WListaInsumos(this).Show();
         }
     }
 }

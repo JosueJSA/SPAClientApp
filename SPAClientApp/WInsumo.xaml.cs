@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf.Transitions;
-using SPAClientApp.InsumosService;
+﻿using SPAClientApp.InsumosService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
@@ -24,23 +22,23 @@ namespace SPAClientApp
     /// <summary>
     /// Interaction logic for WInsumo.xaml
     /// </summary>
-    public partial class WInsumo : UserControl
+    public partial class WInsumo : Window
     {
         private readonly InsumosServiceClient client = new InsumosServiceClient();
         private readonly List<TextBox> UiInputElements;
         private readonly List<Button> UiButtons;
-        private readonly Notifier notifier;
-        private InsumosContenedor Contenedor { get; set; }
+        private Notifier notifier;
+        private string Operacion { get; set; } = "Consulta";
+        private EInsumo Insumo { get; set; }
+        private static WInsumo WindowInsumo { get; set; } = null;
+        private WListaInsumos ParentWindow { get; set; }   
 
-        public WInsumo()
+        public WInsumo(WListaInsumos parent)
         {
             InitializeComponent();
-            UiInputElements = new List<TextBox>() {NombreTxt, ProveedorTxt, CantidadTxt, DescripcionTxt, RestriccionesTxt, CostoTxt};
-            UiButtons = new List<Button>() {EliminarBtn, ActivarBtn, ModificarBtn, CancelarBtn, ActualizarBtn, RegistrarBtn, CerrarBtn};
-            this.Loaded += (s, e) =>
-            {
-                Contenedor = Window.GetWindow(this) as InsumosContenedor;
-            };
+            ParentWindow = parent;
+            UiInputElements = new List<TextBox>() { NombreTxt, ProveedorTxt, CantidadTxt, DescripcionTxt, RestriccionesTxt, CostoTxt };
+            UiButtons = new List<Button>() { CancelarBtn, ActualizarBtn, RegistrarBtn, CerrarBtn };
             notifier = new Notifier(cfg =>
             {
                 cfg.PositionProvider = new WindowPositionProvider(parentWindow: Window.GetWindow(this), corner: Corner.BottomLeft, offsetX: 10, offsetY: 10);
@@ -49,56 +47,67 @@ namespace SPAClientApp
             });
         }
 
-        public void ActivarModoLectura()
+        public void ActivarModoLectura(EInsumo insumo)
         {
-            LlenarCampos();
+            LlenarCampos(insumo);
+            Operacion = "Consulta";
             UiInputElements.ForEach(e => e.IsReadOnly = true);
             UiButtons.ForEach(b => b.Visibility = Visibility.Collapsed);
-            (new List<Button>() { EliminarBtn, ActivarBtn, CerrarBtn, ModificarBtn }).ForEach(b => b.Visibility = Visibility.Visible);
-            EstadoTxt.Visibility = Visibility.Visible;  
+            CerrarBtn.Visibility = Visibility.Visible;
+            EstadoTxt.Visibility = Visibility.Visible;
             estadoLbl.Visibility = Visibility.Visible;
+            UnidadComboBox.IsEnabled = false;
         }
 
-        public void ActivarModoEdicion(string modo)
+        public void ActivarModoEdicion(string modo, EInsumo insumo)
         {
-            UiInputElements.ForEach(e => { e.IsReadOnly = false; e.Text = String.Empty; });
+            UiInputElements.ForEach(e => e.IsReadOnly = false);
             UiButtons.ForEach(b => b.Visibility = Visibility.Collapsed);
             EstadoTxt.Visibility = Visibility.Collapsed;
             estadoLbl.Visibility = Visibility.Collapsed;
-            if (modo == "Registro")
+            if ((Operacion = modo) == "Registro")
             {
                 FechaDatePicker.Text = DateTime.Now.ToString();
+                Insumo = insumo;
                 (new List<Button> { CancelarBtn, RegistrarBtn }).ForEach(b => b.Visibility = Visibility.Visible);
             }
             else
             {
+                Operacion = "Actualizacion";
+                Insumo = insumo;
                 (new List<Button> { CancelarBtn, ActualizarBtn }).ForEach(b => b.Visibility = Visibility.Visible);
-                LlenarCampos();
+                LlenarCampos(insumo);
             }
         }
 
-        public void LlenarCampos()
+        private void CancelarOperacion(object sender, RoutedEventArgs e)
         {
-            NombreTxt.Text = Contenedor.Insumo.Nombre;
-            FechaDatePicker.Text = Contenedor.Insumo.Registro.ToString();
-            Codigolbl.Content = Contenedor.Insumo.Codigo.ToString();
-            EstadoTxt.Text = Contenedor.Insumo.Status;
-            ProveedorTxt.Text = Contenedor.Insumo.ProveedorDeInsumo;
-            CantidadTxt.Text = Contenedor.Insumo.Cantidad.ToString();
-            CostoTxt.Text = Contenedor.Insumo.PrecioCompra.ToString();
-            UnidadComboBox.SelectedItem = Contenedor.Insumo.UnidadMedida;
-            DescripcionTxt.Text = Contenedor.Insumo.Descripcion;
-            RestriccionesTxt.Text = Contenedor.Insumo.Restricciones;
-            if (Contenedor.Insumo.Status == "Activo")
+            string mensaje = "¿Deseas salir sin guardar los cambios?";
+            if (MostrarCuadroConfirmacion(mensaje))
+                Close();
+        }
+
+        private void Actualizar(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                EliminarBtn.IsEnabled = true;
-                ActivarBtn.IsEnabled = false;
+                ValidarInsumo();
+                PrepararNuevoInsumo();
+                AnswerMessage response = client.UpdateInsumo(Insumo.Codigo, Insumo);
+                if (response.Key > 0)
+                {
+                    MostrarToastMessage("Exito", "El insumo se ha actualizado exitosamente");
+                }
+                else
+                {
+                    MostrarToastMessage("Error", response.Message);
+                }
             }
-            else
+            catch (ArgumentException ex)
             {
-                EliminarBtn.IsEnabled = false;
-                ActivarBtn.IsEnabled = true;
+                MostrarToastMessage("Advertencia", ex.Message);
             }
+
         }
 
         private void Registrar(object sender, RoutedEventArgs e)
@@ -106,14 +115,12 @@ namespace SPAClientApp
             try
             {
                 ValidarInsumo();
-                Contenedor.Insumo = new EInsumo();
                 PrepararNuevoInsumo();
-                AnswerMessage response = client.AddInsumo(Contenedor.Insumo);
+                AnswerMessage response = client.AddInsumo(Insumo);
                 if (response.Key > 0)
                 {
-                    Contenedor.Insumo = client.GetInsumosList("Código", response.Key.ToString(), Convert.ToDateTime("1/1/1900 00:00:00"), "Activo").First();
+                    Insumo = client.GetInsumosList("Código", response.Key.ToString(), Convert.ToDateTime("1/1/1900 00:00:00"), "Activo").First();
                     MostrarToastMessage("Exito", "El insumo se ha registrado exitosamente");
-                    ActivarModoLectura();
                 }
                 else
                 {
@@ -126,15 +133,59 @@ namespace SPAClientApp
             }
         }
 
-        private void PrepararNuevoInsumo()
+        private void Salir(object sender, RoutedEventArgs e)
         {
-            Contenedor.Insumo.Nombre = NombreTxt.Text;
-            Contenedor.Insumo.ProveedorDeInsumo = ProveedorTxt.Text;
-            Contenedor.Insumo.Descripcion = DescripcionTxt.Text;
-            Contenedor.Insumo.Restricciones = RestriccionesTxt.Text;
-            Contenedor.Insumo.Cantidad = Convert.ToInt32(CantidadTxt.Text);
-            Contenedor.Insumo.PrecioCompra = float.Parse(CostoTxt.Text);
-            Contenedor.Insumo.UnidadMedida = UnidadComboBox.Text;
+            Close();
+        }
+
+        private void MostrarToastMessage(string tipo, string mensaje)
+        {
+            if (tipo == "Advertencia")
+                notifier.ShowWarning(mensaje);
+            if (tipo == "Exito")
+            {
+                notifier = new Notifier(cfg =>
+                {
+                    cfg.PositionProvider = new WindowPositionProvider(parentWindow: ParentWindow, corner: Corner.BottomLeft, offsetX: 10, offsetY: 10);
+                    cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(5), maximumNotificationCount: MaximumNotificationCount.FromCount(3));
+                    cfg.Dispatcher = Application.Current.Dispatcher;
+                });
+                notifier.ShowSuccess(mensaje);
+                ParentWindow.RefrescarTablaInsumos();
+                Close();
+            }
+            if (tipo == "Error")
+            {
+                notifier = new Notifier(cfg =>
+                {
+                    cfg.PositionProvider = new WindowPositionProvider(parentWindow: ParentWindow, corner: Corner.BottomLeft, offsetX: 10, offsetY: 10);
+                    cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(5), maximumNotificationCount: MaximumNotificationCount.FromCount(3));
+                    cfg.Dispatcher = Application.Current.Dispatcher;
+                });
+                notifier.ShowError(mensaje);
+                ParentWindow.RefrescarTablaInsumos();
+                Close();    
+            }
+        }
+
+        private void LlenarCampos(EInsumo insumo)
+        {
+            NombreTxt.Text = insumo.Nombre;
+            FechaDatePicker.Text = insumo.Registro.ToString();
+            Codigolbl.Content = insumo.Codigo.ToString();
+            EstadoTxt.Text = insumo.Status;
+            ProveedorTxt.Text = insumo.ProveedorDeInsumo;
+            CantidadTxt.Text = insumo.Cantidad.ToString();
+            CostoTxt.Text = insumo.PrecioCompra.ToString();
+            UnidadComboBox.SelectedItem = insumo.UnidadMedida;
+            DescripcionTxt.Text = insumo.Descripcion;
+            RestriccionesTxt.Text = insumo.Restricciones;
+        }
+
+        private bool MostrarCuadroConfirmacion(string message)
+        {
+            MessageBoxResult boxResult = MessageBox.Show(message, "Advertencia", MessageBoxButton.YesNoCancel);
+            return MessageBoxResult.Yes == boxResult;
         }
 
         private void ValidarInsumo()
@@ -153,16 +204,8 @@ namespace SPAClientApp
                 throw new ArgumentException("La cantidad debe ser un número entero positivo");
             if (string.IsNullOrEmpty(CostoTxt.Text) || !float.TryParse(CostoTxt.Text, out auxd) || auxd < 0)
                 throw new ArgumentException("El costo del producto debe ser un número positivo");
-            if (!TieneNombreUnico(NombreTxt.Text))
+            if (!TieneNombreUnico(Insumo.Nombre, NombreTxt.Text))
                 throw new ArgumentException("El nombre del Insumo ya has sido registrado en el sistema");
-        }
-
-        public bool TieneNombreUnico(string nombre)
-        {
-            if (Contenedor.Insumo == null)
-                return !client.IsDuplicated(" ", nombre);
-            else
-                return !client.IsDuplicated(Contenedor.Insumo.Nombre, nombre);
         }
 
         private bool ValidarAuxiliar(string value)
@@ -170,117 +213,23 @@ namespace SPAClientApp
             return (string.IsNullOrEmpty(value) || double.TryParse(value, out _) || string.IsNullOrEmpty(value.Trim()));
         }
 
-        private void CancelarOperacion(object sender, RoutedEventArgs e)
+        private void PrepararNuevoInsumo()
         {
-            string mensaje = "¿Deseas salir sin guardar los cambios?";
-            if (MostrarCuadroConfirmacion(mensaje))
-            {
-                if (Contenedor.Insumo == null)
-                    Transitioner.MovePreviousCommand.Execute(0, this);
-                else
-                    ActivarModoLectura();
-            }
+            Insumo.Nombre = NombreTxt.Text;
+            Insumo.ProveedorDeInsumo = ProveedorTxt.Text;
+            Insumo.Descripcion = DescripcionTxt.Text;
+            Insumo.Restricciones = RestriccionesTxt.Text;
+            Insumo.Cantidad = Convert.ToInt32(CantidadTxt.Text);
+            Insumo.PrecioCompra = float.Parse(CostoTxt.Text);
+            Insumo.UnidadMedida = UnidadComboBox.Text;
         }
 
-        private void Actualizar(object sender, RoutedEventArgs e)
+        private bool TieneNombreUnico(string nombreActual, string nombreABuscar)
         {
-            try
-            {
-                ValidarInsumo();
-                PrepararNuevoInsumo();
-                AnswerMessage response = client.UpdateInsumo(Contenedor.Insumo.Codigo, Contenedor.Insumo);
-                if (response.Key > 0)
-                {
-                    MostrarToastMessage("Exito", "El insumo se ha actualizado exitosamente");
-                    ActivarModoLectura();
-                }
-                else
-                {
-                    MostrarToastMessage("Error", response.Message);
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                MostrarToastMessage("Advertencia", ex.Message);
-            }
-        }
-
-        private void Modificar(object sender, RoutedEventArgs e)
-        {
-            ActivarModoEdicion("Edición");
-        }
-        private void MostrarToastMessage(string tipo, string mensaje)
-        {
-            if (tipo == "Exito")
-                notifier.ShowSuccess(mensaje);
-            if(tipo == "Advertencia")
-                notifier.ShowWarning(mensaje);  
-            if(tipo == "Error")
-                notifier.ShowError(mensaje);    
-        }
-
-        private void Salir(object sender, RoutedEventArgs e)
-        {
-            Transitioner.MovePreviousCommand.Execute(0, this);
-        }
-
-        private void DarDeBaja(object sender, RoutedEventArgs e)
-        {
-            string mensaje = "¿Seguro(a) que deseas dar de baja el Insumo seleccionado?";
-            if (MostrarCuadroConfirmacion(mensaje))
-            {
-                AnswerMessage response = client.ChangeInsumoStatus(Contenedor.Insumo.Codigo, "Dado de baja");
-                if (response.Key >= 0)
-                {
-                    ActualizarStatus("Dado de baja");
-                    MostrarToastMessage("Exito", "El Insumo ha sido dado de baja");
-                }
-                else
-                {
-                    MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                }
-            }
-        }
-
-        private bool MostrarCuadroConfirmacion(string message)
-        {
-            MessageBoxResult boxResult = MessageBox.Show(message, "Advertencia", MessageBoxButton.YesNoCancel);
-            return MessageBoxResult.Yes == boxResult;
-        }
-
-        private void ActualizarStatus(string status)
-        {
-            Contenedor.Insumo.Status = status;
-            EstadoTxt.Text = status;
-            if(status == "Activo")
-            {
-                EliminarBtn.IsEnabled = true;
-                ActivarBtn.IsEnabled = false;
-            }
+            if (Operacion == "Registro")
+                return !client.IsDuplicated(" ", nombreABuscar);
             else
-            {
-                EliminarBtn.IsEnabled = false;
-                ActivarBtn.IsEnabled = true;
-            }
-
-        }
-
-        private void DarDeAlta(object sender, RoutedEventArgs e)
-        {
-            string mensaje = "¿Seguro(a) que deseas dar de alta el Insumo seleccionado?";
-            if (MostrarCuadroConfirmacion(mensaje))
-            {
-                AnswerMessage response = client.ChangeInsumoStatus(Contenedor.Insumo.Codigo, "Activo");
-                if (response.Key >= 0)
-                {
-                    ActualizarStatus("Activo");
-                    MostrarToastMessage("Exito", "El Insumo ha sido dado de alta");
-                }
-                else
-                {
-                    MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                }
-            }
+                return !client.IsDuplicated(nombreActual, nombreABuscar);
         }
     }
 }
