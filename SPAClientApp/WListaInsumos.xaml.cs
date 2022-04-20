@@ -112,20 +112,27 @@ namespace SPAClientApp
             if (TablaActualizada())
             {
                 var insumo = ((FrameworkElement)sender).DataContext as EInsumo;
-                string mensaje = "¿Seguro(a) que deseas dar de baja el Insumo seleccionado?";
-                if (MostrarCuadroConfirmacion(mensaje))
+                if (!EsUsadoEnReceta(insumo.Codigo))
                 {
-                    AnswerMessage response = client.ChangeInsumoStatus(insumo.Codigo, "Dado de baja");
-                    if (response.Key >= 0)
+                    string mensaje = "¿Seguro(a) que deseas dar de baja el Insumo seleccionado?";
+                    if (MostrarCuadroConfirmacion(mensaje))
                     {
-                        MostrarToastMessage("Exito", "El Insumo ha sido dado de baja");
-                        var result = client.GetInsumosList(CriterioSeleccionado, Valor, Fecha, Status).ToList();
-                        ActualizarTablaInsumos(result);
+                        AnswerMessage response = client.ChangeInsumoStatus(insumo.Codigo, "Dado de baja");
+                        if (response.Key >= 0)
+                        {
+                            MostrarToastMessage("Exito", "El Insumo ha sido dado de baja");
+                            var result = client.GetInsumosList(CriterioSeleccionado, Valor, Fecha, Status).ToList();
+                            ActualizarTablaInsumos(result);
+                        }
+                        else
+                        {
+                            MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
+                        }
                     }
-                    else
-                    {
-                        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                    }
+                }
+                else
+                {
+                    MostrarToastMessage("Warning", "Lo sentimos, el Insumo es parte de al menos 1 receta en el sistema");
                 }
             }
             else
@@ -240,6 +247,11 @@ namespace SPAClientApp
                 cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(segundos), maximumNotificationCount: MaximumNotificationCount.FromCount(segundos));
                 cfg.Dispatcher = Application.Current.Dispatcher;
             });
+        }
+
+        private bool EsUsadoEnReceta(int codigoInsumo)
+        {
+            return client.IsUsedInReceta(codigoInsumo);
         }
 
         private bool TablaActualizada()

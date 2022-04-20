@@ -1,0 +1,135 @@
+﻿<Window x:Class="SPAClientApp.WIngredientes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SPAClientApp"
+        mc:Ignorable="d"
+        
+        Icon="Resources/img/logo.png"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Title="WIngredientes" Height="750" Width="716" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Selecciona los ingredientes de la receta" VerticalAlignment="Center" FontWeight="Bold"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBox
+                    Width="190"
+                    Margin="0,0,10,0"
+                x:Name="ValorBusqueda"
+                Style="{StaticResource MaterialDesignFilledTextBox}"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda"
+                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Foreground="Black" SelectionBrush="Black" VerticalAlignment="Center" Height="26" Padding="0,0,0,0" />
+                <ComboBox x:Name="Criterio" Margin="0,0,15,0" Width="70" SelectedIndex="1" Foreground="Black" BorderBrush="Black">
+                    <ComboBoxItem Content="Código" />
+                    <ComboBoxItem Content="Nombre" />
+                    <ComboBoxItem Content="Todos" />
+                </ComboBox>
+                <Button
+                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                      ToolTip="Buscar usando el filtro seleccionado"
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#FF313B8E" Height="23" VerticalAlignment="Center" Click="Buscar">
+                    <materialDesign:PackIcon Kind="Search" />
+                </Button>
+            </StackPanel>
+
+            <DataGrid Margin="0,0,10,0" Grid.Row="2" SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaDatos" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+                <DataGrid.CellStyle>
+                    <Style/>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="ColumnAdd">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                x:Name="AgregarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF137137" BorderBrush="#FF136D1D" Foreground="#DDFFFFFF" FontWeight="Bold" Click="AgregarIngrediente">
+                                    <materialDesign:PackIcon Kind="plus" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Codigo}" Header="#" Width="50"/>
+                    <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre"/>
+                    <DataGridTextColumn Binding="{Binding Cantidad}" Width="90" Header="Cantidad"/>
+                    <DataGridTextColumn Binding="{Binding UnidadMedida}" Width="90" Header="Unidad"/>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+
+            <DataGrid Margin="10,0,0,0" Grid.Column="1" Grid.Row="2" SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaIngredientes" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" IsSynchronizedWithCurrentItem="False">
+                <DataGrid.CellStyle>
+                    <Style/>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="ColumnRemove">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                x:Name="RemoverBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF941E1E" BorderBrush="#FF9A1E1E" Foreground="#DDFFFFFF" FontWeight="Bold" Click="RemoverIngrediente">
+                                    <materialDesign:PackIcon Kind="WindowMinimize" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding CodigoInsumo}" Header="#" Width="50"/>
+                    <DataGridTextColumn Binding="{Binding NombreInsumo}" Header="Nombre"/>
+                    <DataGridTemplateColumn Width="90" Header="Cantidad">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox
+                                  x:Name="cantidad"
+                                    Text= "{Binding CantidadIngrediente, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  materialDesign:TransitionAssist.DisableTransitions="True" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Unidad}" Width="90" Header="Unidad"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button
+              DockPanel.Dock="Left"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Cancelar"
+              Content="Cancelar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Margin="0,0,15,0" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Click="Cancelar" />
+                <Button
+                DockPanel.Dock="Right"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Guardar cambios"
+              Content="Guardar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Guardar" />
+                
+            </StackPanel>
+
+        </Grid>
+    </DockPanel>
+</Window>

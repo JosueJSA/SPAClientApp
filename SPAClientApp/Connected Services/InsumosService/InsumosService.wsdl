@@ -43,6 +43,12 @@
   <wsdl:message name="IInsumosService_IsDuplicated_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsDuplicatedResponse" />
   </wsdl:message>
+  <wsdl:message name="IInsumosService_IsUsedInReceta_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsedInReceta" />
+  </wsdl:message>
+  <wsdl:message name="IInsumosService_IsUsedInReceta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsedInRecetaResponse" />
+  </wsdl:message>
   <wsdl:portType name="IInsumosService">
     <wsdl:operation name="GetInsumosList">
       <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/GetInsumosList" message="tns:IInsumosService_GetInsumosList_InputMessage" />
@@ -67,6 +73,10 @@
     <wsdl:operation name="IsDuplicated">
       <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/IsDuplicated" message="tns:IInsumosService_IsDuplicated_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/IsDuplicatedResponse" message="tns:IInsumosService_IsDuplicated_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUsedInReceta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInsumosService/IsUsedInReceta" message="tns:IInsumosService_IsUsedInReceta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInsumosService/IsUsedInRecetaResponse" message="tns:IInsumosService_IsUsedInReceta_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IInsumosService" type="tns:IInsumosService">
@@ -118,6 +128,15 @@
     </wsdl:operation>
     <wsdl:operation name="IsDuplicated">
       <soap:operation soapAction="http://tempuri.org/IInsumosService/IsDuplicated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUsedInReceta">
+      <soap:operation soapAction="http://tempuri.org/IInsumosService/IsUsedInReceta" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,7 +1,17 @@
-﻿using System;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Upload;
+using Google.Apis.Util.Store;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,6 +58,11 @@ namespace SPAClientApp
         private void VerInsumos(object sender, RoutedEventArgs e)
         {
             new WListaInsumos(this).Show();
+        }
+
+        private void VerProductos(object sender, RoutedEventArgs e)
+        {
+            new WListaProductos(this).Show();
         }
     }
 }

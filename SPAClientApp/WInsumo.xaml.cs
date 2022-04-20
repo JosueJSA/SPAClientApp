@@ -30,7 +30,6 @@ namespace SPAClientApp
         private Notifier notifier;
         private string Operacion { get; set; } = "Consulta";
         private EInsumo Insumo { get; set; }
-        private static WInsumo WindowInsumo { get; set; } = null;
         private WListaInsumos ParentWindow { get; set; }   
 
         public WInsumo(WListaInsumos parent)
@@ -39,12 +38,7 @@ namespace SPAClientApp
             ParentWindow = parent;
             UiInputElements = new List<TextBox>() { NombreTxt, ProveedorTxt, CantidadTxt, DescripcionTxt, RestriccionesTxt, CostoTxt };
             UiButtons = new List<Button>() { CancelarBtn, ActualizarBtn, RegistrarBtn, CerrarBtn };
-            notifier = new Notifier(cfg =>
-            {
-                cfg.PositionProvider = new WindowPositionProvider(parentWindow: Window.GetWindow(this), corner: Corner.BottomLeft, offsetX: 10, offsetY: 10);
-                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(3), maximumNotificationCount: MaximumNotificationCount.FromCount(3));
-                cfg.Dispatcher = Application.Current.Dispatcher;
-            });
+            ConfigurarToastNotifier(this, 3);
         }
 
         public void ActivarModoLectura(EInsumo insumo)
@@ -107,7 +101,6 @@ namespace SPAClientApp
             {
                 MostrarToastMessage("Advertencia", ex.Message);
             }
-
         }
 
         private void Registrar(object sender, RoutedEventArgs e)
@@ -144,24 +137,14 @@ namespace SPAClientApp
                 notifier.ShowWarning(mensaje);
             if (tipo == "Exito")
             {
-                notifier = new Notifier(cfg =>
-                {
-                    cfg.PositionProvider = new WindowPositionProvider(parentWindow: ParentWindow, corner: Corner.BottomLeft, offsetX: 10, offsetY: 10);
-                    cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(5), maximumNotificationCount: MaximumNotificationCount.FromCount(3));
-                    cfg.Dispatcher = Application.Current.Dispatcher;
-                });
+                ConfigurarToastNotifier(ParentWindow, 5);
                 notifier.ShowSuccess(mensaje);
                 ParentWindow.RefrescarTablaInsumos();
                 Close();
             }
             if (tipo == "Error")
             {
-                notifier = new Notifier(cfg =>
-                {
-                    cfg.PositionProvider = new WindowPositionProvider(parentWindow: ParentWindow, corner: Corner.BottomLeft, offsetX: 10, offsetY: 10);
-                    cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(5), maximumNotificationCount: MaximumNotificationCount.FromCount(3));
-                    cfg.Dispatcher = Application.Current.Dispatcher;
-                });
+                ConfigurarToastNotifier(ParentWindow, 5);
                 notifier.ShowError(mensaje);
                 ParentWindow.RefrescarTablaInsumos();
                 Close();    
@@ -198,11 +181,10 @@ namespace SPAClientApp
                 throw new ArgumentException("La descripción debe ser texto");
             if (ValidarAuxiliar(RestriccionesTxt.Text))
                 throw new ArgumentException("Las restricciones deben estar en formato de texto");
-            int aux = 0;
-            float auxd = 0;
-            if (string.IsNullOrEmpty(CantidadTxt.Text) || !int.TryParse(CantidadTxt.Text, out aux) || aux < 0)
+            float aux = 0;
+            if (string.IsNullOrEmpty(CantidadTxt.Text) || !float.TryParse(CantidadTxt.Text, out aux) || aux < 0)
                 throw new ArgumentException("La cantidad debe ser un número entero positivo");
-            if (string.IsNullOrEmpty(CostoTxt.Text) || !float.TryParse(CostoTxt.Text, out auxd) || auxd < 0)
+            if (string.IsNullOrEmpty(CostoTxt.Text) || !float.TryParse(CostoTxt.Text, out aux) || aux < 0)
                 throw new ArgumentException("El costo del producto debe ser un número positivo");
             if (!TieneNombreUnico(Insumo.Nombre, NombreTxt.Text))
                 throw new ArgumentException("El nombre del Insumo ya has sido registrado en el sistema");
@@ -219,7 +201,7 @@ namespace SPAClientApp
             Insumo.ProveedorDeInsumo = ProveedorTxt.Text;
             Insumo.Descripcion = DescripcionTxt.Text;
             Insumo.Restricciones = RestriccionesTxt.Text;
-            Insumo.Cantidad = Convert.ToInt32(CantidadTxt.Text);
+            Insumo.Cantidad = Convert.ToDouble(CantidadTxt.Text);
             Insumo.PrecioCompra = float.Parse(CostoTxt.Text);
             Insumo.UnidadMedida = UnidadComboBox.Text;
         }
@@ -230,6 +212,16 @@ namespace SPAClientApp
                 return !client.IsDuplicated(" ", nombreABuscar);
             else
                 return !client.IsDuplicated(nombreActual, nombreABuscar);
+        }
+
+        private void ConfigurarToastNotifier(Window ventana, int segundos)
+        {
+            notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(parentWindow: ventana, corner: Corner.BottomRight, offsetX: 10, offsetY: 10);
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(segundos), maximumNotificationCount: MaximumNotificationCount.FromCount(segundos));
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }

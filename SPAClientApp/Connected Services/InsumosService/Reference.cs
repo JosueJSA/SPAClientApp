@@ -23,7 +23,7 @@ namespace SPAClientApp.InsumosService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CantidadField;
+        private double CantidadField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int CodigoField;
@@ -63,7 +63,7 @@ namespace SPAClientApp.InsumosService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Cantidad {
+        public double Cantidad {
             get {
                 return this.CantidadField;
             }
@@ -302,6 +302,12 @@ namespace SPAClientApp.InsumosService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInsumosService/IsDuplicated", ReplyAction="http://tempuri.org/IInsumosService/IsDuplicatedResponse")]
         System.Threading.Tasks.Task<bool> IsDuplicatedAsync(string nombreActual, string nombreABuscar);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInsumosService/IsUsedInReceta", ReplyAction="http://tempuri.org/IInsumosService/IsUsedInRecetaResponse")]
+        bool IsUsedInReceta(int codigoInsumo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInsumosService/IsUsedInReceta", ReplyAction="http://tempuri.org/IInsumosService/IsUsedInRecetaResponse")]
+        System.Threading.Tasks.Task<bool> IsUsedInRecetaAsync(int codigoInsumo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -377,6 +383,14 @@ namespace SPAClientApp.InsumosService {
         
         public System.Threading.Tasks.Task<bool> IsDuplicatedAsync(string nombreActual, string nombreABuscar) {
             return base.Channel.IsDuplicatedAsync(nombreActual, nombreABuscar);
+        }
+        
+        public bool IsUsedInReceta(int codigoInsumo) {
+            return base.Channel.IsUsedInReceta(codigoInsumo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsUsedInRecetaAsync(int codigoInsumo) {
+            return base.Channel.IsUsedInRecetaAsync(codigoInsumo);
         }
     }
 }

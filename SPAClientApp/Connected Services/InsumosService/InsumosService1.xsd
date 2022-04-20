@@ -8,7 +8,7 @@
   <xs:element name="ArrayOfEInsumo" nillable="true" type="tns:ArrayOfEInsumo" />
   <xs:complexType name="EInsumo">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Cantidad" type="xs:double" />
       <xs:element minOccurs="0" name="Codigo" type="xs:int" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
