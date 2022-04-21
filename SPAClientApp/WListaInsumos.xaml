@@ -47,7 +47,7 @@
                         <ColumnDefinition Width="400"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
                         <Label Content="Criterio" FontWeight="Bold"/>
                         <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" MouseLeftButtonDown="SeleccionarCriterio">
                             <ComboBoxItem Content="Código" />
@@ -61,7 +61,7 @@
                             Content="Solo activos" Foreground="#DD000000" BorderBrush="#FF361FAB" Background="#FF2916B5" />
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <StackPanel Margin="0,0,20,0" Orientation="Vertical">
                         <Label Content="A partir de" FontWeight="Bold"/>
                         <StackPanel>
                             <DatePicker x:Name="FechaLimite" Foreground="Black"

@@ -45,7 +45,7 @@ namespace SPAClientApp
         private readonly ProductosServiceClient client = new ProductosServiceClient();
         private readonly List<TextBox> UiInputElements;
         private readonly List<Button> UiButtons;
-        private List<EIngrediente> Ingredientes { get; set; } = new List<EIngrediente>();
+
         private Notifier notifier;
         private string Operacion { get; set; } = "Consulta";
         private EProducto Producto { get; set; } = new EProducto();
@@ -53,34 +53,43 @@ namespace SPAClientApp
         private WListaProductos ParentWindow { get; set; }
         private UserCredential Credential { get; set; }
         private string FileUrl { get; set; } = string.Empty;   
+        private bool ConReceta { get; set; } = false;
 
         public WProducto(WListaProductos parent)
         {
             InitializeComponent();
             ParentWindow = parent;
-            UiInputElements = new List<TextBox>() { NombreTxt, PrecioCompraTxt, CantidadTxt, DescripcionTxt, RestriccionesTxt, PrecioVentaTxt, ProcedimientoTxt };
+            UiInputElements = new List<TextBox>() { NombreTxt, PrecioCompraTxt, CantidadTxt, DescripcionTxt, RestriccionesTxt, PrecioVentaTxt, ProcedimientoTxt, EstadoTxt };
             UiButtons = new List<Button>() { CancelarBtn, ActualizarBtn, RegistrarBtn, CerrarBtn, EditarBtn, UploadBtn };
             ConfigurarToastNotifier(this, 3);
         }
 
         public void ActivarModoLectura(EProducto producto)
         {
-            var receta = client.GetReceta(producto.CodigoReceta);
-            if (receta != null)
+            LlenarCampos(producto);
+            Operacion = "Consulta";
+            UiInputElements.ForEach(e => e.IsReadOnly = true);
+            UiButtons.ForEach(b => b.Visibility = Visibility.Collapsed);
+            CheckBoxReceta.IsEnabled = false;
+            CerrarBtn.Visibility = Visibility.Visible;
+            EstadoTxt.Visibility = Visibility.Visible;
+            EstadoTxt.Visibility = Visibility.Visible;
+
+            if (producto.CodigoReceta > 0)
             {
-                LlenarCampos(producto, receta);
-                Operacion = "Consulta";
-                UiInputElements.ForEach(e => e.IsReadOnly = true);
-                UiButtons.ForEach(b => b.Visibility = Visibility.Collapsed);
-                CerrarBtn.Visibility = Visibility.Visible;
-                EstadoTxt.Visibility = Visibility.Visible;
-                EstadoTxt.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                MostrarToastMessage("Error", "Lo sentimos, el servidor no ha respondido correctamente, si el problema persiste" +
-                    " favor de contactar a soporte técnico");
-            }   
+                Receta = client.GetReceta(Convert.ToInt32(producto.CodigoReceta));
+                if (Receta != null)
+                {
+                    CheckBoxReceta.IsEnabled = false;
+                    CheckBoxReceta.IsChecked = true;
+                    LlenarCamposReceta(Receta);
+                }
+                else
+                {
+                    MostrarToastMessage("Error", "Lo sentimos, el servidor no ha respondido correctamente, si el problema persiste" +
+                        " favor de contactar a soporte técnico");
+                }
+            } 
         }
 
         public void ActivarModoEdicion(string modo, EProducto producto)
@@ -99,23 +108,28 @@ namespace SPAClientApp
             }
             else
             {
-                var receta = client.GetReceta(producto.CodigoReceta);
-                if (receta != null)
+                new List<Button> { CancelarBtn, ActualizarBtn }.ForEach(b => b.Visibility = Visibility.Visible);
+                Operacion = "Actualizacion";
+                CheckBoxReceta.IsChecked = false;
+                LlenarCampos(producto);
+                if (producto.CodigoReceta >= 0)
                 {
-                    Operacion = "Actualizacion";
-                    new List<Button> { CancelarBtn, ActualizarBtn }.ForEach(b => b.Visibility = Visibility.Visible);
-                    LlenarCampos(producto, receta);
-                    Ingredientes = receta.Ingredientes.ToList();
-                }
-                else
-                {
-                    MostrarToastMessage("Error", "Lo sentimos, el servidor no ha respondido correctamente, si el problema persiste" +
-                        " favor de contactar a soporte técnico");
+                    Receta = client.GetReceta(Convert.ToInt32(producto.CodigoReceta));
+                    if (Receta != null)
+                    {
+                        CheckBoxReceta.IsChecked = true;
+                        LlenarCamposReceta(Receta);
+                    }
+                    else
+                    {
+                        MostrarToastMessage("Error", "Lo sentimos, el servidor no ha respondido correctamente, si el problema persiste" +
+                            " favor de contactar a soporte técnico");
+                    }
                 }
             }
         }
 
-        private void LlenarCampos(EProducto producto, EReceta receta)
+        private void LlenarCampos(EProducto producto)
         {
             NombreTxt.Text = producto.Nombre;
             FechaDatePicker.Text = producto.Registro.ToString();
@@ -126,18 +140,17 @@ namespace SPAClientApp
             PrecioVentaTxt.Text = producto.PrecioVenta.ToString();
             DescripcionTxt.Text = producto.Descripcion;
             RestriccionesTxt.Text = producto.Restricciones;
+            Image.ImageSource = new BitmapImage(new Uri(producto.Foto));
+        }
+
+        private void LlenarCamposReceta(EReceta receta)
+        {
             ProcedimientoTxt.Text = receta.Descripcion;
-            tablaDatos.ItemsSource = receta.Ingredientes;
-            try
-            {
-                Image.ImageSource = new BitmapImage(new Uri(producto.Foto));
-            }
-            catch (Exception e) { }
+            ActualizarTablaIngredientes(receta.Ingredientes.ToList());
         }
 
         public void ActualizarTablaIngredientes(List<EIngrediente> ingredientes)
         {
-            Ingredientes = ingredientes;
             tablaDatos.ItemsSource = ingredientes;
         }
 
@@ -177,7 +190,7 @@ namespace SPAClientApp
         {
             var window = WIngredientes.GetWindow(this);
             window.Show();
-            window.CargarIngredientes(Ingredientes);
+            window.CargarIngredientes(Receta.Ingredientes.ToList());
         }
 
         private void CancelarOperacion(object sender, RoutedEventArgs e)
@@ -199,22 +212,28 @@ namespace SPAClientApp
             return MessageBoxResult.Yes == boxResult;
         }
 
+        [Obsolete]
         private void Registrar(object sender, RoutedEventArgs e)
         {
             try
             {
                 ValidarProducto();
                 PrepararNuevoProducto();
-                PrepararReceta();
-                AnswerMessage response = client.AddProducto(Producto, Receta);
-                if (response.Key > 0)
+                AnswerMessage response;
+                if (ConReceta)
                 {
-                    MostrarToastMessage("Exito", "El producto se ha registrado exitosamente");
+                    PrepararReceta();
+                    response = client.AddProducto(Producto, Receta);
                 }
                 else
                 {
-                    MostrarToastMessage("Error", response.Message);
+                    Producto.CodigoReceta = -1;
+                    response = client.AddProducto(Producto, null);
                 }
+                if (response.Key > 0)
+                    MostrarToastMessage("Exito", "El producto se ha registrado exitosamente");
+                else
+                    MostrarToastMessage("Error", response.Message);
             }
             catch (ArgumentException ex)
             {
@@ -231,6 +250,12 @@ namespace SPAClientApp
                 throw new ArgumentException("El precio de venta del producto debe ser un número > 0");
             if (string.IsNullOrEmpty(PrecioCompraTxt.Text) || !float.TryParse(PrecioCompraTxt.Text, out auxf) || auxf < 0)
                 throw new ArgumentException("El precio de compra del producto debe ser un número > 0");
+            if (!ConReceta)
+            {
+                int auxi = 0;
+                if (string.IsNullOrEmpty(CantidadTxt.Text) || !int.TryParse(PrecioCompraTxt.Text, out auxi) || auxi < 0)
+                    throw new ArgumentException("El precio de compra del producto debe ser un número > 0");
+            }
             if (ValidarAuxiliar(DescripcionTxt.Text))
                 throw new ArgumentException("La descripción debe ser una cadena de texto");
             if (ValidarAuxiliar(RestriccionesTxt.Text))
@@ -239,7 +264,8 @@ namespace SPAClientApp
                 throw new ArgumentException("El nombre del Insumo ya has sido registrado en el sistema");
             if (Operacion == "Registro" && string.IsNullOrEmpty(FileUrl))
                 throw new ArgumentException("Debes subir una foto del producto");
-            ValidarReceta();
+            if (CheckBoxReceta.IsChecked ?? false)
+                ValidarReceta();
         }
 
         private void ValidarReceta()
@@ -276,6 +302,7 @@ namespace SPAClientApp
             return client.CheckIngredientesStatus(ingredientes.ToArray());
         }
 
+        [Obsolete]
         private void PrepararNuevoProducto()
         {
             Producto.PrecioCompra = float.Parse(PrecioCompraTxt.Text);
@@ -288,6 +315,8 @@ namespace SPAClientApp
                 if(!string.IsNullOrEmpty(aux))
                     EliminarFoto(aux.Substring(31), ConfigurarDriveAPI());
             }
+            if (!ConReceta)
+                Producto.Cantidad = int.Parse(CantidadTxt.Text);
             Producto.Descripcion = DescripcionTxt.Text;
             Producto.Restricciones = RestriccionesTxt.Text;
         }
@@ -303,14 +332,24 @@ namespace SPAClientApp
             Receta.Ingredientes = ingredientes.ToArray();
         }
 
+        [Obsolete]
         private void Actualizar(object sender, RoutedEventArgs e)
         {
             try
             {
                 ValidarProducto();
                 PrepararNuevoProducto();
-                PrepararReceta();
-                AnswerMessage response = client.UpdateProducto(Producto, Receta);
+                AnswerMessage response;
+                if (ConReceta)
+                {
+                    PrepararReceta();
+                    response = client.UpdateProducto(Producto, Receta);
+                }
+                else
+                {
+                    Producto.CodigoReceta = -1;
+                    response = client.UpdateProducto(Producto, null);
+                }
                 if (response.Key > 0)
                 {
                     MostrarToastMessage("Exito", "El producto se ha actualizado exitosamente");
@@ -329,7 +368,7 @@ namespace SPAClientApp
         [Obsolete]
         private DriveService ConfigurarDriveAPI()
         {
-            DriveService service = null;
+            DriveService service;
             try
             {
                 string settings = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"), @"Resources\client_secret.json"));
@@ -434,6 +473,26 @@ namespace SPAClientApp
                     MostrarToastMessage("Error", ex.Message);
                 }
             }
+        }
+
+        private void ActivarReceta(object sender, RoutedEventArgs e)
+        {
+            this.Height = 820;
+            ConReceta = true;
+            RecetaSection.Visibility = Visibility.Visible;
+            ProcedimientoSection.Visibility = Visibility.Visible;
+            IngredientesSection.Visibility = Visibility.Visible;
+            CantidadTxt.IsEnabled = false;
+        }
+
+        private void DesactivarReceta(object sender, RoutedEventArgs e)
+        {
+            this.Height = 420;
+            ConReceta = false;
+            RecetaSection.Visibility = Visibility.Collapsed;
+            ProcedimientoSection.Visibility = Visibility.Collapsed;
+            IngredientesSection.Visibility = Visibility.Collapsed;
+            CantidadTxt.IsEnabled = true;
         }
     }
 }

@@ -10,7 +10,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
       <xs:element minOccurs="0" name="Codigo" type="xs:int" />
-      <xs:element minOccurs="0" name="CodigoReceta" type="xs:int" />
+      <xs:element minOccurs="0" name="CodigoReceta" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />

@@ -245,5 +245,9 @@ namespace SPAClientApp
                 MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
             }
         }
+
+        private void ElegirCriterio(object sender, SelectionChangedEventArgs e)
+        {
+        }
     }
 }

@@ -160,7 +160,7 @@ namespace SPAClientApp
             ProveedorTxt.Text = insumo.ProveedorDeInsumo;
             CantidadTxt.Text = insumo.Cantidad.ToString();
             CostoTxt.Text = insumo.PrecioCompra.ToString();
-            UnidadComboBox.SelectedItem = insumo.UnidadMedida;
+            UnidadComboBox.Text = insumo.UnidadMedida;
             DescripcionTxt.Text = insumo.Descripcion;
             RestriccionesTxt.Text = insumo.Restricciones;
         }

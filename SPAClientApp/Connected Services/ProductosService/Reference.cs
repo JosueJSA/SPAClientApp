@@ -29,7 +29,7 @@ namespace SPAClientApp.ProductosService {
         private int CodigoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CodigoRecetaField;
+        private System.Nullable<int> CodigoRecetaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescripcionField;
@@ -92,7 +92,7 @@ namespace SPAClientApp.ProductosService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CodigoReceta {
+        public System.Nullable<int> CodigoReceta {
             get {
                 return this.CodigoRecetaField;
             }
