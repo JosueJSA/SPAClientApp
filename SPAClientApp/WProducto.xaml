@@ -83,15 +83,21 @@
             </Grid>
 
             <DockPanel Grid.Row="2" Grid.RowSpan="4">
-                <Button
+                <StackPanel DockPanel.Dock="Left">
+                    <Button
                     x:Name="UploadBtn"
-                    DockPanel.Dock="Left"
                   Style="{StaticResource MaterialDesignIconButton}"
                   ToolTip="MaterialDesignIconButton"
                   Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
                   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Top" Foreground="#FF26329C" Click="CargarImagen">
-                <materialDesign:PackIcon Kind="Upload" />
-                </Button>
+                        <materialDesign:PackIcon Kind="Upload" />
+                    </Button>
+                    <ProgressBar
+                        x:Name="Progress"
+                      Style="{StaticResource MaterialDesignCircularProgressBar}"
+                      Value="0"
+                      IsIndeterminate="True" Visibility="Collapsed" />
+                </StackPanel>
                 <Border Margin="0,10,10,10" CornerRadius="8,8,8,8">
                     <Border.Background>
                         <ImageBrush x:Name="Image" />

@@ -57,20 +57,23 @@ namespace SPAClientApp
             tablaDatos.ItemsSource = insumos;
         }
 
-        public void CargarIngredientes(List<EIngrediente> ingredientes)
+        public void CargarIngredientes(List<EIngrediente> ingredientes = null)
         {
-            foreach (EIngrediente ingrediente in ingredientes)
+            if (ingredientes != null)
             {
-                bool Existe = false;
-                foreach (EInsumo insumo in tablaDatos.Items)
+                foreach (EIngrediente ingrediente in ingredientes)
                 {
-                    if(insumo.Codigo == ingrediente.CodigoInsumo)
-                        Existe = true;
+                    bool Existe = false;
+                    foreach (EInsumo insumo in tablaDatos.Items)
+                    {
+                        if (insumo.Codigo == ingrediente.CodigoInsumo)
+                            Existe = true;
+                    }
+                    if (!Existe)
+                        MostrarToastMessage("Advertencia", $"El insumo '{ingrediente.NombreInsumo}' no se exntontró dado de alta en el sistema");
+                    else if (Existe && !EstaAgregado(ingrediente.CodigoInsumo))
+                        tablaIngredientes.Items.Add(ingrediente);
                 }
-                if (!Existe)
-                    MostrarToastMessage("Advertencia", $"El insumo '{ingrediente.NombreInsumo}' no se exntontró dado de alta en el sistema");
-                else if(Existe && !EstaAgregado(ingrediente.CodigoInsumo))
-                    tablaIngredientes.Items.Add(ingrediente);
             }
         }
 

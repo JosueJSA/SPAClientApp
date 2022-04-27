@@ -31,16 +31,6 @@ namespace SPAClientApp
     /// </summary>
     public partial class WProducto : Window
     {
-        private string[] Scopes = { 
-            DriveService.Scope.Drive,
-            DriveService.Scope.DriveAppdata,
-            DriveService.Scope.DriveFile,
-            DriveService.Scope.DriveMetadataReadonly,
-            DriveService.Scope.DriveReadonly,
-            DriveService.Scope.DriveScripts
-        };
-
-        private string ApplicationName = "SAP Project";
 
         private readonly ProductosServiceClient client = new ProductosServiceClient();
         private readonly List<TextBox> UiInputElements;
@@ -190,17 +180,26 @@ namespace SPAClientApp
         {
             var window = WIngredientes.GetWindow(this);
             window.Show();
-            window.CargarIngredientes(Receta.Ingredientes.ToList());
+            if (Receta.Ingredientes != null)
+                window.CargarIngredientes(Receta.Ingredientes.ToList());
         }
 
-        private void CancelarOperacion(object sender, RoutedEventArgs e)
+        [Obsolete]
+        private async void CancelarOperacion(object sender, RoutedEventArgs e)
         {
             string mensaje = "¿Deseas salir sin guardar los cambios?";
             if (MostrarCuadroConfirmacion(mensaje))
             {
                 if (!string.IsNullOrEmpty(FileUrl))
                 {
-                    EliminarFoto(FileUrl.Substring(31), ConfigurarDriveAPI());
+                    try
+                    {
+                        await GoogleDriveAPI.EliminarFoto(FileUrl.Substring(31), null);
+                    }
+                    catch (Exception ex)
+                    {
+                        MostrarToastMessage("Error", ex.Message);
+                    }
                 }
                 Close();
             }
@@ -303,22 +302,28 @@ namespace SPAClientApp
         }
 
         [Obsolete]
-        private void PrepararNuevoProducto()
+        private async void PrepararNuevoProducto()
         {
-            Producto.PrecioCompra = float.Parse(PrecioCompraTxt.Text);
-            Producto.PrecioVenta = float.Parse(PrecioVentaTxt.Text);
-            Producto.Nombre = NombreTxt.Text;
-            if (!string.IsNullOrEmpty(FileUrl))
+            try
             {
-                var aux = Producto.Foto;
-                Producto.Foto = FileUrl;
-                if(!string.IsNullOrEmpty(aux))
-                    EliminarFoto(aux.Substring(31), ConfigurarDriveAPI());
+                Producto.PrecioCompra = float.Parse(PrecioCompraTxt.Text);
+                Producto.PrecioVenta = float.Parse(PrecioVentaTxt.Text);
+                Producto.Nombre = NombreTxt.Text;
+                if (!string.IsNullOrEmpty(FileUrl))
+                {
+                    var aux = Producto.Foto;
+                    Producto.Foto = FileUrl;
+                    if (!string.IsNullOrEmpty(aux))
+                        await GoogleDriveAPI.EliminarFoto(aux.Substring(31), null);
+                }
+                if (!ConReceta)
+                    Producto.Cantidad = int.Parse(CantidadTxt.Text);
+                Producto.Descripcion = DescripcionTxt.Text;
+                Producto.Restricciones = RestriccionesTxt.Text;
+            } catch (Exception e)
+            {
+                MostrarToastMessage("Error", e.Message);
             }
-            if (!ConReceta)
-                Producto.Cantidad = int.Parse(CantidadTxt.Text);
-            Producto.Descripcion = DescripcionTxt.Text;
-            Producto.Restricciones = RestriccionesTxt.Text;
         }
 
         private void PrepararReceta()
@@ -365,57 +370,6 @@ namespace SPAClientApp
             }
         }
 
-        [Obsolete]
-        private DriveService ConfigurarDriveAPI()
-        {
-            DriveService service;
-            try
-            {
-                string settings = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\"), @"Resources\client_secret.json"));
-                using (var stream = new FileStream(settings, FileMode.Open, FileAccess.Read))
-                {
-                    string credPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".credentials/drive-dotnet-quickstart.json");
-                    Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.Load(stream).Secrets,
-                        Scopes,
-                        "user",
-                        CancellationToken.None,
-                        new FileDataStore(credPath, true)).Result;
-                    Console.WriteLine("Credential file saved to: " + credPath);
-                }
-
-                service = new DriveService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = Credential,
-                    ApplicationName = ApplicationName,
-                });
-            }
-            catch (Exception ex)
-            {
-                service = null;
-                MostrarToastMessage("Error", ex.Message);
-            }
-            return service;
-        }
-
-        private void EliminarFoto(string id, DriveService service)
-        {
-            if (service != null)
-            {
-                if (!string.IsNullOrEmpty(id))
-                {
-                    FilesResource.DeleteRequest auxRequest;
-                    auxRequest = service.Files.Delete(id);
-                    auxRequest.Execute();
-                }
-            }
-            else
-            {
-                MostrarToastMessage("Error", "El servicio no fue iniciado correctamente");
-            }
-            
-        }
-
         private string ObtenerImagenPath()
         {
             string path = string.Empty;
@@ -438,43 +392,6 @@ namespace SPAClientApp
             Close();
         }
 
-        [Obsolete]
-        private void CargarImagen(object sender, RoutedEventArgs e)
-        {
-            var service = ConfigurarDriveAPI();
-            if (service != null)
-            {
-                try
-                {
-                    string path;
-                    if (!string.IsNullOrEmpty(path = ObtenerImagenPath()))
-                    {
-                        if (!string.IsNullOrEmpty(FileUrl))
-                            EliminarFoto(FileUrl.Substring(31), ConfigurarDriveAPI());
-                        var file = new Google.Apis.Drive.v3.Data.File();
-                        file.Parents = new string[] { "1AE2JMSauYqhETj7QDnmsSbSzbuMkFCcE" };
-                        FilesResource.CreateMediaUpload request;
-                        using (var stream = new FileStream(path, FileMode.Open))
-                        {
-                            file.Name = stream.Name;
-                            request = service.Files.Create(file, stream, file.MimeType);
-                            request.Fields = "id";
-                            request.Upload();
-                        }
-                        var response = request.ResponseBody;
-                        FileUrl = $"https://drive.google.com/uc?id={response.Id}";
-                        service.Permissions.Create(new Permission() { Type = "anyone", Role = "writer" }, response.Id).Execute(); //Creating Permission after folder creation.
-                        Image.ImageSource = new BitmapImage(new Uri(FileUrl));
-                        MostrarToastMessage("Info", "La imagen se ha cargado correctamente");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MostrarToastMessage("Error", ex.Message);
-                }
-            }
-        }
-
         private void ActivarReceta(object sender, RoutedEventArgs e)
         {
             this.Height = 820;
@@ -493,6 +410,26 @@ namespace SPAClientApp
             ProcedimientoSection.Visibility = Visibility.Collapsed;
             IngredientesSection.Visibility = Visibility.Collapsed;
             CantidadTxt.IsEnabled = true;
+        }
+
+        [Obsolete]
+        private async void CargarImagen(object sender, RoutedEventArgs e)
+        {
+            string path;
+            if (!string.IsNullOrEmpty(path = ObtenerImagenPath()))
+            {
+                try
+                {
+                    Progress.Visibility = Visibility.Visible;
+                    FileUrl = await GoogleDriveAPI.CargarImagen(path, FileUrl);
+                    Image.ImageSource = new BitmapImage(new Uri(FileUrl));
+                    Progress.Visibility = Visibility.Collapsed;
+                    MostrarToastMessage("Info", "Imágen cargada exitosamente");
+                }catch (Exception ex)
+                {
+                    MostrarToastMessage("Advertencia", ex.Message);
+                }
+            }
         }
     }
 }
