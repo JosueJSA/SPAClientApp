@@ -64,5 +64,15 @@ namespace SPAClientApp
         {
             new WListaProductos(this).Show();
         }
+
+        private void VerPedidosClientes(object sender, RoutedEventArgs e)
+        {
+            new WListaPedidosClientes(this).Show();
+        }
+
+        private void VerCliente(object sender, RoutedEventArgs e)
+        {
+            WCliente.GetWClient(this).Show();
+        }
     }
 }

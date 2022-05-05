@@ -13,9 +13,8 @@
          TextOptions.TextRenderingMode="Auto"
          FontFamily="{DynamicResource MaterialDesignFont}"
       
-      mc:Ignorable="d" 
-      d:DesignHeight="393" d:DesignWidth="724"
-      Title="ClientePage">
+      mc:Ignorable="d" d:DesignWidth="724"
+      Title="ClientePage" Height="240">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -23,27 +22,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
             <RowDefinition/>
-            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <Border Margin="10" Grid.Row="1" Background="#41768FCE" CornerRadius="5">
-            
+
         </Border>
 
         <Border Margin="10" Grid.Row="1" Grid.Column="1" Background="#41768FCE" CornerRadius="5">
 
         </Border>
 
-        <StackPanel VerticalAlignment="Center">
-            <Label Margin="10, 0, 0,0" Content="Cliente" Foreground="#DD000000" FontWeight="Bold" FontSize="22"/>
-        </StackPanel>
-
         <Grid Margin="20" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -55,38 +46,51 @@
             <TextBox
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Nombre" Padding="5,5,5,5" Background="White" />
+            materialDesign:HintAssist.Hint="Nombre" Padding="5,5,5,5" Background="White" FontSize="10" />
             <TextBox
             Grid.Row="1"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Apellidos" Padding="5,5,5,5" Background="White"/>
+            materialDesign:HintAssist.Hint="Apellidos" Padding="5,5,5,5" Background="White" FontSize="10"/>
             <TextBox
             Grid.Row="2"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Teléfono" Padding="5,5,5,5" Background="White" />
+            materialDesign:HintAssist.Hint="Teléfono" Padding="5,5,5,5" Background="White" FontSize="10"/>
             <TextBox
             Grid.Row="3"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Correo electrónico" Padding="5,5,5,5" Background="White"/>
-            <TextBox
-            Grid.Row="4"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Ciudad" Padding="5,5,5,5" Background="White"/>
-            <TextBox
-            Grid.Row="5"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Código postal" Padding="5,5,5,5" Background="White"/>
-            <DatePicker
-            Grid.Row="6"
-            Style="{StaticResource MaterialDesignOutlinedDatePicker}"
-            VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Fecha de nacimiento" Padding="5,5,5,5" Background="White"/>
-            <StackPanel Grid.Row="7" Orientation="Horizontal">
+            materialDesign:HintAssist.Hint="Correo electrónico" Padding="5,5,5,5" Background="White" FontSize="10"/>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox
+                    Margin="0,0,5,0"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Ciudad" Padding="5,5,5,5" Background="White" FontSize="10"/>
+                <TextBox
+                    Margin="5,0,5,0"
+                    Grid.Column="1"
+                    Grid.Row="5"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Código postal" Padding="5,5,5,5" Background="White" FontSize="10"/>
+                <DatePicker
+                    Margin="5,0,0,0"
+                    Grid.Column="2"
+                    Grid.Row="6"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Nacimiento" Padding="5,5,5,5" Background="White" FontSize="10"/>
+            </Grid>
+
+            <StackPanel Grid.Row="5" Orientation="Horizontal">
                 <Label Content="Edad: "/>
                 <Label Width="60"/>
                 <Label Content="Status: "/>
@@ -110,70 +114,40 @@
               ItemsSource="{Binding ShortStringList}"
               materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White">
                 <ComboBox.SelectedItem>
-                        <Binding
+                    <Binding
                           Path="SelectedValidationOutlined"
                           Mode="TwoWay"
                           UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </ComboBox.SelectedItem>
+                        <Binding.ValidationRules>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
             </ComboBox>
 
             <TextBox
             Grid.Row="1"
-                Margin="0,5,0,0"
+            Margin="0,5,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Colonia" Padding="5,5,5,5" Background="White" />
+            materialDesign:HintAssist.Hint="Colonia" Padding="5,5,5,5" Background="White"/>
 
             <TextBox
             Grid.Row="2"
-                Margin="0,5,0,0"
+            FontSize="10" 
+            Margin="0,5,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Calle" Padding="5,5,5,5" Background="White" />
 
             <TextBox
             Grid.Row="3"
-                Margin="0,5,0,0"
+            FontSize="10" 
+            Margin="0,5,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Número" Padding="5,5,5,5" Background="White" />
 
         </Grid>
 
-
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button
-                Margin="10,0,20,0"
-              DockPanel.Dock="Left"
-              Style="{StaticResource MaterialDesignRaisedDarkButton}"
-              ToolTip="Agregar cliente"
-              Content="Cancelar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="90" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Visibility="Collapsed" />
-            <Button
-              Margin="0,0,20,0"
-                DockPanel.Dock="Right"
-              Style="{StaticResource MaterialDesignRaisedDarkButton}"
-              ToolTip="Volver atrás"
-              Content="Registrar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" />
-            <Button
-              Margin="0,0,20,0"
-                DockPanel.Dock="Right"
-              Style="{StaticResource MaterialDesignRaisedDarkButton}"
-              ToolTip="Volver atrás"
-              Content="Actualizar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" />
-            <Button
-              Margin="0,0,20,0"
-                DockPanel.Dock="Right"
-              Style="{StaticResource MaterialDesignRaisedDarkButton}"
-              ToolTip="Volver atrás"
-              Content="Salir"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" />
-        </StackPanel>
-        
     </Grid>
 </Page>

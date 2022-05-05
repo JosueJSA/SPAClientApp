@@ -198,7 +198,7 @@ namespace SPAClientApp
             if (TablaActualizada())
             {
                 var producto = ((FrameworkElement)sender).DataContext as EProducto;
-                string mensaje = "¿Seguro(a) que deseas dar de alta el Producto seleccionado?";
+                string mensaje = $"¿Seguro(a) que deseas dar de alta el Producto {producto.Nombre} seleccionado?";
                 if (MostrarCuadroConfirmacion(mensaje))
                 {
                     AnswerMessage response = client.ChangeProductoStatus(producto.Codigo, "Activo");
@@ -224,7 +224,7 @@ namespace SPAClientApp
             if (TablaActualizada())
             {
                 var producto = ((FrameworkElement)sender).DataContext as EProducto;
-                string mensaje = "¿Seguro(a) que deseas dar de baja el Producto seleccionado?";
+                string mensaje = $"¿Seguro(a) que deseas dar de baja el Producto '{producto.Nombre}' seleccionado?";
                 if (MostrarCuadroConfirmacion(mensaje))
                 {
                     AnswerMessage response = client.ChangeProductoStatus(producto.Codigo, "Dado de baja");

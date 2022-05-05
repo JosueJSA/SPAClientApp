@@ -1,0 +1,171 @@
+﻿<Window x:Class="SPAClientApp.WPedidoCliente"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SPAClientApp"
+        
+        Icon="Resources/img/logo.png"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        mc:Ignorable="d"
+        Title="WPedidoCliente" Height="730" Width="724">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBox
+                Width="190"
+                Margin="0,0,10,0"
+                x:Name="ValorBusqueda"
+                Style="{StaticResource MaterialDesignFilledTextBox}"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda"
+                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Foreground="Black" SelectionBrush="Black" VerticalAlignment="Center" Height="26" Padding="0,0,0,0" />
+            <ComboBox x:Name="Criterio" Margin="0,0,15,0" Width="70" SelectedIndex="1" Foreground="Black" BorderBrush="Black">
+                <ComboBoxItem Content="Código" />
+                <ComboBoxItem Content="Nombre" />
+                <ComboBoxItem Content="Todos" />
+            </ComboBox>
+            <Button
+                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                      ToolTip="Buscar usando el filtro seleccionado"
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#FF313B8E" Height="23" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Search" />
+            </Button>
+        </StackPanel>
+
+
+        <DataGrid x:Name="TablaProductos" Margin="0,0,10,0" Grid.Row="1" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="ColumnAdd">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="AgregarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF137137" BorderBrush="#FF136D1D" Foreground="#DDFFFFFF" FontWeight="Bold" Click="AgregarProducto">
+                                <materialDesign:PackIcon Kind="plus" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Codigo}" Header="#" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre"/>
+                <DataGridTextColumn Binding="{Binding Cantidad}" Width="90" Header="Cantidad"/>
+                <DataGridTextColumn Binding="{Binding PrecioVenta}" Width="90" Header="Costo $"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <DataGrid x:Name="TablaProductosSeleccionados" Margin="0,0,10,0" Grid.Row="1" Grid.Column="1" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="ColumnRemove">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="RemoverBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FFA91717" BorderBrush="#FFA71C15" Foreground="#DDFFFFFF" FontWeight="Bold" Click="RemoverProducto">
+                                <materialDesign:PackIcon Kind="WindowMinimize" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding CodigoProductoVenta}" Header="#" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre"/>
+                <DataGridTemplateColumn Width="90" Header="Cantidad">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                  x:Name="cantidad"
+                                    Text= "{Binding Cantidad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  materialDesign:TransitionAssist.DisableTransitions="True" KeyUp="CambiarCantidades" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Precio, Mode=TwoWay}" Width="90" Header="Costo $"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Label Margin="0,0,10,0" Content="Cliente" FontWeight="Bold" FontSize="16" VerticalAlignment="Center"/>
+            <CheckBox
+                DockPanel.Dock="Right"
+                x:Name="CheckBoxPedido"
+                IsChecked="False"
+                Content="Pedido a domicilio" Foreground="#DD000000" BorderBrush="#FF361FAB" Background="#FF2916B5" HorizontalAlignment="Right" VerticalAlignment="Center" Checked="ActivarCliente" Unchecked="DesactivarCliente" />
+        </StackPanel>
+
+        <materialDesign:Card Grid.ColumnSpan="2" Grid.Row="3" Margin="10">
+            <TabControl
+            VerticalContentAlignment="Bottom"
+            materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+            Style="{StaticResource MaterialDesignNavigationRailTabControl}">
+                <TabItem VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="User" Foreground="#DDFFFFFF" VerticalAlignment="Top" />
+                    </TabItem.Header>
+
+                    <StackPanel Margin="10">
+                        <ComboBox
+                            Width="270"
+                          materialDesign:HintAssist.Hint="Seleccionar cliente"
+                          materialDesign:HintAssist.HintOpacity=".26"
+                            IsEditable="True" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        </ComboBox>
+                        <Frame Source="ClientePage.xaml"></Frame>
+                    </StackPanel>
+                    
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="AccountPlus" Foreground="#DDFFFFFF" VerticalAlignment="Center" />
+                    </TabItem.Header>
+
+                </TabItem>
+            </TabControl>
+        </materialDesign:Card>
+
+        <StackPanel Margin="0,0,30,0" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button
+              DockPanel.Dock="Left"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Cancelar"
+              Content="Cancelar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Margin="0,0,15,0" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" />
+            <Button
+                DockPanel.Dock="Right"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Realizar pedido"
+              Content="Realizar pedido"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="150" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" />
+
+        </StackPanel>
+
+    </Grid>
+</Window>

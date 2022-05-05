@@ -16,7 +16,41 @@
         
         mc:Ignorable="d"
         Title="WCliente" Height="393" Width="724">
-    <Frame Source="ClientePage.xaml">
+    <Grid>
+        <Frame Source="ClientePage.xaml">
 
-    </Frame>
+        </Frame>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button
+                Margin="10,0,20,0"
+              DockPanel.Dock="Left"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Agregar cliente"
+              Content="Cancelar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="90" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Visibility="Collapsed" />
+            <Button
+              Margin="0,0,20,0"
+                DockPanel.Dock="Right"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Volver atrás"
+              Content="Registrar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" />
+            <Button
+              Margin="0,0,20,0"
+                DockPanel.Dock="Right"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Volver atrás"
+              Content="Actualizar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" />
+            <Button
+              Margin="0,0,20,0"
+                DockPanel.Dock="Right"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Volver atrás"
+              Content="Salir"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" />
+        </StackPanel>
+    </Grid>
+
 </Window>

@@ -147,7 +147,7 @@
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerCliente">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">
@@ -226,7 +226,7 @@
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerPedidosClientes">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">

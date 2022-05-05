@@ -114,7 +114,7 @@ namespace SPAClientApp
                 var insumo = ((FrameworkElement)sender).DataContext as EInsumo;
                 if (!EsUsadoEnReceta(insumo.Codigo))
                 {
-                    string mensaje = "¿Seguro(a) que deseas dar de baja el Insumo seleccionado?";
+                    string mensaje = $"¿Seguro(a) que deseas dar de baja el Insumo '{insumo.Nombre}' seleccionado?";
                     if (MostrarCuadroConfirmacion(mensaje))
                     {
                         AnswerMessage response = client.ChangeInsumoStatus(insumo.Codigo, "Dado de baja");
@@ -146,7 +146,7 @@ namespace SPAClientApp
             if (TablaActualizada())
             {
                 var insumo = ((FrameworkElement)sender).DataContext as EInsumo;
-                string mensaje = "¿Seguro(a) que deseas dar de alta el Insumo seleccionado?";
+                string mensaje = $"¿Seguro(a) que deseas dar de alta el Insumo '{insumo.Nombre}' seleccionado?";
                 if (MostrarCuadroConfirmacion(mensaje))
                 {
                     AnswerMessage response = client.ChangeInsumoStatus(insumo.Codigo, "Activo");
