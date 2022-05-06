@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SPAClientApp"
         mc:Ignorable="d"
 
-        Icon="Resources/img/logo.png"
+        Icon="../Resources/img/logo.png"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
          TextElement.FontSize="13"

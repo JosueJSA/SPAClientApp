@@ -100,7 +100,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ClientePage.xaml.cs">
+    <Compile Include="Views\ClientePage.xaml.cs">
       <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\InsumosService\Reference.cs">
@@ -119,51 +119,51 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="GoogleDriveAPI.cs" />
-    <Compile Include="WCliente.xaml.cs">
+    <Compile Include="Views\WCliente.xaml.cs">
       <DependentUpon>WCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WIngredientes.xaml.cs">
+    <Compile Include="Views\WIngredientes.xaml.cs">
       <DependentUpon>WIngredientes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WInsumo.xaml.cs">
+    <Compile Include="Views\WInsumo.xaml.cs">
       <DependentUpon>WInsumo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WListaInsumos.xaml.cs">
+    <Compile Include="Views\WListaInsumos.xaml.cs">
       <DependentUpon>WListaInsumos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WListaPedidosClientes.xaml.cs">
+    <Compile Include="Views\WListaPedidosClientes.xaml.cs">
       <DependentUpon>WListaPedidosClientes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WListaProductos.xaml.cs">
+    <Compile Include="Views\WListaProductos.xaml.cs">
       <DependentUpon>WListaProductos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WPedidoCliente.xaml.cs">
+    <Compile Include="Views\WPedidoCliente.xaml.cs">
       <DependentUpon>WPedidoCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WProducto.xaml.cs">
+    <Compile Include="Views\WProducto.xaml.cs">
       <DependentUpon>WProducto.xaml</DependentUpon>
     </Compile>
-    <Page Include="ClientePage.xaml">
+    <Page Include="Views\ClientePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WCliente.xaml">
+    <Page Include="Views\WCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WIngredientes.xaml">
+    <Page Include="Views\WIngredientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WInsumo.xaml">
+    <Page Include="Views\WInsumo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WListaInsumos.xaml">
+    <Page Include="Views\WListaInsumos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WHome.xaml">
+    <Page Include="Views\WHome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -171,23 +171,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="WHome.xaml.cs">
+    <Compile Include="Views\WHome.xaml.cs">
       <DependentUpon>WHome.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="WListaPedidosClientes.xaml">
+    <Page Include="Views\WListaPedidosClientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WListaProductos.xaml">
+    <Page Include="Views\WListaProductos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WPedidoCliente.xaml">
+    <Page Include="Views\WPedidoCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WProducto.xaml">
+    <Page Include="Views\WProducto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,9 +289,6 @@
     <WCFMetadataStorage Include="Connected Services\ProductosService\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\img\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\InsumosService\InsumosService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -335,6 +332,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

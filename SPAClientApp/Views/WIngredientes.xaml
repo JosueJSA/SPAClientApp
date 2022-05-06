@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SPAClientApp"
         mc:Ignorable="d"
         
-        Icon="Resources/img/logo.png"
+        Icon="../Resources/img/logo.png"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
          TextElement.FontSize="13"
@@ -15,7 +15,7 @@
          TextOptions.TextRenderingMode="Auto"
          FontFamily="{DynamicResource MaterialDesignFont}"
         
-        Title="WIngredientes" Height="750" Width="716" WindowStartupLocation="CenterScreen">
+        Title="WIngredientes" Height="647" Width="716" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Grid Margin="15">
             <Grid.RowDefinitions>

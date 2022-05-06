@@ -394,22 +394,34 @@ namespace SPAClientApp
 
         private void ActivarReceta(object sender, RoutedEventArgs e)
         {
-            this.Height = 820;
+            this.Height = 670;
             ConReceta = true;
             RecetaSection.Visibility = Visibility.Visible;
             ProcedimientoSection.Visibility = Visibility.Visible;
             IngredientesSection.Visibility = Visibility.Visible;
             CantidadTxt.IsEnabled = false;
+            CentrarVentana();
         }
 
         private void DesactivarReceta(object sender, RoutedEventArgs e)
         {
-            this.Height = 420;
+            this.Height = 350;
             ConReceta = false;
             RecetaSection.Visibility = Visibility.Collapsed;
             ProcedimientoSection.Visibility = Visibility.Collapsed;
             IngredientesSection.Visibility = Visibility.Collapsed;
             CantidadTxt.IsEnabled = true;
+            CentrarVentana();
+        }
+
+        private void CentrarVentana()
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double windowWidth = this.Width;
+            double windowHeight = this.Height;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
         [Obsolete]

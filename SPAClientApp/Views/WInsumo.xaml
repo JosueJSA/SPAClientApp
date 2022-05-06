@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SPAClientApp"
         mc:Ignorable="d"
         
-        Icon="Resources/img/logo.png"
+        Icon="../Resources/img/logo.png"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
          TextElement.FontSize="13"
@@ -15,7 +15,7 @@
          TextOptions.TextRenderingMode="Auto"
          FontFamily="{DynamicResource MaterialDesignFont}"
         
-        Title="WInsumo" Height="408" Width="763"
+        Title="WInsumo" Height="373" Width="724"
         WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Grid Background="White" Margin="10">

@@ -1,4 +1,4 @@
-﻿<Window x:Class="SPAClientApp.WListaProductos"
+﻿<Window x:Class="SPAClientApp.WListaInsumos"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SPAClientApp"
         mc:Ignorable="d"
         
-        Icon="Resources/img/logo.png"
+        Icon="../Resources/img/logo.png"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
          TextElement.FontSize="13"
@@ -15,9 +15,8 @@
          TextOptions.TextRenderingMode="Auto"
          FontFamily="{DynamicResource MaterialDesignFont}"
         
-        Title="WListaProductos" Height="523" Width="902" WindowStartupLocation="CenterScreen">
-
-
+        Title="WListaInsumos" Height="523" Width="902"
+        WindowStartupLocation="CenterScreen">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="180"/>
@@ -50,7 +49,7 @@
 
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <Label Content="Criterio" FontWeight="Bold"/>
-                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" SelectionChanged="ElegirCriterio">
+                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" MouseLeftButtonDown="SeleccionarCriterio">
                             <ComboBoxItem Content="Código" />
                             <ComboBoxItem Content="Nombre" />
                             <ComboBoxItem Content="Todos" />
@@ -99,7 +98,7 @@
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Buscar usando el filtro seleccionado"
                       Content="Buscar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#FF313B8E" Height="23" Click="BuscarProductos" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#FF313B8E" Height="23" Click="BuscarInsumos" />
                 </StackPanel>
 
             </Grid>
@@ -164,22 +163,11 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Codigo}" Header="#Código" Width="90"/>
-                <DataGridTemplateColumn Header="Imagen">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Ellipse Width="30" Height="30">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding Foto}" Stretch="Fill"></ImageBrush>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre"/>
                 <DataGridTextColumn Binding="{Binding Cantidad}" Width="90" Header="Cantidad"/>
+                <DataGridTextColumn Binding="{Binding UnidadMedida}" Width="90" Header="Unidad"/>
                 <DataGridTextColumn Binding="{Binding Status}" Header="Estado"/>
                 <DataGridTextColumn Binding="{Binding PrecioCompra}" Header="Precio de compra $"/>
-                <DataGridTextColumn Binding="{Binding PrecioVenta}" Header="Precio de venta $"/>
                 <DataGridTextColumn Binding="{Binding Descripcion}" Width="100" Header="Descripcion"/>
                 <DataGridTextColumn Binding="{Binding Restricciones}" Width="100" Header="Restricciones"/>
                 <DataGridTextColumn Binding="{Binding Registro}" Header="Fecha registro"/>
@@ -198,11 +186,10 @@
             <Button
               DockPanel.Dock="Left"
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
-              ToolTip="Agregar nuevo producto"
-              Content="Agregar nuevo producto"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" Click="Registrar" />
+              ToolTip="Agregar nuevo insumo"
+              Content="Agregar nuevo insumo"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Click="AgregarInsumo" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" />
         </DockPanel>
 
     </Grid>
-
 </Window>
