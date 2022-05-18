@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="rSk5CGztLjnn/ME/TSmTqxfXwjpDTJn0AkGOFWvPIiY=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="hrBD0s26K3MkjdjkIoDC+iJ524hafRoATnpvfW3BOuM=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IPedidosClientesService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IPedidosClientesService" contract="PedidosClientesService.IPedidosClientesService" bindingType="basicHttpBinding" address="http://localhost:6666/PedidosClientesService.svc" bindingConfiguration="BasicHttpBinding_IPedidosClientesService">
+    <endpoint name="BasicHttpBinding_IPedidosClientesService" contract="PedidosClientesService.IPedidosClientesService" bindingType="basicHttpBinding" address="http://localhost:1234/PedidosClientesService.svc" bindingConfiguration="BasicHttpBinding_IPedidosClientesService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:6666/PedidosClientesService.svc</serializedValue>
+          <serializedValue>http://localhost:1234/PedidosClientesService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

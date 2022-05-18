@@ -32,7 +32,7 @@ namespace SPAClientApp.PedidosClientesService {
         private double CostoTotalField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime EntregaField;
+        private System.Nullable<System.DateTime> EntregaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> NumeroProductosField;
@@ -96,7 +96,7 @@ namespace SPAClientApp.PedidosClientesService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Entrega {
+        public System.Nullable<System.DateTime> Entrega {
             get {
                 return this.EntregaField;
             }
@@ -409,259 +409,6 @@ namespace SPAClientApp.PedidosClientesService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ECliente", Namespace="http://schemas.datacontract.org/2004/07/Services.Model")]
-    [System.SerializableAttribute()]
-    public partial class ECliente : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ApellidoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CalleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CiudadField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CodigoPostalField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ColoniaField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int EdadField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdDireccionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime NacimientoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NombreField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NumeroField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TelefonoField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Apellido {
-            get {
-                return this.ApellidoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ApellidoField, value) != true)) {
-                    this.ApellidoField = value;
-                    this.RaisePropertyChanged("Apellido");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Calle {
-            get {
-                return this.CalleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CalleField, value) != true)) {
-                    this.CalleField = value;
-                    this.RaisePropertyChanged("Calle");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Ciudad {
-            get {
-                return this.CiudadField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CiudadField, value) != true)) {
-                    this.CiudadField = value;
-                    this.RaisePropertyChanged("Ciudad");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CodigoPostal {
-            get {
-                return this.CodigoPostalField;
-            }
-            set {
-                if ((this.CodigoPostalField.Equals(value) != true)) {
-                    this.CodigoPostalField = value;
-                    this.RaisePropertyChanged("CodigoPostal");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Colonia {
-            get {
-                return this.ColoniaField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ColoniaField, value) != true)) {
-                    this.ColoniaField = value;
-                    this.RaisePropertyChanged("Colonia");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Edad {
-            get {
-                return this.EdadField;
-            }
-            set {
-                if ((this.EdadField.Equals(value) != true)) {
-                    this.EdadField = value;
-                    this.RaisePropertyChanged("Edad");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email {
-            get {
-                return this.EmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
-                    this.EmailField = value;
-                    this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdDireccion {
-            get {
-                return this.IdDireccionField;
-            }
-            set {
-                if ((this.IdDireccionField.Equals(value) != true)) {
-                    this.IdDireccionField = value;
-                    this.RaisePropertyChanged("IdDireccion");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Nacimiento {
-            get {
-                return this.NacimientoField;
-            }
-            set {
-                if ((this.NacimientoField.Equals(value) != true)) {
-                    this.NacimientoField = value;
-                    this.RaisePropertyChanged("Nacimiento");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nombre {
-            get {
-                return this.NombreField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
-                    this.NombreField = value;
-                    this.RaisePropertyChanged("Nombre");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Numero {
-            get {
-                return this.NumeroField;
-            }
-            set {
-                if ((this.NumeroField.Equals(value) != true)) {
-                    this.NumeroField = value;
-                    this.RaisePropertyChanged("Numero");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Telefono {
-            get {
-                return this.TelefonoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TelefonoField, value) != true)) {
-                    this.TelefonoField = value;
-                    this.RaisePropertyChanged("Telefono");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EProducto", Namespace="http://schemas.datacontract.org/2004/07/Services.Model")]
     [System.SerializableAttribute()]
     public partial class EProducto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -865,6 +612,67 @@ namespace SPAClientApp.PedidosClientesService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AnswerMessage", Namespace="http://schemas.datacontract.org/2004/07/Services.Model")]
+    [System.SerializableAttribute()]
+    public partial class AnswerMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int KeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Key {
+            get {
+                return this.KeyField;
+            }
+            set {
+                if ((this.KeyField.Equals(value) != true)) {
+                    this.KeyField = value;
+                    this.RaisePropertyChanged("Key");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PedidosClientesService.IPedidosClientesService")]
     public interface IPedidosClientesService {
@@ -887,17 +695,29 @@ namespace SPAClientApp.PedidosClientesService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetProductosComprados", ReplyAction="http://tempuri.org/IPedidosClientesService/GetProductosCompradosResponse")]
         System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EProductoComprado[]> GetProductosCompradosAsync(int clavePedido);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetClienteInfo", ReplyAction="http://tempuri.org/IPedidosClientesService/GetClienteInfoResponse")]
-        SPAClientApp.PedidosClientesService.ECliente GetClienteInfo(int IDCliente, int IDDirección);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetClienteInfo", ReplyAction="http://tempuri.org/IPedidosClientesService/GetClienteInfoResponse")]
-        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.ECliente> GetClienteInfoAsync(int IDCliente, int IDDirección);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetProductosList", ReplyAction="http://tempuri.org/IPedidosClientesService/GetProductosListResponse")]
         SPAClientApp.PedidosClientesService.EProducto[] GetProductosList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetProductosList", ReplyAction="http://tempuri.org/IPedidosClientesService/GetProductosListResponse")]
         System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EProducto[]> GetProductosListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/AddPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/AddPedidoClienteResponse")]
+        SPAClientApp.PedidosClientesService.AnswerMessage AddPedidoCliente(SPAClientApp.PedidosClientesService.EPedidoCliente pedido, SPAClientApp.PedidosClientesService.EProductoComprado[] productos, int idCliente, int idDireccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/AddPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/AddPedidoClienteResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> AddPedidoClienteAsync(SPAClientApp.PedidosClientesService.EPedidoCliente pedido, SPAClientApp.PedidosClientesService.EProductoComprado[] productos, int idCliente, int idDireccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/CheckProductosSeleccionados", ReplyAction="http://tempuri.org/IPedidosClientesService/CheckProductosSeleccionadosResponse")]
+        string CheckProductosSeleccionados(SPAClientApp.PedidosClientesService.EProductoComprado[] productos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/CheckProductosSeleccionados", ReplyAction="http://tempuri.org/IPedidosClientesService/CheckProductosSeleccionadosResponse")]
+        System.Threading.Tasks.Task<string> CheckProductosSeleccionadosAsync(SPAClientApp.PedidosClientesService.EProductoComprado[] productos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoClienteResponse")]
+        SPAClientApp.PedidosClientesService.AnswerMessage ChangeStatusPedidoCliente(int IdPedido, string status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoClienteResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> ChangeStatusPedidoClienteAsync(int IdPedido, string status);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -951,20 +771,36 @@ namespace SPAClientApp.PedidosClientesService {
             return base.Channel.GetProductosCompradosAsync(clavePedido);
         }
         
-        public SPAClientApp.PedidosClientesService.ECliente GetClienteInfo(int IDCliente, int IDDirección) {
-            return base.Channel.GetClienteInfo(IDCliente, IDDirección);
-        }
-        
-        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.ECliente> GetClienteInfoAsync(int IDCliente, int IDDirección) {
-            return base.Channel.GetClienteInfoAsync(IDCliente, IDDirección);
-        }
-        
         public SPAClientApp.PedidosClientesService.EProducto[] GetProductosList() {
             return base.Channel.GetProductosList();
         }
         
         public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EProducto[]> GetProductosListAsync() {
             return base.Channel.GetProductosListAsync();
+        }
+        
+        public SPAClientApp.PedidosClientesService.AnswerMessage AddPedidoCliente(SPAClientApp.PedidosClientesService.EPedidoCliente pedido, SPAClientApp.PedidosClientesService.EProductoComprado[] productos, int idCliente, int idDireccion) {
+            return base.Channel.AddPedidoCliente(pedido, productos, idCliente, idDireccion);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> AddPedidoClienteAsync(SPAClientApp.PedidosClientesService.EPedidoCliente pedido, SPAClientApp.PedidosClientesService.EProductoComprado[] productos, int idCliente, int idDireccion) {
+            return base.Channel.AddPedidoClienteAsync(pedido, productos, idCliente, idDireccion);
+        }
+        
+        public string CheckProductosSeleccionados(SPAClientApp.PedidosClientesService.EProductoComprado[] productos) {
+            return base.Channel.CheckProductosSeleccionados(productos);
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckProductosSeleccionadosAsync(SPAClientApp.PedidosClientesService.EProductoComprado[] productos) {
+            return base.Channel.CheckProductosSeleccionadosAsync(productos);
+        }
+        
+        public SPAClientApp.PedidosClientesService.AnswerMessage ChangeStatusPedidoCliente(int IdPedido, string status) {
+            return base.Channel.ChangeStatusPedidoCliente(IdPedido, status);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> ChangeStatusPedidoClienteAsync(int IdPedido, string status) {
+            return base.Channel.ChangeStatusPedidoClienteAsync(IdPedido, status);
         }
     }
 }

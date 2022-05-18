@@ -4,6 +4,7 @@ using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using SPAClientApp.ProductosService;
+using SPAClientApp.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -41,6 +42,7 @@ namespace SPAClientApp
         private EProducto Producto { get; set; } = new EProducto();
         private EReceta Receta { get; set; } = new EReceta();
         private WListaProductos ParentWindow { get; set; }
+        private WPedidoClienteConsulta ParentPedido { get; set; }
         private UserCredential Credential { get; set; }
         private string FileUrl { get; set; } = string.Empty;   
         private bool ConReceta { get; set; } = false;
@@ -49,6 +51,15 @@ namespace SPAClientApp
         {
             InitializeComponent();
             ParentWindow = parent;
+            UiInputElements = new List<TextBox>() { NombreTxt, PrecioCompraTxt, CantidadTxt, DescripcionTxt, RestriccionesTxt, PrecioVentaTxt, ProcedimientoTxt, EstadoTxt };
+            UiButtons = new List<Button>() { CancelarBtn, ActualizarBtn, RegistrarBtn, CerrarBtn, EditarBtn, UploadBtn };
+            ConfigurarToastNotifier(this, 3);
+        }
+
+        public WProducto(WPedidoClienteConsulta parent)
+        {
+            InitializeComponent();
+            ParentPedido = parent;
             UiInputElements = new List<TextBox>() { NombreTxt, PrecioCompraTxt, CantidadTxt, DescripcionTxt, RestriccionesTxt, PrecioVentaTxt, ProcedimientoTxt, EstadoTxt };
             UiButtons = new List<Button>() { CancelarBtn, ActualizarBtn, RegistrarBtn, CerrarBtn, EditarBtn, UploadBtn };
             ConfigurarToastNotifier(this, 3);

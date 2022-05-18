@@ -2,9 +2,9 @@
 <wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="PedidosClientesService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:6666/PedidosClientesService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:6666/PedidosClientesService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:6666/PedidosClientesService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
+      <xsd:import schemaLocation="http://localhost:1234/PedidosClientesService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:1234/PedidosClientesService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1234/PedidosClientesService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IPedidosClientesService_GetPedidosClientesList_InputMessage">
@@ -25,17 +25,29 @@
   <wsdl:message name="IPedidosClientesService_GetProductosComprados_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProductosCompradosResponse" />
   </wsdl:message>
-  <wsdl:message name="IPedidosClientesService_GetClienteInfo_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetClienteInfo" />
-  </wsdl:message>
-  <wsdl:message name="IPedidosClientesService_GetClienteInfo_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetClienteInfoResponse" />
-  </wsdl:message>
   <wsdl:message name="IPedidosClientesService_GetProductosList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductosList" />
   </wsdl:message>
   <wsdl:message name="IPedidosClientesService_GetProductosList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProductosListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_AddPedidoCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPedidoCliente" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_AddPedidoCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPedidoClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_CheckProductosSeleccionados_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckProductosSeleccionados" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_CheckProductosSeleccionados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckProductosSeleccionadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_ChangeStatusPedidoCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusPedidoCliente" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_ChangeStatusPedidoCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusPedidoClienteResponse" />
   </wsdl:message>
   <wsdl:portType name="IPedidosClientesService">
     <wsdl:operation name="GetPedidosClientesList">
@@ -50,13 +62,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/GetProductosComprados" message="tns:IPedidosClientesService_GetProductosComprados_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/GetProductosCompradosResponse" message="tns:IPedidosClientesService_GetProductosComprados_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetClienteInfo">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/GetClienteInfo" message="tns:IPedidosClientesService_GetClienteInfo_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/GetClienteInfoResponse" message="tns:IPedidosClientesService_GetClienteInfo_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetProductosList">
       <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/GetProductosList" message="tns:IPedidosClientesService_GetProductosList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/GetProductosListResponse" message="tns:IPedidosClientesService_GetProductosList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPedidoCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/AddPedidoCliente" message="tns:IPedidosClientesService_AddPedidoCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/AddPedidoClienteResponse" message="tns:IPedidosClientesService_AddPedidoCliente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckProductosSeleccionados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/CheckProductosSeleccionados" message="tns:IPedidosClientesService_CheckProductosSeleccionados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/CheckProductosSeleccionadosResponse" message="tns:IPedidosClientesService_CheckProductosSeleccionados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatusPedidoCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoCliente" message="tns:IPedidosClientesService_ChangeStatusPedidoCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoClienteResponse" message="tns:IPedidosClientesService_ChangeStatusPedidoCliente_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPedidosClientesService" type="tns:IPedidosClientesService">
@@ -88,8 +108,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetClienteInfo">
-      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/GetClienteInfo" style="document" />
+    <wsdl:operation name="GetProductosList">
+      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/GetProductosList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -97,8 +117,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetProductosList">
-      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/GetProductosList" style="document" />
+    <wsdl:operation name="AddPedidoCliente">
+      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/AddPedidoCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckProductosSeleccionados">
+      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/CheckProductosSeleccionados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatusPedidoCliente">
+      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoCliente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -109,7 +147,7 @@
   </wsdl:binding>
   <wsdl:service name="PedidosClientesService">
     <wsdl:port name="BasicHttpBinding_IPedidosClientesService" binding="tns:BasicHttpBinding_IPedidosClientesService">
-      <soap:address location="http://localhost:6666/PedidosClientesService.svc" />
+      <soap:address location="http://localhost:1234/PedidosClientesService.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -1,4 +1,5 @@
-﻿using SPAClientApp.PedidosClientesService;
+﻿using SPAClientApp.ClientesService;
+using SPAClientApp.PedidosClientesService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,15 @@ namespace SPAClientApp
     /// </summary>
     public partial class WPedidoCliente : Window
     {
+        private List<string> Clientes { get; set; }
+        public ECliente Cliente { get; set; }
+        private EPedidoCliente Pedido { get; set; }
+        private ClientePage ClienteExistPage { get; set; }  
+        private ClientePage NewClientPage { get; set; }
         private Notifier notifier;
         private static WPedidoCliente PedidoWindow = null;
-        private readonly PedidosClientesServiceClient client = new PedidosClientesServiceClient(); 
+        private readonly PedidosClientesServiceClient client = new PedidosClientesServiceClient();
+        private readonly ClientesServiceClient clientCliente = new ClientesServiceClient();
         private WListaPedidosClientes Parent { get; set; }
 
         private WPedidoCliente()
@@ -34,6 +41,8 @@ namespace SPAClientApp
             InitializeComponent();
             ConfigurarToastNotifier(this, 3);
             CargarProductos();
+            Frame.Content = (ClienteExistPage = new ClientePage(this));
+            SecondFrame.Content = (NewClientPage = new ClientePage(this));
         }
 
         public static WPedidoCliente GetWListaPedidosClientesWindow(WListaPedidosClientes parent)
@@ -50,12 +59,27 @@ namespace SPAClientApp
                 MostrarToastMessage("Advertencia", $"El producto '{producto.Nombre}' ya ha sido agregado a la lista de productos comprados");
             else
                 TablaProductosSeleccionados.Items.Add(producto);
+            ActualizarTotal();
+        }
+
+        private void ActualizarTotal()
+        {
+            if (TablaProductosSeleccionados.Items.Count > 0)
+            {
+                double total = 0;
+                foreach (EProductoComprado producto in TablaProductosSeleccionados.Items)
+                {
+                    total += producto.Precio;
+                }
+                Total.Content = total.ToString();
+            }
         }
 
         private void RemoverProducto(object sender, RoutedEventArgs e)
         {
             var producto = ((FrameworkElement)sender).DataContext as EProducto;
             TablaProductosSeleccionados.Items.Remove(producto);
+            ActualizarTotal();
         }
 
         private void CargarProductos()
@@ -83,7 +107,7 @@ namespace SPAClientApp
                 Foto = producto.Foto,
                 Descripcion = producto.Descripcion,
                 Restricciones = producto.Restricciones
-    };
+            };
         }
 
         private bool EstaAgregado(int id)
@@ -101,10 +125,14 @@ namespace SPAClientApp
         {
             if (tipo == "Advertencia")
                 notifier.ShowWarning(mensaje);
-            if (tipo == "Exito")
-                notifier.ShowSuccess(mensaje);
             if (tipo == "Info")
                 notifier.ShowInformation(mensaje);
+            if (tipo == "Exito")
+            {
+                ConfigurarToastNotifier(Parent, 5);
+                notifier.ShowSuccess(mensaje);
+                Close();
+            }
             if (tipo == "Error")
             {
                 ConfigurarToastNotifier(Parent, 5);
@@ -123,32 +151,159 @@ namespace SPAClientApp
             });
         }
 
-        private void CambiarCantidades(object sender, DataTransferEventArgs e)
-        {
-            string sentece = "";
-            foreach (EProductoComprado producto in TablaProductosSeleccionados.Items)
-            {
-                sentece += $"{producto.Nombre}, \n";
-            }
-            MessageBox.Show(sentece + "aaaa");
-        }
-
         private void CambiarCantidades(object sender, KeyEventArgs e)
         {
             foreach (EProductoComprado producto in TablaProductosSeleccionados.Items)
             {
                 producto.Precio = producto.Cantidad * producto.PrecioVenta;
+                if (producto.Cantidad > producto.stock)
+                    producto.Cantidad = producto.stock;
             }
+            ActualizarTotal();
         }
 
         private void ActivarCliente(object sender, RoutedEventArgs e)
         {
-
+            ClientSection.IsEnabled = true;
         }
 
         private void DesactivarCliente(object sender, RoutedEventArgs e)
         {
+            ClientSection.IsEnabled = false;
+        }
 
+        private async void VerClientes(object sender, EventArgs e)
+        {
+            var result = await clientCliente.GetClientesListAsync();
+            Clientes = result.ToList();
+            ClientesCbmbx.ItemsSource = Clientes;
+            ClientesCbmbx.IsDropDownOpen = true;
+        }
+
+        private async void SeleccionarCliente(object sender, SelectionChangedEventArgs e)
+        {
+            if (ClientesCbmbx.SelectedItem != null)
+            {
+                int clave = Convert.ToInt32(ClientesCbmbx.SelectedItem.ToString().Substring(0, ClientesCbmbx.SelectedItem.ToString().IndexOf(':')));
+                Cliente = await clientCliente.GetClienteAsync(clave);
+                MostrarCleinteInfo(Cliente);
+            }
+        }
+
+        private void MostrarCleinteInfo(ECliente cliente)
+        {
+            if (cliente != null)
+            {
+                Cliente = cliente;
+                ClienteExistPage.MostrarClienteInfo(cliente);
+            }
+        }
+
+        private async void RealizarPedido(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ValidarPedido();
+                PrepararPedidoCliente();
+                PedidosClientesService.AnswerMessage response;
+                if (Convert.ToBoolean(CheckBoxPedido.IsChecked))
+                {
+                    var cliente = await GuardarCliente();
+                    int idDireccion = ClienteExistenteTab.IsSelected ? ClienteExistPage.ObtenerIdDireccion(ClienteExistPage.Direccion, 
+                        cliente.Direcciones.ToList()) : NewClientPage.ObtenerIdDireccion(NewClientPage.Direccion, cliente.Direcciones.ToList());
+                    response = await client.AddPedidoClienteAsync(Pedido, ObtenerProductosSeleccionados().ToArray(), cliente.Id, idDireccion);
+                }
+                else
+                {
+                    response = await client.AddPedidoClienteAsync(Pedido, ObtenerProductosSeleccionados().ToArray(), -1, -1);
+                }
+                if (response.Key > 0)
+                    MostrarToastMessage("Exito", "El pedido se ha realizado exitosamente");
+                else
+                    MostrarToastMessage("Error", response.Message);
+            }
+            catch (Exception ex)
+            {
+                MostrarToastMessage("Advertencia", ex.Message);
+            }
+        }
+
+        private async Task<ECliente> GuardarCliente()
+        {
+            ECliente cliente;
+            if (ClienteExistenteTab.IsSelected)
+                cliente = await ClienteExistPage.ActualizarCliente();
+            else
+                cliente = await NewClientPage.RegistrarCliente();
+            return cliente;
+        }
+
+
+        private void PrepararPedidoCliente()
+        {
+            if (Pedido == null)
+                Pedido = new EPedidoCliente();
+            Pedido.CostoTotal = Convert.ToDouble(Total.Content);
+            Pedido.Status = "Ordenado";
+            Pedido.Solicitud = DateTime.Now;
+            Pedido.Entrega = DateTime.Now;
+            Pedido.Cantidad = 1;
+            Pedido.TipoPedido = Convert.ToBoolean(CheckBoxPedido.IsChecked) ? "A domicilio" : "En establecimiento";
+            Pedido.NumeroProductos = TablaProductosSeleccionados.Items.Count;
+        }
+
+        private async void ValidarPedido()
+        {
+            if (TablaProductosSeleccionados.Items.Count == 0)
+                throw new FormatException("Debes seleccionar al menos 1 producto para comprar");
+            var result = await client.CheckProductosSeleccionadosAsync(ObtenerProductosSeleccionados().ToArray());
+            if (!string.IsNullOrEmpty(result))
+                throw new FormatException(result);
+            if (Convert.ToBoolean(CheckBoxPedido.IsChecked))
+            {
+                if (ClienteExistenteTab.IsSelected)
+                    ClienteExistPage.ValidarCliente("Actualización");
+                else
+                    NewClientPage.ValidarCliente("Registro");
+            }
+        }
+
+        private List<EProductoComprado> ObtenerProductosSeleccionados()
+        {
+            List<EProductoComprado> productos = new List<EProductoComprado>();
+            foreach (EProductoComprado p in TablaProductosSeleccionados.Items)
+            {
+                productos.Add(p);
+            }
+            return productos;
+        }
+
+        private void BuscarCliente(object sender, KeyEventArgs e)
+        {
+            if (ClientesCbmbx.Items.Count > 0)
+            {
+                if (string.IsNullOrEmpty(ClientesCbmbx.Text))
+                {
+                    ClientesCbmbx.ItemsSource = Clientes;
+                }
+                else
+                {
+                    ClientesCbmbx.IsDropDownOpen = true;
+                    ClientesCbmbx.ItemsSource = Clientes.Where(c => c.Contains(ClientesCbmbx.Text));
+                }
+            }
+        }
+
+        private void CancelarOperacion(object sender, RoutedEventArgs e)
+        {
+            if (MostrarCuadroConfirmacion("¿Estás seguro(a) que deseas cancelar el registro del pedido?"))
+                Close();
+        }
+
+        private bool MostrarCuadroConfirmacion(string message)
+        {
+            MessageBoxResult boxResult = MessageBox.Show(message, "Advertencia", MessageBoxButton.YesNoCancel);
+            return MessageBoxResult.Yes == boxResult;
         }
     }
 }

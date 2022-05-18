@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Services.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Services.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ECliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Apellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Ciudad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoPostal" type="xs:int" />
+      <xs:element minOccurs="0" name="Direcciones" nillable="true" type="tns:ArrayOfEDireccion" />
+      <xs:element minOccurs="0" name="Edad" type="xs:int" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Nacimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ECliente" nillable="true" type="tns:ECliente" />
+  <xs:complexType name="ArrayOfEDireccion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EDireccion" nillable="true" type="tns:EDireccion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEDireccion" nillable="true" type="tns:ArrayOfEDireccion" />
+  <xs:complexType name="EDireccion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Calle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Colonia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdCliente" type="xs:int" />
+      <xs:element minOccurs="0" name="Numero" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EDireccion" nillable="true" type="tns:EDireccion" />
+  <xs:complexType name="AnswerMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AnswerMessage" nillable="true" type="tns:AnswerMessage" />
+</xs:schema>

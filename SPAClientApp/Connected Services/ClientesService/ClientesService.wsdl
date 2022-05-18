@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ClientesService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:1234/ClientesService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:1234/ClientesService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1234/ClientesService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
+      <xsd:import schemaLocation="http://localhost:1234/ClientesService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IClientesService_GetCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCliente" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_GetCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_GetClientesList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientesList" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_GetClientesList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientesListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_AddCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCliente" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_AddCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_UpdateCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCliente" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_UpdateCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_GetClienteByPedido_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClienteByPedido" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_GetClienteByPedido_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClienteByPedidoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IClientesService">
+    <wsdl:operation name="GetCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/GetCliente" message="tns:IClientesService_GetCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/GetClienteResponse" message="tns:IClientesService_GetCliente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientesList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/GetClientesList" message="tns:IClientesService_GetClientesList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/GetClientesListResponse" message="tns:IClientesService_GetClientesList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/AddCliente" message="tns:IClientesService_AddCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/AddClienteResponse" message="tns:IClientesService_AddCliente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/UpdateCliente" message="tns:IClientesService_UpdateCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/UpdateClienteResponse" message="tns:IClientesService_UpdateCliente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClienteByPedido">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/GetClienteByPedido" message="tns:IClientesService_GetClienteByPedido_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/GetClienteByPedidoResponse" message="tns:IClientesService_GetClienteByPedido_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IClientesService" type="tns:IClientesService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCliente">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/GetCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientesList">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/GetClientesList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCliente">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/AddCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCliente">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/UpdateCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClienteByPedido">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/GetClienteByPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClientesService">
+    <wsdl:port name="BasicHttpBinding_IClientesService" binding="tns:BasicHttpBinding_IClientesService">
+      <soap:address location="http://localhost:1234/ClientesService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

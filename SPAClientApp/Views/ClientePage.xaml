@@ -13,24 +13,22 @@
          TextOptions.TextRenderingMode="Auto"
          FontFamily="{DynamicResource MaterialDesignFont}"
       
-      mc:Ignorable="d" d:DesignWidth="724"
-      Title="ClientePage" Height="240">
+      mc:Ignorable="d"
+      Title="ClientePage" Height="240" Width="576">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Margin="10" Grid.Row="1" Background="#41768FCE" CornerRadius="5">
+        <Border Margin="10" Grid.Row="1" Background="#41768FCE" CornerRadius="5"/>
 
-        </Border>
-
-        <Border Margin="10" Grid.Row="1" Grid.Column="1" Background="#41768FCE" CornerRadius="5">
-
+        <Border Margin="10,60,10,10" Grid.Row="1" Grid.Column="1" Background="#41768FCE" CornerRadius="5">
+            <StackPanel Margin="10" Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right"/>
         </Border>
 
         <Grid Margin="20" Grid.Row="1">
@@ -42,22 +40,31 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" Grid.RowSpan="2"/>
 
             <TextBox
+                x:Name="NombreTxt"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Nombre" Padding="5,5,5,5" Background="White" FontSize="10" />
             <TextBox
+                x:Name="ApellidosTxt"
             Grid.Row="1"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Apellidos" Padding="5,5,5,5" Background="White" FontSize="10"/>
             <TextBox
+                x:Name="TelefonoTxt"
             Grid.Row="2"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Teléfono" Padding="5,5,5,5" Background="White" FontSize="10"/>
             <TextBox
+                x:Name="CorreoElectronicoTxt"
             Grid.Row="3"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
@@ -70,11 +77,13 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox
+                    x:Name="CiudadTxt"
                     Margin="0,0,5,0"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Ciudad" Padding="5,5,5,5" Background="White" FontSize="10"/>
                 <TextBox
+                    x:Name="CodigoPostalTxt"
                     Margin="5,0,5,0"
                     Grid.Column="1"
                     Grid.Row="5"
@@ -82,6 +91,7 @@
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Código postal" Padding="5,5,5,5" Background="White" FontSize="10"/>
                 <DatePicker
+                    x:Name="NacimientoDatePicker"
                     Margin="5,0,0,0"
                     Grid.Column="2"
                     Grid.Row="6"
@@ -92,57 +102,161 @@
 
             <StackPanel Grid.Row="5" Orientation="Horizontal">
                 <Label Content="Edad: "/>
-                <Label Width="60"/>
+                <Label x:Name="EdadLbl" Width="60"/>
                 <Label Content="Status: "/>
-                <Label Width="100"/>
+                <Label x:Name="StatusLbl" Width="100"/>
             </StackPanel>
 
         </Grid>
 
         <Grid Grid.Column="1" Margin="20"  Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <ComboBox
+            <StackPanel Orientation="Horizontal">
+
+                <ComboBox
+                x:Name="DireccionesCmbx"
               Style="{StaticResource MaterialDesignOutlinedComboBox}"
-              materialDesign:HintAssist.Hint="Validation test"
+              materialDesign:HintAssist.Hint="Selecciona una dirección"
               ItemsSource="{Binding ShortStringList}"
-              materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White">
-                <ComboBox.SelectedItem>
-                    <Binding
+              materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White" FontSize="10" Height="24" SelectionChanged="SeleccionarDireccion" Width="231">
+                    <ComboBox.SelectedItem>
+                        <Binding
                           Path="SelectedValidationOutlined"
                           Mode="TwoWay"
                           UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </ComboBox.SelectedItem>
-            </ComboBox>
+                            <Binding.ValidationRules>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+
+                <StackPanel
+                  Orientation="Horizontal">
+                    <materialDesign:PopupBox
+                    StaysOpen="True"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right">
+                        <Grid
+                      Width="300"
+                      Margin="8,8,8,8">
+                            <Grid.Resources>
+                                <Style
+                          TargetType="CheckBox"
+                          BasedOn="{StaticResource MaterialDesignCheckBox}">
+                                    <Setter
+                            Property="Margin"
+                            Value="8,8,10,8" />
+                                </Style>
+                                <Style
+                          TargetType="TextBox"
+                          BasedOn="{StaticResource MaterialDesignTextBox}">
+                                    <Setter
+                            Property="materialDesign:HintAssist.IsFloating"
+                            Value="True" />
+                                    <Setter
+                            Property="Margin"
+                            Value="8,8,8,8" />
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                          Width="*" />
+                                <ColumnDefinition
+                          Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                          Height="*" />
+                                <RowDefinition
+                          Height="*" />
+                                <RowDefinition
+                          Height="*" />
+                                <RowDefinition
+                          Height="*" />
+                                <RowDefinition
+                          Height="*" />
+                                <RowDefinition
+                          Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        Margin="8,8,8,16"
+                        Text="Nueva dirección" />
+                            <TextBox
+                        x:Name="ColoniaNuevaTxt"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        materialDesign:HintAssist.Hint="Colonia"
+                        Text="" />
+                            <TextBox
+                          x:Name="CalleNuevaTxt"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        materialDesign:HintAssist.Hint="Calle"
+                        Text="" />
+                            <TextBox
+                          x:Name="NumeroNuevoTxt"
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        materialDesign:HintAssist.Hint="Numero"
+                        Text="" />
+                            <StackPanel
+                        Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                                <Button
+                          Content="Agregar"
+                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="AgregarDireccion" />
+                                <Button
+                          Content="Cancelar"
+                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                    <Button.Style>
+                                        <Style
+                              TargetType="Button">
+                                            <Setter
+                                Property="Foreground"
+                                Value="Red" />
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </materialDesign:PopupBox>
+                </StackPanel>
+            </StackPanel>
+
 
             <TextBox
+            x:Name="ColoniaTxt"
             Grid.Row="1"
-            Margin="0,5,0,0"
+            Margin="0,50,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Colonia" Padding="5,5,5,5" Background="White"/>
+            materialDesign:HintAssist.Hint="Colonia" Padding="5,5,5,5" Background="White" FontSize="10"/>
 
             <TextBox
+            x:Name="CalleTxt"
             Grid.Row="2"
             FontSize="10" 
-            Margin="0,5,0,0"
+            Margin="0,10,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Calle" Padding="5,5,5,5" Background="White" />
 
             <TextBox
+                x:Name="NumeroTxt"
             Grid.Row="3"
             FontSize="10" 
-            Margin="0,5,0,0"
+            Margin="0,10,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Número" Padding="5,5,5,5" Background="White" />

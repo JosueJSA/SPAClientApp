@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="df8c3320-558e-4abb-a504-b4dc9e2ba3f8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="cefd9320-7831-4bdb-8d35-28ffe8a096db" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:6666/PedidosClientesService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:1234/PedidosClientesService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="PedidosClientesService.disco" MetadataType="Disco" ID="989cff6a-65b2-4392-9d76-3f104be8996a" SourceId="1" SourceUrl="http://localhost:6666/PedidosClientesService.svc?disco" />
-    <MetadataFile FileName="PedidosClientesService.xsd" MetadataType="Schema" ID="4eee5791-4c48-4b62-8644-d16ff3f5d31d" SourceId="1" SourceUrl="http://localhost:6666/PedidosClientesService.svc?xsd=xsd0" />
-    <MetadataFile FileName="PedidosClientesService1.xsd" MetadataType="Schema" ID="9ce6d0d3-0e1e-4b03-a9f3-90ed9f199c78" SourceId="1" SourceUrl="http://localhost:6666/PedidosClientesService.svc?xsd=xsd2" />
-    <MetadataFile FileName="PedidosClientesService2.xsd" MetadataType="Schema" ID="526b0511-147e-42b1-97de-193c3c30dd4c" SourceId="1" SourceUrl="http://localhost:6666/PedidosClientesService.svc?xsd=xsd1" />
-    <MetadataFile FileName="PedidosClientesService.wsdl" MetadataType="Wsdl" ID="3bfd26b7-1786-4257-9835-fdd156a30a42" SourceId="1" SourceUrl="http://localhost:6666/PedidosClientesService.svc?wsdl" />
+    <MetadataFile FileName="PedidosClientesService.disco" MetadataType="Disco" ID="e273cf2c-29a6-413e-b48f-00596a068ba0" SourceId="1" SourceUrl="http://localhost:1234/PedidosClientesService.svc?disco" />
+    <MetadataFile FileName="PedidosClientesService.xsd" MetadataType="Schema" ID="07aad730-308f-4fab-8bbf-14398872d4b1" SourceId="1" SourceUrl="http://localhost:1234/PedidosClientesService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PedidosClientesService1.xsd" MetadataType="Schema" ID="08263e63-32a3-4ee8-be02-8ac0968cb98b" SourceId="1" SourceUrl="http://localhost:1234/PedidosClientesService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PedidosClientesService.wsdl" MetadataType="Wsdl" ID="ddd0d5c8-f014-4d23-bf06-84e8f6ce3578" SourceId="1" SourceUrl="http://localhost:1234/PedidosClientesService.svc?wsdl" />
+    <MetadataFile FileName="PedidosClientesService2.xsd" MetadataType="Schema" ID="afdd4346-c049-48dd-831f-d8a04ea003db" SourceId="1" SourceUrl="http://localhost:1234/PedidosClientesService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

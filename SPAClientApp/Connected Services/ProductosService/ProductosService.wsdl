@@ -2,9 +2,9 @@
 <wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ProductosService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:6666/ProductosService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:6666/ProductosService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:6666/ProductosService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
+      <xsd:import schemaLocation="http://localhost:1234/ProductosService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:1234/ProductosService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1234/ProductosService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProductosService_GetProductosList_InputMessage">
@@ -55,6 +55,12 @@
   <wsdl:message name="IProductosService_CheckIngredientesStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckIngredientesStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductosService_GetProductById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductById" />
+  </wsdl:message>
+  <wsdl:message name="IProductosService_GetProductById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductByIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProductosService">
     <wsdl:operation name="GetProductosList">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductosService/GetProductosList" message="tns:IProductosService_GetProductosList_InputMessage" />
@@ -87,6 +93,10 @@
     <wsdl:operation name="CheckIngredientesStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductosService/CheckIngredientesStatus" message="tns:IProductosService_CheckIngredientesStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductosService/CheckIngredientesStatusResponse" message="tns:IProductosService_CheckIngredientesStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductosService/GetProductById" message="tns:IProductosService_GetProductById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductosService/GetProductByIdResponse" message="tns:IProductosService_GetProductById_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProductosService" type="tns:IProductosService">
@@ -163,10 +173,19 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetProductById">
+      <soap:operation soapAction="http://tempuri.org/IProductosService/GetProductById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ProductosService">
     <wsdl:port name="BasicHttpBinding_IProductosService" binding="tns:BasicHttpBinding_IProductosService">
-      <soap:address location="http://localhost:6666/ProductosService.svc" />
+      <soap:address location="http://localhost:1234/ProductosService.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

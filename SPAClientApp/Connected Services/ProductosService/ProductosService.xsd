@@ -1,121 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:6666/ProductosService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
-  <xs:element name="GetProductosList">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="criterio" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="valor" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetProductosListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="GetProductosListResult" nillable="true" type="q1:ArrayOfEProducto" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetReceta">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="clave" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetRecetaResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="GetRecetaResult" nillable="true" type="q2:EReceta" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetIngredientes">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetIngredientesResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="GetIngredientesResult" nillable="true" type="q3:ArrayOfEInsumo" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddProducto">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="producto" nillable="true" type="q4:EProducto" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="receta" nillable="true" type="q5:EReceta" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddProductoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="AddProductoResult" nillable="true" type="q6:AnswerMessage" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsDuplicated">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="nombreActual" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nombreABuscar" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsDuplicatedResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IsDuplicatedResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateProducto">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="producto" nillable="true" type="q7:EProducto" />
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="receta" nillable="true" type="q8:EReceta" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateProductoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="UpdateProductoResult" nillable="true" type="q9:AnswerMessage" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ChangeProductoStatus">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="productoID" type="xs:int" />
-        <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ChangeProductoStatusResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="ChangeProductoStatusResult" nillable="true" type="q10:AnswerMessage" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CheckIngredientesStatus">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="ingredientes" nillable="true" type="q11:ArrayOfEIngrediente" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CheckIngredientesStatusResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="CheckIngredientesStatusResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Services.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Services.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfEProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EProducto" nillable="true" type="tns:EProducto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEProducto" nillable="true" type="tns:ArrayOfEProducto" />
+  <xs:complexType name="EProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+      <xs:element minOccurs="0" name="CodigoReceta" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrecioCompra" type="xs:double" />
+      <xs:element minOccurs="0" name="PrecioVenta" type="xs:double" />
+      <xs:element minOccurs="0" name="Registro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Restricciones" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EProducto" nillable="true" type="tns:EProducto" />
+  <xs:complexType name="EReceta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Clave" type="xs:int" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Ingredientes" nillable="true" type="tns:ArrayOfEIngrediente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EReceta" nillable="true" type="tns:EReceta" />
+  <xs:complexType name="ArrayOfEIngrediente">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EIngrediente" nillable="true" type="tns:EIngrediente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEIngrediente" nillable="true" type="tns:ArrayOfEIngrediente" />
+  <xs:complexType name="EIngrediente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CantidadIngrediente" type="xs:double" />
+      <xs:element minOccurs="0" name="CantidadInsumo" type="xs:double" />
+      <xs:element minOccurs="0" name="CodigoInsumo" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreInsumo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrecioInsumo" type="xs:double" />
+      <xs:element minOccurs="0" name="Unidad" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EIngrediente" nillable="true" type="tns:EIngrediente" />
+  <xs:complexType name="ArrayOfEInsumo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EInsumo" nillable="true" type="tns:EInsumo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEInsumo" nillable="true" type="tns:ArrayOfEInsumo" />
+  <xs:complexType name="EInsumo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:double" />
+      <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrecioCompra" type="xs:double" />
+      <xs:element minOccurs="0" name="ProveedorDeInsumo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Registro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Restricciones" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UnidadMedida" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EInsumo" nillable="true" type="tns:EInsumo" />
+  <xs:complexType name="AnswerMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AnswerMessage" nillable="true" type="tns:AnswerMessage" />
 </xs:schema>

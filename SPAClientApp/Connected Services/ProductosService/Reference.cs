@@ -721,6 +721,12 @@ namespace SPAClientApp.ProductosService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductosService/CheckIngredientesStatus", ReplyAction="http://tempuri.org/IProductosService/CheckIngredientesStatusResponse")]
         System.Threading.Tasks.Task<string> CheckIngredientesStatusAsync(SPAClientApp.ProductosService.EIngrediente[] ingredientes);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductosService/GetProductById", ReplyAction="http://tempuri.org/IProductosService/GetProductByIdResponse")]
+        SPAClientApp.ProductosService.EProducto GetProductById(int idProduct);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductosService/GetProductById", ReplyAction="http://tempuri.org/IProductosService/GetProductByIdResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.ProductosService.EProducto> GetProductByIdAsync(int idProduct);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -812,6 +818,14 @@ namespace SPAClientApp.ProductosService {
         
         public System.Threading.Tasks.Task<string> CheckIngredientesStatusAsync(SPAClientApp.ProductosService.EIngrediente[] ingredientes) {
             return base.Channel.CheckIngredientesStatusAsync(ingredientes);
+        }
+        
+        public SPAClientApp.ProductosService.EProducto GetProductById(int idProduct) {
+            return base.Channel.GetProductById(idProduct);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.ProductosService.EProducto> GetProductByIdAsync(int idProduct) {
+            return base.Channel.GetProductByIdAsync(idProduct);
         }
     }
 }
