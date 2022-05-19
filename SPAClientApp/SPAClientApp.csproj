@@ -315,28 +315,13 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\img\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ClientesService\" />
     <WCFMetadataStorage Include="Connected Services\InsumosService\" />
     <WCFMetadataStorage Include="Connected Services\PedidosClientesService\" />
     <WCFMetadataStorage Include="Connected Services\ProductosService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\img\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\PedidosClientesService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ClientesService\ClientesService.disco" />
@@ -354,21 +339,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ProductosService\ProductosService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProductosService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProductosService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ProductosService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\InsumosService\InsumosService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -379,6 +349,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\InsumosService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\PedidosClientesService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductosService\ProductosService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductosService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductosService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProductosService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

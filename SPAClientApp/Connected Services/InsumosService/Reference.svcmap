@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="0fd09df8-6f7c-4f89-af19-e9004d0b5f27" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="0112a4d7-643a-4449-8241-131a477e85ea" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:1234/InsumosService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="InsumosService.xsd" MetadataType="Schema" ID="27970606-8c7e-4c3c-a10b-8c854b83c23c" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?xsd=xsd2" />
-    <MetadataFile FileName="InsumosService.wsdl" MetadataType="Wsdl" ID="e1d8ace0-a4f7-490e-a4b7-9d6660aa9905" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?wsdl" />
-    <MetadataFile FileName="InsumosService.disco" MetadataType="Disco" ID="48994f8d-c850-4ee9-a04f-d77c8ad726fa" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?disco" />
-    <MetadataFile FileName="InsumosService1.xsd" MetadataType="Schema" ID="a07f189c-6fa8-4c01-b72c-80c5bb8404d3" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?xsd=xsd0" />
-    <MetadataFile FileName="InsumosService2.xsd" MetadataType="Schema" ID="50f30862-f967-42b5-8c34-a124d8beb78d" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?xsd=xsd1" />
+    <MetadataFile FileName="InsumosService.xsd" MetadataType="Schema" ID="61c7461a-a9b2-4cb2-ba6f-190b0e51408c" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?xsd=xsd2" />
+    <MetadataFile FileName="InsumosService.wsdl" MetadataType="Wsdl" ID="d684b64f-448d-468a-85a3-7313a8fa13d5" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?wsdl" />
+    <MetadataFile FileName="InsumosService.disco" MetadataType="Disco" ID="6a7d8530-68d1-4fe8-bda9-cec403da42d0" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?disco" />
+    <MetadataFile FileName="InsumosService1.xsd" MetadataType="Schema" ID="870b0613-cbc2-464c-9152-10c8dccaa24d" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?xsd=xsd0" />
+    <MetadataFile FileName="InsumosService2.xsd" MetadataType="Schema" ID="0634dbf7-6c57-49e2-86af-b6fb506fb960" SourceId="1" SourceUrl="http://localhost:1234/InsumosService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
