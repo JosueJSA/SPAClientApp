@@ -27,7 +27,7 @@
 
         <Border Margin="10" Grid.Row="1" Background="#41768FCE" CornerRadius="5"/>
 
-        <Border Margin="10,60,10,10" Grid.Row="1" Grid.Column="1" Background="#41768FCE" CornerRadius="5">
+        <Border Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" Background="#41768FCE" CornerRadius="5">
             <StackPanel Margin="10" Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right"/>
         </Border>
 
@@ -138,93 +138,87 @@
                 </ComboBox>
 
                 <StackPanel
+                    x:Name="MostrarDomrularioDireccionBtn"
                   Orientation="Horizontal">
                     <materialDesign:PopupBox
-                    StaysOpen="True"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right">
+                        StaysOpen="True"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right">
                         <Grid
-                      Width="300"
-                      Margin="8,8,8,8">
+                          Width="300"
+                          Margin="8,8,8,8">
                             <Grid.Resources>
                                 <Style
-                          TargetType="CheckBox"
-                          BasedOn="{StaticResource MaterialDesignCheckBox}">
+                                  TargetType="TextBox"
+                                  BasedOn="{StaticResource MaterialDesignTextBox}">
                                     <Setter
-                            Property="Margin"
-                            Value="8,8,10,8" />
-                                </Style>
-                                <Style
-                          TargetType="TextBox"
-                          BasedOn="{StaticResource MaterialDesignTextBox}">
+                                        Property="materialDesign:HintAssist.IsFloating"
+                                        Value="True" />
                                     <Setter
-                            Property="materialDesign:HintAssist.IsFloating"
-                            Value="True" />
-                                    <Setter
-                            Property="Margin"
-                            Value="8,8,8,8" />
+                                        Property="Margin"
+                                        Value="8,8,8,8" />
                                 </Style>
                             </Grid.Resources>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition
-                          Width="*" />
+                                    Width="*" />
                                 <ColumnDefinition
-                          Width="Auto" />
+                                    Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition
-                          Height="*" />
+                                    Height="*" />
                                 <RowDefinition
-                          Height="*" />
+                                    Height="*" />
                                 <RowDefinition
-                          Height="*" />
+                                    Height="*" />
                                 <RowDefinition
-                          Height="*" />
+                                    Height="*" />
                                 <RowDefinition
-                          Height="*" />
+                                    Height="*" />
                                 <RowDefinition
-                          Height="*" />
+                                    Height="*" />
                             </Grid.RowDefinitions>
                             <TextBlock
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Margin="8,8,8,16"
-                        Text="Nueva dirección" />
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Margin="8,8,8,16"
+                            Text="Nueva dirección" />
                             <TextBox
-                        x:Name="ColoniaNuevaTxt"
-                        Grid.Column="0"
-                        Grid.Row="1"
-                        materialDesign:HintAssist.Hint="Colonia"
-                        Text="" />
+                            x:Name="ColoniaNuevaTxt"
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            materialDesign:HintAssist.Hint="Colonia"
+                            Text="" />
                             <TextBox
-                          x:Name="CalleNuevaTxt"
-                        Grid.Column="0"
-                        Grid.Row="2"
-                        materialDesign:HintAssist.Hint="Calle"
-                        Text="" />
+                              x:Name="CalleNuevaTxt"
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            materialDesign:HintAssist.Hint="Calle"
+                            Text="" />
                             <TextBox
-                          x:Name="NumeroNuevoTxt"
-                        Grid.Column="0"
-                        Grid.Row="3"
-                        materialDesign:HintAssist.Hint="Numero"
-                        Text="" />
+                              x:Name="NumeroNuevoTxt"
+                            Grid.Column="0"
+                            Grid.Row="3"
+                            materialDesign:HintAssist.Hint="Numero"
+                            Text="" />
                             <StackPanel
-                        Grid.Row="5"
-                        Grid.ColumnSpan="2"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right">
+                            Grid.Row="5"
+                            Grid.ColumnSpan="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
                                 <Button
-                          Content="Agregar"
-                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="AgregarDireccion" />
+                                  Content="Agregar"
+                                  Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="AgregarDireccion" />
                                 <Button
-                          Content="Cancelar"
-                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                  Content="Cancelar"
+                                  Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
                                     <Button.Style>
                                         <Style
-                              TargetType="Button">
+                                            TargetType="Button">
                                             <Setter
-                                Property="Foreground"
-                                Value="Red" />
+                                                Property="Foreground"
+                                                Value="Red" />
                                         </Style>
                                     </Button.Style>
                                 </Button>
@@ -238,7 +232,7 @@
             <TextBox
             x:Name="ColoniaTxt"
             Grid.Row="1"
-            Margin="0,50,0,0"
+            Margin="0,10,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Colonia" Padding="5,5,5,5" Background="White" FontSize="10"/>

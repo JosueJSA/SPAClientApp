@@ -43,6 +43,8 @@ namespace SPAClientApp
             CargarProductos();
             Frame.Content = (ClienteExistPage = new ClientePage(this));
             SecondFrame.Content = (NewClientPage = new ClientePage(this));
+            NewClientPage.ObtenerCmbBoxDirecciones().Visibility = Visibility.Collapsed;
+            NewClientPage.ObtenerTogglerAgregarDireccion().Visibility = Visibility.Collapsed;
         }
 
         public static WPedidoCliente GetWListaPedidosClientesWindow(WListaPedidosClientes parent)
@@ -73,11 +75,15 @@ namespace SPAClientApp
                 }
                 Total.Content = total.ToString();
             }
+            else
+            {
+                Total.Content = "0";
+            }
         }
 
         private void RemoverProducto(object sender, RoutedEventArgs e)
         {
-            var producto = ((FrameworkElement)sender).DataContext as EProducto;
+            var producto = ((FrameworkElement)sender).DataContext as EProductoComprado;
             TablaProductosSeleccionados.Items.Remove(producto);
             ActualizarTotal();
         }

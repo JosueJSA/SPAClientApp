@@ -169,13 +169,13 @@
                                     <MouseBinding Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" MouseAction="LeftClick" />
                                 </DockPanel.InputBindings>
                                 <StackPanel DockPanel.Dock="Left">
-                                    <materialDesign:PackIcon Kind="FoodVariant" Foreground="#DD28187B" Height="58" Width="51" />
+                                    <materialDesign:PackIcon Kind="FoodVariant" Foreground="#DD115861" Height="58" Width="51" />
                                 </StackPanel>
                                 <Button
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerInsumos">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#DD115861" Click="VerInsumos" BorderBrush="#DD115861">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">
@@ -194,13 +194,13 @@
                         UniformCornerRadius="6">
                             <DockPanel>
                                 <StackPanel DockPanel.Dock="Left">
-                                    <materialDesign:PackIcon Kind="Pizza" Foreground="#DD28187B" Height="58" Width="51" />
+                                    <materialDesign:PackIcon Kind="Pizza" Foreground="#DD0978CE" Height="58" Width="51" />
                                 </StackPanel>
                                 <Button
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerProductos">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#DD0978CE" Click="VerProductos" BorderBrush="#DD0978CE">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">
@@ -220,13 +220,13 @@
                         UniformCornerRadius="6">
                             <DockPanel>
                                 <StackPanel DockPanel.Dock="Left">
-                                    <materialDesign:PackIcon Kind="BorderColor" Foreground="#DD28187B" Height="58" Width="51" />
+                                    <materialDesign:PackIcon Kind="BorderColor" Foreground="#DD6F00D0" Height="58" Width="51" />
                                 </StackPanel>
                                 <Button
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerPedidosClientes">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#DD6F00D0" Click="VerPedidosClientes">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">

@@ -32,15 +32,26 @@ namespace SPAClientApp
         private string CriterioSeleccionado { get; set; } = "Todos";   
         private WHome HomeWindow { get; set; }
         private DateTime Tiempo { get; set; }
+        private static bool IsClosed { get; set; } = false;
+        private static WListaInsumos CurrentWindow { get; set; } = null;  
 
-        public WListaInsumos(WHome home)
+        private WListaInsumos(WHome home)
         {
             InitializeComponent();
             HomeWindow = home;
-            ConfigurarToastNotifier(Window.GetWindow(this), 3); // 3 -> Número de segundos para mostrar una notificacion en la ventana.
+            ConfigurarToastNotifier(GetWindow(this), 3);
+            IsClosed = false;
         }
 
-        private void BuscarInsumos(object sender, RoutedEventArgs e)
+        public static WListaInsumos GetWListaInsumos(WHome window = null)
+        {
+            if (IsClosed || CurrentWindow == null)
+                return (CurrentWindow = new WListaInsumos(window));
+            else
+                return CurrentWindow;  
+        }
+
+        private async void BuscarInsumos(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -52,8 +63,8 @@ namespace SPAClientApp
                 if (Criterio.Text == "Todos")
                     Valor = null;
                 string criterio = Criterio.Text;
-                var result = client.GetInsumosList(CriterioSeleccionado, Valor, Fecha, Status).ToList();
-                ActualizarTablaInsumos(result);
+                var result = await client.GetInsumosListAsync(CriterioSeleccionado, Valor, Fecha, Status);
+                ActualizarTablaInsumos(result.ToList());   
             }
             catch (ArgumentException ae)
             {
@@ -104,6 +115,7 @@ namespace SPAClientApp
 
         private void Salir(object sender, RoutedEventArgs e)
         {
+            IsClosed = true;
             Close();
         }
 
@@ -263,6 +275,26 @@ namespace SPAClientApp
                 RefrescarTablaInsumos();
             }
             return isCurrent;
+        }
+
+        private void Window_Closing(object sender, EventArgs e)
+        {
+            IsClosed = true;
+            Close();
+        }
+
+        private void SeleccionarCriterio(object sender, EventArgs e)
+        {
+            var cbBox = sender as ComboBox;
+            cbBox.IsDropDownOpen = false;
+            busquedaLbl.Content = $"Ingresa el {cbBox.Text}";
+            ValorBusqueda.IsEnabled = true;
+            if (cbBox.Text == "Todos")
+            {
+                busquedaLbl.Content = "No requerido";
+                ValorBusqueda.Text = string.Empty;
+                ValorBusqueda.IsEnabled = false;
+            }
         }
     }
 }

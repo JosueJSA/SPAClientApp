@@ -15,7 +15,7 @@
          TextOptions.TextRenderingMode="Auto"
          FontFamily="{DynamicResource MaterialDesignFont}"
         
-        Title="WIngredientes" Height="647" Width="716" WindowStartupLocation="CenterScreen">
+        Title="WIngredientes" Height="513" Width="736" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Grid Margin="15">
             <Grid.RowDefinitions>
@@ -49,7 +49,7 @@
                 <Button
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Buscar usando el filtro seleccionado"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#FF313B8E" Height="23" VerticalAlignment="Center" Click="Buscar">
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#DD0978CE" Height="23" VerticalAlignment="Center" Click="Buscar" BorderBrush="#DD0978CE">
                     <materialDesign:PackIcon Kind="Search" />
                 </Button>
             </StackPanel>
@@ -77,7 +77,7 @@
                     <DataGridTextColumn Binding="{Binding Cantidad}" Width="90" Header="Cantidad"/>
                     <DataGridTextColumn Binding="{Binding UnidadMedida}" Width="90" Header="Unidad"/>
                 </DataGrid.Columns>
-                
+
             </DataGrid>
 
             <DataGrid Margin="10,0,0,0" Grid.Column="1" Grid.Row="2" SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaIngredientes" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" IsSynchronizedWithCurrentItem="False">
@@ -120,14 +120,14 @@
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Cancelar"
               Content="Cancelar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Margin="0,0,15,0" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Click="Cancelar" />
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Margin="0,0,15,0" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF1E7EC9" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Click="Cancelar" />
                 <Button
                 DockPanel.Dock="Right"
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Guardar cambios"
               Content="Guardar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Guardar" />
-                
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Guardar" BorderBrush="#FF1E7EC9" Background="#FF1E7EC9" />
+
             </StackPanel>
 
         </Grid>

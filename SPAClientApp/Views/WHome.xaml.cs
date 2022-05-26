@@ -57,12 +57,12 @@ namespace SPAClientApp
 
         private void VerInsumos(object sender, RoutedEventArgs e)
         {
-            new WListaInsumos(this).Show();
+            WListaInsumos.GetWListaInsumos(this).Show();
         }
 
         private void VerProductos(object sender, RoutedEventArgs e)
         {
-            new WListaProductos(this).Show();
+            WListaProductos.GetWListaProductos(this).Show();
         }
 
         private void VerPedidosClientes(object sender, RoutedEventArgs e)

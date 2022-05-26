@@ -75,6 +75,15 @@ namespace SPAClientApp
             };
         }
 
+        public StackPanel ObtenerTogglerAgregarDireccion()
+        {
+            return MostrarDomrularioDireccionBtn;
+        }
+
+        public ComboBox ObtenerCmbBoxDirecciones()
+        {
+            return DireccionesCmbx;
+        }
         public async Task<ECliente> ActualizarCliente()
         {
             try

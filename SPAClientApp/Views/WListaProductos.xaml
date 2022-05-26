@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:SPAClientApp"
         mc:Ignorable="d"
         
+        Closed="Windows_closing"
         Icon="../Resources/img/logo.png"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
@@ -26,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <materialDesign:Card
-            Background="#210027FF"
+            Background="#2D0090FF"
             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
             Padding="5"
             Margin="15"
@@ -50,7 +51,7 @@
 
                     <StackPanel Grid.Column="1" Orientation="Vertical">
                         <Label Content="Criterio" FontWeight="Bold"/>
-                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" SelectionChanged="ElegirCriterio">
+                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" DropDownClosed="SeleccionarCriterio">
                             <ComboBoxItem Content="Código" />
                             <ComboBoxItem Content="Nombre" />
                             <ComboBoxItem Content="Todos" />
@@ -59,7 +60,7 @@
                             x:Name="CheckBoxActivos"
                             IsChecked="True"
                             Margin="0,5,0,8"
-                            Content="Solo activos" Foreground="#DD000000" BorderBrush="#FF361FAB" Background="#FF2916B5" />
+                            Content="Solo activos" Foreground="#DD000000" BorderBrush="#DD0978CE" Background="#DD0978CE" />
                     </StackPanel>
 
                     <StackPanel Margin="0,0,20,0" Orientation="Vertical">
@@ -70,20 +71,20 @@
                             <CheckBox
                                 Margin="0,5,0,0"
                                 x:Name="CheckBoxConFecha"
-                                Content="Contemplar fecha" Foreground="Black" />
+                                Content="Contemplar fecha" Foreground="Black" Background="#DD0978CE" BorderBrush="#DD0978CE" />
                         </StackPanel>
 
                     </StackPanel>
 
                     <StackPanel Margin="10,0,10,0" Grid.Column="2" Orientation="Vertical">
-                        <Label Content="Valor de búsqueda" FontWeight="Bold"/>
+                        <Label x:Name="busquedaLbl" Content="Valor de búsqueda" FontWeight="Bold"/>
                         <TextBox
                             x:Name="ValorBusqueda"
                             Style="{StaticResource MaterialDesignFilledTextBox}"
                             AcceptsReturn="True"
                             TextWrapping="Wrap"
                             materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda según el criterio"
-                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Padding="3,3,3,3" Foreground="Black" SelectionBrush="Black" />
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Padding="3,3,3,3" Foreground="Black" SelectionBrush="Black" CaretBrush="#DD0978CE" />
                     </StackPanel>
 
                 </Grid>
@@ -93,13 +94,13 @@
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Limpiar formulario"
                       Content="Limpiar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="60" Foreground="#DD171717" Background="#FFFDFCFF" Height="22" Click="LimpiarFiltro" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="60" Foreground="#DD171717" Background="#FFFDFCFF" Height="22" Click="LimpiarFiltro" BorderBrush="#DD0978CE" />
                     <Button
                         Margin="10,0,10,0"
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Buscar usando el filtro seleccionado"
                       Content="Buscar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#FF313B8E" Height="23" Click="BuscarProductos" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#DD0978CE" Height="23" Click="BuscarProductos" BorderBrush="#DD0978CE" />
                 </StackPanel>
 
             </Grid>
@@ -144,7 +145,7 @@
                                 x:Name="ConsultarBtn"
                               Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
                               ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
-                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="Consultar">
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#DD0978CE" BorderBrush="#DD0978CE" Click="Consultar">
                                 <materialDesign:PackIcon Kind="Eye" />
                             </Button>
                         </DataTemplate>
@@ -157,7 +158,7 @@
                                 Name="EditarBtn"
                               Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
                               ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
-                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="Modificar">
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#DD0978CE" BorderBrush="#DD0978CE" Click="Modificar">
                                 <materialDesign:PackIcon Kind="Pencil" />
                             </Button>
                         </DataTemplate>
@@ -193,14 +194,14 @@
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Volver atrás"
               Content="Salir"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Salir" />
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Salir" Background="#DD0978CE" BorderBrush="#DD0978CE" />
 
             <Button
               DockPanel.Dock="Left"
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Agregar nuevo producto"
               Content="Agregar nuevo producto"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" Click="Registrar" />
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#DD0978CE" Background="White" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" Click="Registrar" />
         </DockPanel>
 
     </Grid>

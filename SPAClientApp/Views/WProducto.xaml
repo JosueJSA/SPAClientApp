@@ -15,7 +15,7 @@
          TextOptions.TextRenderingMode="Auto"
          FontFamily="{DynamicResource MaterialDesignFont}"
         
-        Title="WProducto" Height="350" Width="680" WindowStartupLocation="CenterScreen">
+        Title="WProducto" Height="350" Width="600" WindowStartupLocation="CenterScreen">
     <ScrollViewer>
         <DockPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <Grid Margin="10">
@@ -40,7 +40,7 @@
                 <DockPanel Grid.ColumnSpan="2">
                     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <Label Content="Nombre: " FontWeight="Bold"/>
-                        <TextBox x:Name="NombreTxt" materialDesign:HintAssist.Hint="Nombre del producto" Width="300"/>
+                        <TextBox x:Name="NombreTxt" Width="200" materialDesign:HintAssist.Hint="Nombre del producto"/>
                     </StackPanel>
                     <StackPanel  DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <Label Content="Fecha: " FontSize="11"/>
@@ -57,7 +57,7 @@
                         DockPanel.Dock="Right"
                         x:Name="CheckBoxReceta"
                         IsChecked="False"
-                        Content="Tiene receta" Foreground="#DD000000" BorderBrush="#FF361FAB" Background="#FF2916B5" HorizontalAlignment="Right" VerticalAlignment="Center" Checked="ActivarReceta" Unchecked="DesactivarReceta" />
+                        Content="Tiene receta" Foreground="#DD000000" BorderBrush="#DD0978CE" Background="#DD0978CE" HorizontalAlignment="Right" VerticalAlignment="Center" Checked="ActivarReceta" Unchecked="DesactivarReceta" />
                 </DockPanel>
 
                 <Grid Grid.RowSpan="4" Grid.Column="1" Grid.Row="2">
@@ -83,29 +83,33 @@
 
                 </Grid>
 
-                <DockPanel Grid.Row="2" Grid.RowSpan="4">
-                    <StackPanel DockPanel.Dock="Left">
-                        <Button
-                        x:Name="UploadBtn"
-                      Style="{StaticResource MaterialDesignIconButton}"
-                      ToolTip="MaterialDesignIconButton"
-                      Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Top" Foreground="#FF26329C" Click="CargarImagen">
-                            <materialDesign:PackIcon Kind="Upload" />
-                        </Button>
-                        <ProgressBar
+                <Border Margin="0,10,10,10" CornerRadius="8,8,8,8" Grid.Row="2" Grid.RowSpan="4" Background="#FFBBD8EE">
+                    <DockPanel >
+                        <Border DockPanel.Dock="Left" CornerRadius="8,8,8,8" Background="#FF1E7EC9">
+                            <StackPanel >
+                                <Button
+                                        x:Name="UploadBtn"
+                                      Style="{StaticResource MaterialDesignIconButton}"
+                                      ToolTip="MaterialDesignIconButton"
+                                      Background="#0F000000"
+                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Top" Foreground="#FFE2E3ED" Click="CargarImagen">
+                                    <materialDesign:PackIcon Kind="Upload" Foreground="White" />
+                                </Button>
+                                <ProgressBar
                             x:Name="Progress"
                           Style="{StaticResource MaterialDesignCircularProgressBar}"
                           Value="0"
-                          IsIndeterminate="True" Visibility="Collapsed" />
-                    </StackPanel>
-                    <Border Margin="0,10,10,10" CornerRadius="8,8,8,8">
-                        <Border.Background>
-                            <ImageBrush x:Name="Image" />
-                        </Border.Background>
-                    </Border>
+                          IsIndeterminate="True" Visibility="Collapsed" Foreground="White" />
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="10,10,10,10" CornerRadius="8,8,8,8">
+                            <Border.Background>
+                                <ImageBrush x:Name="Image" />
+                            </Border.Background>
+                        </Border>
 
-                </DockPanel>
+                    </DockPanel>
+                </Border>
 
                 <DockPanel Grid.Row="6" Margin="0,10,10,0">
                     <Label Content="Descripción" DockPanel.Dock="Top" FontWeight="Bold" FontSize="11"/>
@@ -116,7 +120,7 @@
                       AcceptsReturn="True"
                       VerticalScrollBarVisibility="Auto"
                       SpellCheck.IsEnabled="True"
-                      materialDesign:HintAssist.Hint="Escribe la descripción del producto" FontSize="10" />
+                      materialDesign:HintAssist.Hint="Escribe la descripción del producto" FontSize="10" CaretBrush="#DD0978CE" />
                 </DockPanel>
 
                 <DockPanel Grid.Row="6" Grid.Column="1" Margin="10,10,0,0">
@@ -128,52 +132,75 @@
                       AcceptsReturn="True"
                       VerticalScrollBarVisibility="Auto"
                       SpellCheck.IsEnabled="True"
-                      materialDesign:HintAssist.Hint="Escribe las restricciones del producto" FontSize="11" />
+                      materialDesign:HintAssist.Hint="Escribe las restricciones del producto" FontSize="11" CaretBrush="#DD0978CE" />
                 </DockPanel>
 
-                <StackPanel x:Name="RecetaSection" Margin="0,20,0,0" Grid.Row="7" Grid.ColumnSpan="2" Orientation="Vertical" Background="#FF0E487F" Visibility="Collapsed">
-                    <Label Content="Receta" HorizontalAlignment="Center" VerticalAlignment="Stretch" FontWeight="Bold" Foreground="#DDFFFFFF"/>
-                </StackPanel>
+                <materialDesign:Card
+                    x:Name="RecetaSection"
+                  Background="#33008FFF"
+                    Margin="0,15,0,0"
+                    Padding="10"
+                    Grid.Row="7"
+                    Grid.RowSpan="3"
+                    Grid.ColumnSpan="2"
+                  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                  UniformCornerRadius="6" Visibility="Collapsed">
 
-                <DockPanel x:Name="ProcedimientoSection" Grid.Row="8" Grid.ColumnSpan="2" Height="70" Visibility="Collapsed">
-                    <Label Content="Procedimiento" FontWeight="Bold" DockPanel.Dock="Top"/>
-                    <TextBox 
-                        DockPanel.Dock="Bottom"
-                        Margin="0,0,0,10"
-                        x:Name="ProcedimientoTxt"
-                      TextWrapping="Wrap"
-                      AcceptsReturn="True"
-                      VerticalScrollBarVisibility="Auto"
-                      SpellCheck.IsEnabled="True"
-                      materialDesign:HintAssist.Hint="Procedimiento" />
-                </DockPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="215"/>
+                        </Grid.RowDefinitions>
 
-                <DockPanel x:Name="IngredientesSection" Height="200" Margin="0,0,0,10" Grid.Row="9" Grid.ColumnSpan="2" Visibility="Collapsed">
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                        <Label Content="Ingredientes" DockPanel.Dock="Top" FontWeight="Bold"/>
-                        <Button
-                            Margin="10,0,0,0"
-                            Name="EditarBtn"
-                            Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
-                            ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="EditarIngredientes">
-                            <materialDesign:PackIcon Kind="Pencil" />
-                        </Button>
-                    </StackPanel>
-                    <DataGrid SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaDatos" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
-                        <DataGrid.CellStyle>
-                            <Style/>
-                        </DataGrid.CellStyle>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding CodigoInsumo}" Header="#Código" Width="90"/>
-                            <DataGridTextColumn Binding="{Binding NombreInsumo}" Header="Nombre" Width="200"/>
-                            <DataGridTextColumn Binding="{Binding CantidadIngrediente}" Width="90" Header="Cantidad de ingrediente"/>
-                            <DataGridTextColumn Binding="{Binding CantidadInsumo}" Header="Stock" Width="90"/>
-                            <DataGridTextColumn Binding="{Binding Unidad}" Header="Unidad" Width="90"/>
-                            <DataGridTextColumn Binding="{Binding PrecioInsumo}" Header="Precio $" Width="130"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </DockPanel>
+                        <materialDesign:Chip Content="Receta" Margin="0,0,0,0" HorizontalAlignment="Left" Height="22" Background="White" Foreground="#FF0B79CE" FontSize="12" FontWeight="Bold" />
+
+                        <DockPanel Margin="5,5,5,10" x:Name="ProcedimientoSection" Grid.Row="1" Visibility="Visible">
+                            <Label Content="Procedimiento" FontWeight="Bold" DockPanel.Dock="Left" Background="#FF1E7EC9" Foreground="#DDFFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <TextBox
+                            BorderThickness="1"
+                            DockPanel.Dock="Right"
+                            x:Name="ProcedimientoTxt"
+                          TextWrapping="Wrap"
+                          AcceptsReturn="True"
+                          VerticalScrollBarVisibility="Auto"
+                          SpellCheck.IsEnabled="True"
+                          materialDesign:HintAssist.Hint="Escribe el procedimiento..." Foreground="Black" BorderBrush="#FF1E7EC9" />
+                        </DockPanel>
+
+                        <DockPanel x:Name="IngredientesSection" Height="200" Margin="0,0,0,10" Grid.Row="2" Grid.ColumnSpan="2" Visibility="Visible">
+                            <Button
+                                Margin="0,0,10,0"
+                                Name="EditarBtn"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                                ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#DD0978CE" BorderBrush="#DD0978CE" Click="EditarIngredientes" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="Pencil" />
+                            </Button>
+                            <DataGrid SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaDatos" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+                                <DataGrid.CellStyle>
+                                    <Style/>
+                                </DataGrid.CellStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding CodigoInsumo}" Header="#Código" Width="90"/>
+                                    <DataGridTextColumn Binding="{Binding NombreInsumo}" Header="Nombre" Width="200"/>
+                                    <DataGridTextColumn Binding="{Binding CantidadIngrediente}" Width="90" Header="Cantidad de ingrediente"/>
+                                    <DataGridTextColumn Binding="{Binding CantidadInsumo}" Header="Stock" Width="90"/>
+                                    <DataGridTextColumn Binding="{Binding Unidad}" Header="Unidad" Width="90"/>
+                                    <DataGridTextColumn Binding="{Binding PrecioInsumo}" Header="Precio $" Width="130"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+
+                    </Grid>
+
+                </materialDesign:Card>
+
+                <!--Colapsed-->
+                
+
+                <!--Colapsed-->
+                
 
                 <StackPanel x:Name="ButtonsSection" Orientation="Horizontal" Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Visible">
                     <Button
@@ -182,28 +209,28 @@
                           Style="{StaticResource MaterialDesignRaisedDarkButton}"
                           ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                           Content="Cancelar"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#EE000000" Background="White" Visibility="Collapsed" Click="CancelarOperacion"/>
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#EE000000" Background="White" Visibility="Collapsed" Click="CancelarOperacion" BorderBrush="#DD0978CE"/>
                     <Button
                             x:Name="ActualizarBtn"
                             Margin="0,0,15,0"
                           Style="{StaticResource MaterialDesignRaisedDarkButton}"
                           ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                           Content="Actualizar"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Actualizar" />
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Actualizar" Background="#DD0978CE" BorderBrush="#DD0978CE" />
                     <Button
                             x:Name="RegistrarBtn"
                             Margin="0,0,15,0"
                           Style="{StaticResource MaterialDesignRaisedDarkButton}"
                           ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                           Content="Registrar"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Registrar" />
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Registrar" Background="#DD0978CE" BorderBrush="#DD0978CE" />
                     <Button
                             x:Name="CerrarBtn"
                             Margin="0,0,15,0"
                           Style="{StaticResource MaterialDesignRaisedDarkButton}"
                           ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                           Content="Cerrar"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Salir" />
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Salir" Background="#DD0978CE" BorderBrush="#DD0978CE" />
 
                 </StackPanel>
 

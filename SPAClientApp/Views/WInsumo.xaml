@@ -33,7 +33,7 @@
 
             <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
                 <Label Margin="0,0,15,0" Content="Nombre: "  VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                <TextBox x:Name="NombreTxt" materialDesign:HintAssist.Hint="Nombre del insumo" VerticalAlignment="Center" Width="300" FontSize="14"></TextBox>
+                <TextBox x:Name="NombreTxt" materialDesign:HintAssist.Hint="Nombre del insumo" VerticalAlignment="Center" Width="300" FontSize="14" CaretBrush="#DD115861"></TextBox>
             </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Margin="0,0,10,0" Content="Registro: "  VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
@@ -64,10 +64,10 @@
                 <Label Grid.Row="3" Content="Costo de compra $: " FontWeight="Bold"/>
                 <Label Grid.Row="4" Content="Unidad: " FontWeight="Bold"/>
 
-                <TextBox x:Name="EstadoTxt" Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="Estado" VerticalAlignment="Center" IsReadOnly="True" ></TextBox>
-                <TextBox x:Name="ProveedorTxt" Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Proveedor" VerticalAlignment="Center" ></TextBox>
-                <TextBox x:Name="CantidadTxt" Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="Cantidad" VerticalAlignment="Center" ></TextBox>
-                <TextBox x:Name="CostoTxt" Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Costo" VerticalAlignment="Center" ></TextBox>
+                <TextBox x:Name="EstadoTxt" Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="Estado" VerticalAlignment="Center" IsReadOnly="True" CaretBrush="#DD115861" ></TextBox>
+                <TextBox x:Name="ProveedorTxt" Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Proveedor" VerticalAlignment="Center" CaretBrush="#DD115861" ></TextBox>
+                <TextBox x:Name="CantidadTxt" Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="Cantidad" VerticalAlignment="Center" CaretBrush="#DD115861" ></TextBox>
+                <TextBox x:Name="CostoTxt" Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Costo" VerticalAlignment="Center" CaretBrush="#DD115861" ></TextBox>
                 <ComboBox x:Name="UnidadComboBox" Grid.Row="4" SelectedIndex="0" Grid.Column="1" materialDesign:HintAssist.Hint="OS">
                     <ComboBoxItem Content="Kg" />
                     <ComboBoxItem Content="gr" />
@@ -91,7 +91,7 @@
                   AcceptsReturn="True"
                   VerticalScrollBarVisibility="Auto"
                   SpellCheck.IsEnabled="True"
-                  materialDesign:HintAssist.Hint="Escribe la descripción del insumo" />
+                  materialDesign:HintAssist.Hint="Escribe la descripción del insumo" CaretBrush="#DD115861" />
             </DockPanel>
 
             <DockPanel Margin="10,10,10,20" Grid.Column="2" Grid.Row="2">
@@ -104,7 +104,7 @@
                   AcceptsReturn="True"
                   VerticalScrollBarVisibility="Auto"
                   SpellCheck.IsEnabled="True"
-                  materialDesign:HintAssist.Hint="Escribe las restricciones del insumo" />
+                  materialDesign:HintAssist.Hint="Escribe las restricciones del insumo" CaretBrush="#DD115861" />
             </DockPanel>
 
             <DockPanel Grid.Row="3" Grid.ColumnSpan="3">
@@ -115,28 +115,28 @@
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                       Content="Cancelar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#EE000000" Background="White" Visibility="Collapsed" Click="CancelarOperacion" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#EE000000" Background="White" Visibility="Collapsed" Click="CancelarOperacion" BorderBrush="#DD115861" />
                     <Button
                         x:Name="ActualizarBtn"
                         Margin="0,0,15,0"
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                       Content="Actualizar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Actualizar" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Actualizar" Background="#DD115861" BorderBrush="#DD115861" />
                     <Button
                         x:Name="RegistrarBtn"
                         Margin="0,0,15,0"
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                       Content="Registrar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Registrar" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Registrar" Background="#DD115861" BorderBrush="#DD115861" />
                     <Button
                         x:Name="CerrarBtn"
                         Margin="0,0,15,0"
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                       Content="Cerrar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Salir" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Salir" Background="#DD115861" BorderBrush="#DD115861" />
 
                 </StackPanel>
             </DockPanel>

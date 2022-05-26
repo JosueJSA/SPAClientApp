@@ -32,13 +32,23 @@ namespace SPAClientApp
         private string CriterioSeleccionado { get; set; } = "Todos";
         private WHome HomeWindow { get; set; }
         private DateTime Tiempo { get; set; }
+        private static bool IsClosed { get; set; } = false;
+        private static WListaProductos CurrentWindow { get; set; } = null;
 
 
-        public WListaProductos(WHome homeWindow)
+        private WListaProductos(WHome homeWindow)
         {
             InitializeComponent();
             HomeWindow = homeWindow;
             ConfigurarToastNotifier(this, 3);
+        }
+
+        public static WListaProductos GetWListaProductos(WHome window = null)
+        {
+            if (IsClosed || CurrentWindow == null)
+                return (CurrentWindow = new WListaProductos(window));
+            else
+                return CurrentWindow;
         }
 
         private void BuscarProductos(object sender, RoutedEventArgs e)
@@ -136,6 +146,7 @@ namespace SPAClientApp
 
         private void Salir(object sender, RoutedEventArgs e)
         {
+            IsClosed = true;
             Close();
         }
 
@@ -246,8 +257,24 @@ namespace SPAClientApp
             }
         }
 
-        private void ElegirCriterio(object sender, SelectionChangedEventArgs e)
+        private void SeleccionarCriterio(object sender, EventArgs e)
         {
+            var cbBox = sender as ComboBox;
+            cbBox.IsDropDownOpen = false;
+            busquedaLbl.Content = $"Ingresa el {cbBox.Text}";
+            ValorBusqueda.IsEnabled = true;
+            if (cbBox.Text == "Todos")
+            {
+                busquedaLbl.Content = "No requerido";
+                ValorBusqueda.Text = string.Empty;
+                ValorBusqueda.IsEnabled = false;
+            }
+        }
+
+        private void Windows_closing(object sender, EventArgs e)
+        {
+            IsClosed = true;
+            Close();
         }
     }
 }

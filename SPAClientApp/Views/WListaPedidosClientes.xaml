@@ -129,7 +129,7 @@
                                           Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
                                           ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
                                           IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0D7D0F" BorderBrush="#FF117D2B" Click="TerminarPreparacion">
-                                            <materialDesign:PackIcon Kind="CheckBold" />
+                                            <materialDesign:PackIcon Kind="Moped" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -300,7 +300,7 @@
                                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                       ToolTip="Buscar usando el filtro seleccionado"
                                       Content="Buscar"
-                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#FF313B8E" Height="23" />
+                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#DD5D12AB" Height="23" BorderBrush="#DD5D12AB" />
                                 </StackPanel>
 
                             </Grid>
@@ -352,79 +352,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <materialDesign:Card
-                            Background="#210027FF"
-                            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                            Padding="5"
-                            Margin="15"
-                            UniformCornerRadius="6">
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
-
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="400"/>
-                                    </Grid.ColumnDefinitions>
-
-
-                                    <StackPanel Grid.Column="1" Orientation="Vertical">
-                                        <Label Content="Filtro" FontWeight="Bold"/>
-                                        <ComboBox Margin="0,0,15,0" SelectedIndex="0" Foreground="Black" BorderBrush="Black" >
-                                            <ComboBoxItem Content="Todos" />
-                                            <ComboBoxItem Content="En establecimiento" />
-                                            <ComboBoxItem Content="A domicilio" />
-                                        </ComboBox>
-                                    </StackPanel>
-
-                                    <StackPanel Margin="0,0,20,0" Orientation="Vertical">
-                                        <Label Content="A partir de" FontWeight="Bold"/>
-                                        <StackPanel>
-                                            <DatePicker x:Name="FechaLimiteCancel" Foreground="Black"
-                                                IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxConFecha}" />
-                                            <CheckBox
-                                                Margin="0,5,0,0"
-                                                x:Name="CheckBoxConFechaCancel"
-                                                Content="Contemplar fecha" Foreground="Black" />
-                                        </StackPanel>
-                                    </StackPanel>
-
-                                    <StackPanel Margin="10,0,10,0" Grid.Column="3" Orientation="Vertical">
-                                        <Label Content="Valor de búsqueda" FontWeight="Bold"/>
-                                        <TextBox
-                                            x:Name="ValorBusquedaCancel"
-                                            Style="{StaticResource MaterialDesignFilledTextBox}"
-                                            AcceptsReturn="True"
-                                            TextWrapping="Wrap"
-                                            materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda según el criterio"
-                                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Padding="3,3,3,3" Foreground="Black" SelectionBrush="Black" />
-                                    </StackPanel>
-                                </Grid>
-
-                                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Button
-                                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                      ToolTip="Limpiar formulario"
-                                      Content="Limpiar"
-                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="60" Foreground="#DD171717" Background="#FFFDFCFF" Height="22" />
-                                    <Button
-                                        Margin="10,0,10,0"
-                                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                      ToolTip="Buscar usando el filtro seleccionado"
-                                      Content="Buscar"
-                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#FF313B8E" Height="23" />
-                                </StackPanel>
-
-                            </Grid>
-
-                        </materialDesign:Card>
-
-                        <DataGrid Grid.Row="1" x:Name="TablaCancelado" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+                        <DataGrid Grid.Row="0" Grid.RowSpan="2" x:Name="TablaCancelado" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
                             <DataGrid.CellStyle>
                                 <Style/>
                             </DataGrid.CellStyle>
@@ -466,14 +394,14 @@
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Volver atrás"
               Content="Salir"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Salir" />
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Salir" Background="#DD5D12AB" BorderBrush="#DD5D12AB" />
 
             <Button
               DockPanel.Dock="Left"
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Agregar nuevo pedido"
               Content="Agregar nuevo pedido"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" Click="RegistrarPedido" />
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#DD6F00D0" Background="White" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" Click="RegistrarPedido" />
         </DockPanel>
 
     </Grid>

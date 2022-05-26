@@ -408,9 +408,8 @@ namespace SPAClientApp
             this.Height = 670;
             ConReceta = true;
             RecetaSection.Visibility = Visibility.Visible;
-            ProcedimientoSection.Visibility = Visibility.Visible;
-            IngredientesSection.Visibility = Visibility.Visible;
             CantidadTxt.IsEnabled = false;
+            CantidadTxt.Text = "Automático";
             CentrarVentana();
         }
 
@@ -419,15 +418,14 @@ namespace SPAClientApp
             this.Height = 350;
             ConReceta = false;
             RecetaSection.Visibility = Visibility.Collapsed;
-            ProcedimientoSection.Visibility = Visibility.Collapsed;
-            IngredientesSection.Visibility = Visibility.Collapsed;
             CantidadTxt.IsEnabled = true;
+            CantidadTxt.Text = "0";
             CentrarVentana();
         }
 
         private void CentrarVentana()
         {
-            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
             double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
             double windowWidth = this.Width;
             double windowHeight = this.Height;
