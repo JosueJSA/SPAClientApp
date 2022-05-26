@@ -50,7 +50,7 @@
                 x:Name="NombreTxt"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Nombre" Padding="5,5,5,5" Background="White" FontSize="10" />
+            materialDesign:HintAssist.Hint="Nombre" Padding="5,5,5,5" Background="White" FontSize="10" Cursor="Arrow" />
             <TextBox
                 x:Name="ApellidosTxt"
             Grid.Row="1"

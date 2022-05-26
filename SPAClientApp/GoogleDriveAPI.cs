@@ -70,7 +70,7 @@ namespace SPAClientApp
                         await EliminarFoto(oldPath.Substring(ID_NUMBER), await ConfigurarDriveAPI());
                     var file = new Google.Apis.Drive.v3.Data.File
                     {
-                        Parents = new string[] { "1AE2JMSauYqhETj7QDnmsSbSzbuMkFCcE" }
+                        Parents = new string[] { "1RdNmsgTnBOxPxccxVAQZ04YwYGk6msKF" }
                     };
                     FilesResource.CreateMediaUpload request;
                     using (var stream = new FileStream(path, FileMode.Open))
