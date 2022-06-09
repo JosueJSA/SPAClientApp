@@ -28,7 +28,6 @@ namespace SPAClientApp.Views
     {
         private WListaPedidosClientes Parent { get; set; }
         private ClientePage ClienteExistPage { get; set; }
-        private readonly ClientesServiceClient clientService = new ClientesServiceClient();
         private readonly PedidosClientesServiceClient pedidoService = new PedidosClientesServiceClient();
         private readonly ProductosServiceClient productoService = new ProductosServiceClient();
         private Notifier notifier;
@@ -38,10 +37,19 @@ namespace SPAClientApp.Views
             InitializeComponent();
             Parent = parent;
             Frame.Content = (ClienteExistPage = new ClientePage());
-            Total.Content = pedido.CostoTotal.ToString();
+            idPedido.Content = pedido.Codigo.ToString();
+            tipoPedido.Content = pedido.TipoPedido;
+            this.total.Content = pedido.CostoTotal.ToString();
+            if(pedido.Status == "Cancelado")
+            {
+                cancelacionSection.Visibility = Visibility.Visible;
+                motivoCancelacion.Text = pedido.MotivoCancelacion;
+            }
             CargarProductos(pedido.Codigo);
             if (pedido.TipoPedido == "A domicilio")
                 CargarCliente(pedido.Codigo);
+            else
+                ClienteExistPage.Visibility = Visibility.Collapsed;
         }
 
         private async void CargarProductos(int idPedido)
@@ -52,8 +60,11 @@ namespace SPAClientApp.Views
 
         private async void CargarCliente(int idPedido)
         {
-            var cliente = await clientService.GetClienteByPedidoAsync(idPedido);
-            ClienteExistPage.MostrarClienteInfo(cliente);
+            var cliente = await pedidoService.GetPedidoClienteAsync(idPedido);
+            ClienteExistPage.MostrarClienteDePedido(cliente);
+            Height = 654;
+            clientLabel.Visibility = Visibility.Visible;
+            ClientSection.Visibility = Visibility.Visible;
         }
 
         private void Salir(object sender, RoutedEventArgs e)

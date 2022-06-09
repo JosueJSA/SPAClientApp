@@ -1,0 +1,188 @@
+﻿<Window x:Class="SPAClientApp.Views.WListaProveedores"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SPAClientApp.Views"
+        
+         Icon="../Resources/img/logo.png"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Title="WListaProveedores" Height="523" Width="902"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <materialDesign:Card
+            Background="#210027FF"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+            Padding="5"
+            Margin="15"
+            UniformCornerRadius="6">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Filtro de búsqueda" FontWeight="Bold" FontSize="11"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="650"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="15,0,0,0" >
+                        <Label Content="Criterio" FontWeight="Bold"/>
+                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" MouseLeftButtonDown="SeleccionarCriterio" DropDownClosed="SeleccionarCriterio">
+                            <ComboBoxItem Content="Nombre" />
+                            <ComboBoxItem Content="Categoria Insumo" />
+                            <ComboBoxItem Content="RFC" />
+                            <ComboBoxItem Content="Todos" />
+                        </ComboBox>
+                        <CheckBox
+                            x:Name="CheckBoxActivos"
+                            IsChecked="True"
+                            Margin="0,5,0,8"
+                            Content="Solo activos" Foreground="#DD000000" BorderBrush="#FF361FAB" Background="#FF2916B5" />
+                    </StackPanel>
+
+                    <StackPanel Margin="10,0,10,0" Grid.Column="1" Orientation="Vertical">
+                        <Label Content="Valor de búsqueda" FontWeight="Bold"/>
+                        <TextBox
+                            x:Name="ValorBusqueda"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda según el criterio"
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Padding="3,3,3,3" Foreground="Black" SelectionBrush="Black" />
+                    </StackPanel>
+
+                </Grid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button
+                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                      ToolTip="Limpiar formulario"
+                      Content="Limpiar"
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="60" Foreground="#DD171717" Background="#FFFDFCFF" Height="22" Click="LimpiarFiltro" />
+                    <Button
+                        Margin="10,0,10,0"
+                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                      ToolTip="Buscar usando el filtro seleccionado"
+                      Content="Buscar"
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#FF313B8E" Height="23" Click="BuscarProveedores" />
+                </StackPanel>
+
+            </Grid>
+
+        </materialDesign:Card>
+
+        <DataGrid Margin="15,15,15,15" Grid.Row="1" SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaDatos" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="ColumnEliminate">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="ElminarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF8A0707" BorderBrush="#FF7D0909" Click="DarDeBaja">
+                                <materialDesign:PackIcon Kind="ArrowDownBold" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  x:Name="ColumnActive">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="ActivarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF14841B" BorderBrush="#FF117D2B" Click="Activar">
+                                <materialDesign:PackIcon Kind="ArrowUpBold" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Name="EditarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="Modificar">
+                                <materialDesign:PackIcon Kind="Pencil" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="ConsultarBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="ConsultarProveedor">
+                                <materialDesign:PackIcon Kind="Eye" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                x:Name="DireccionesBtn"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="ConsultarDirecciones">
+                                <materialDesign:PackIcon Kind="Home" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Nombre}"  Width="250" Header="Nombre de la Empresa"/>
+                <DataGridTextColumn Binding="{Binding Apellido}" Width="150" Header="RFC"/>
+                <DataGridTextColumn Binding="{Binding Telefono}" Width="200"  Header="Categoria de Insumos"/>
+                <DataGridTextColumn Binding="{Binding Status}" Width="100" Header="Estado"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DockPanel Grid.Row="2">
+            <Button
+              Margin="0,0,20,0"
+                DockPanel.Dock="Right"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Volver atrás (Home)"
+              Content="Salir"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Salir" />
+
+            <Button
+              DockPanel.Dock="Left"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Registre un nuevo Proveedor"
+              Content="Registrar Proveedor"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Click="AgregarProveedor" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" />
+        </DockPanel>
+
+    </Grid>
+</Window>

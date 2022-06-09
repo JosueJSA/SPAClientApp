@@ -49,6 +49,24 @@
   <wsdl:message name="IPedidosClientesService_ChangeStatusPedidoCliente_OutputMessage">
     <wsdl:part name="parameters" element="tns:ChangeStatusPedidoClienteResponse" />
   </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_GetPedidoCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPedidoCliente" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_GetPedidoCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPedidoClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_RestablishChanges_InputMessage">
+    <wsdl:part name="parameters" element="tns:RestablishChanges" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_RestablishChanges_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RestablishChangesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_CancelPedidoCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelPedidoCliente" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosClientesService_CancelPedidoCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelPedidoClienteResponse" />
+  </wsdl:message>
   <wsdl:portType name="IPedidosClientesService">
     <wsdl:operation name="GetPedidosClientesList">
       <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/GetPedidosClientesList" message="tns:IPedidosClientesService_GetPedidosClientesList_InputMessage" />
@@ -77,6 +95,18 @@
     <wsdl:operation name="ChangeStatusPedidoCliente">
       <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoCliente" message="tns:IPedidosClientesService_ChangeStatusPedidoCliente_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoClienteResponse" message="tns:IPedidosClientesService_ChangeStatusPedidoCliente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPedidoCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/GetPedidoCliente" message="tns:IPedidosClientesService_GetPedidoCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/GetPedidoClienteResponse" message="tns:IPedidosClientesService_GetPedidoCliente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RestablishChanges">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/RestablishChanges" message="tns:IPedidosClientesService_RestablishChanges_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/RestablishChangesResponse" message="tns:IPedidosClientesService_RestablishChanges_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelPedidoCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosClientesService/CancelPedidoCliente" message="tns:IPedidosClientesService_CancelPedidoCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosClientesService/CancelPedidoClienteResponse" message="tns:IPedidosClientesService_CancelPedidoCliente_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPedidosClientesService" type="tns:IPedidosClientesService">
@@ -137,6 +167,33 @@
     </wsdl:operation>
     <wsdl:operation name="ChangeStatusPedidoCliente">
       <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPedidoCliente">
+      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/GetPedidoCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestablishChanges">
+      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/RestablishChanges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelPedidoCliente">
+      <soap:operation soapAction="http://tempuri.org/IPedidosClientesService/CancelPedidoCliente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

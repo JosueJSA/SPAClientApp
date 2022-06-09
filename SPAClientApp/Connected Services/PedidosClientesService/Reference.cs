@@ -35,6 +35,9 @@ namespace SPAClientApp.PedidosClientesService {
         private System.Nullable<System.DateTime> EntregaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MotivoCancelacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> NumeroProductosField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -104,6 +107,19 @@ namespace SPAClientApp.PedidosClientesService {
                 if ((this.EntregaField.Equals(value) != true)) {
                     this.EntregaField = value;
                     this.RaisePropertyChanged("Entrega");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MotivoCancelacion {
+            get {
+                return this.MotivoCancelacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MotivoCancelacionField, value) != true)) {
+                    this.MotivoCancelacionField = value;
+                    this.RaisePropertyChanged("MotivoCancelacion");
                 }
             }
         }
@@ -673,15 +689,444 @@ namespace SPAClientApp.PedidosClientesService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EPedidoClienteDetallado", Namespace="http://schemas.datacontract.org/2004/07/Services.Model")]
+    [System.SerializableAttribute()]
+    public partial class EPedidoClienteDetallado : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ApellidoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CalleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double CantidadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CiudadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CodigoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> CodigoPostalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ColoniaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double CostoTotalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> EdadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> EntregaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdClienteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdClientePedidoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdClientePropioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdDireccionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MotivoCancelacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> NacimientoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> NumeroField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime SolicitudField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusClienteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusPedidoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TelefonoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TipoPedidoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Apellido {
+            get {
+                return this.ApellidoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ApellidoField, value) != true)) {
+                    this.ApellidoField = value;
+                    this.RaisePropertyChanged("Apellido");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Calle {
+            get {
+                return this.CalleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CalleField, value) != true)) {
+                    this.CalleField = value;
+                    this.RaisePropertyChanged("Calle");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Cantidad {
+            get {
+                return this.CantidadField;
+            }
+            set {
+                if ((this.CantidadField.Equals(value) != true)) {
+                    this.CantidadField = value;
+                    this.RaisePropertyChanged("Cantidad");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Ciudad {
+            get {
+                return this.CiudadField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CiudadField, value) != true)) {
+                    this.CiudadField = value;
+                    this.RaisePropertyChanged("Ciudad");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Codigo {
+            get {
+                return this.CodigoField;
+            }
+            set {
+                if ((this.CodigoField.Equals(value) != true)) {
+                    this.CodigoField = value;
+                    this.RaisePropertyChanged("Codigo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> CodigoPostal {
+            get {
+                return this.CodigoPostalField;
+            }
+            set {
+                if ((this.CodigoPostalField.Equals(value) != true)) {
+                    this.CodigoPostalField = value;
+                    this.RaisePropertyChanged("CodigoPostal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Colonia {
+            get {
+                return this.ColoniaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ColoniaField, value) != true)) {
+                    this.ColoniaField = value;
+                    this.RaisePropertyChanged("Colonia");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double CostoTotal {
+            get {
+                return this.CostoTotalField;
+            }
+            set {
+                if ((this.CostoTotalField.Equals(value) != true)) {
+                    this.CostoTotalField = value;
+                    this.RaisePropertyChanged("CostoTotal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Edad {
+            get {
+                return this.EdadField;
+            }
+            set {
+                if ((this.EdadField.Equals(value) != true)) {
+                    this.EdadField = value;
+                    this.RaisePropertyChanged("Edad");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> Entrega {
+            get {
+                return this.EntregaField;
+            }
+            set {
+                if ((this.EntregaField.Equals(value) != true)) {
+                    this.EntregaField = value;
+                    this.RaisePropertyChanged("Entrega");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> IdCliente {
+            get {
+                return this.IdClienteField;
+            }
+            set {
+                if ((this.IdClienteField.Equals(value) != true)) {
+                    this.IdClienteField = value;
+                    this.RaisePropertyChanged("IdCliente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> IdClientePedido {
+            get {
+                return this.IdClientePedidoField;
+            }
+            set {
+                if ((this.IdClientePedidoField.Equals(value) != true)) {
+                    this.IdClientePedidoField = value;
+                    this.RaisePropertyChanged("IdClientePedido");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> IdClientePropio {
+            get {
+                return this.IdClientePropioField;
+            }
+            set {
+                if ((this.IdClientePropioField.Equals(value) != true)) {
+                    this.IdClientePropioField = value;
+                    this.RaisePropertyChanged("IdClientePropio");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> IdDireccion {
+            get {
+                return this.IdDireccionField;
+            }
+            set {
+                if ((this.IdDireccionField.Equals(value) != true)) {
+                    this.IdDireccionField = value;
+                    this.RaisePropertyChanged("IdDireccion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MotivoCancelacion {
+            get {
+                return this.MotivoCancelacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MotivoCancelacionField, value) != true)) {
+                    this.MotivoCancelacionField = value;
+                    this.RaisePropertyChanged("MotivoCancelacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> Nacimiento {
+            get {
+                return this.NacimientoField;
+            }
+            set {
+                if ((this.NacimientoField.Equals(value) != true)) {
+                    this.NacimientoField = value;
+                    this.RaisePropertyChanged("Nacimiento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombre {
+            get {
+                return this.NombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
+                    this.NombreField = value;
+                    this.RaisePropertyChanged("Nombre");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Numero {
+            get {
+                return this.NumeroField;
+            }
+            set {
+                if ((this.NumeroField.Equals(value) != true)) {
+                    this.NumeroField = value;
+                    this.RaisePropertyChanged("Numero");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Solicitud {
+            get {
+                return this.SolicitudField;
+            }
+            set {
+                if ((this.SolicitudField.Equals(value) != true)) {
+                    this.SolicitudField = value;
+                    this.RaisePropertyChanged("Solicitud");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StatusCliente {
+            get {
+                return this.StatusClienteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusClienteField, value) != true)) {
+                    this.StatusClienteField = value;
+                    this.RaisePropertyChanged("StatusCliente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StatusPedido {
+            get {
+                return this.StatusPedidoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusPedidoField, value) != true)) {
+                    this.StatusPedidoField = value;
+                    this.RaisePropertyChanged("StatusPedido");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Telefono {
+            get {
+                return this.TelefonoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TelefonoField, value) != true)) {
+                    this.TelefonoField = value;
+                    this.RaisePropertyChanged("Telefono");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TipoPedido {
+            get {
+                return this.TipoPedidoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TipoPedidoField, value) != true)) {
+                    this.TipoPedidoField = value;
+                    this.RaisePropertyChanged("TipoPedido");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PedidosClientesService.IPedidosClientesService")]
     public interface IPedidosClientesService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetPedidosClientesList", ReplyAction="http://tempuri.org/IPedidosClientesService/GetPedidosClientesListResponse")]
-        SPAClientApp.PedidosClientesService.EPedidoCliente[] GetPedidosClientesList(string criterio, System.DateTime fecha);
+        SPAClientApp.PedidosClientesService.EPedidoCliente[] GetPedidosClientesList(string status, System.Nullable<int> codigo, System.Nullable<System.DateTime> fecha);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetPedidosClientesList", ReplyAction="http://tempuri.org/IPedidosClientesService/GetPedidosClientesListResponse")]
-        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EPedidoCliente[]> GetPedidosClientesListAsync(string criterio, System.DateTime fecha);
+        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EPedidoCliente[]> GetPedidosClientesListAsync(string status, System.Nullable<int> codigo, System.Nullable<System.DateTime> fecha);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetCommonPedidosList", ReplyAction="http://tempuri.org/IPedidosClientesService/GetCommonPedidosListResponse")]
         SPAClientApp.PedidosClientesService.EPedidoCliente[] GetCommonPedidosList();
@@ -718,6 +1163,24 @@ namespace SPAClientApp.PedidosClientesService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/ChangeStatusPedidoClienteResponse")]
         System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> ChangeStatusPedidoClienteAsync(int IdPedido, string status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/GetPedidoClienteResponse")]
+        SPAClientApp.PedidosClientesService.EPedidoClienteDetallado GetPedidoCliente(int codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/GetPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/GetPedidoClienteResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EPedidoClienteDetallado> GetPedidoClienteAsync(int codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/RestablishChanges", ReplyAction="http://tempuri.org/IPedidosClientesService/RestablishChangesResponse")]
+        SPAClientApp.PedidosClientesService.AnswerMessage RestablishChanges(SPAClientApp.PedidosClientesService.EProductoComprado[] productos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/RestablishChanges", ReplyAction="http://tempuri.org/IPedidosClientesService/RestablishChangesResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> RestablishChangesAsync(SPAClientApp.PedidosClientesService.EProductoComprado[] productos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/CancelPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/CancelPedidoClienteResponse")]
+        SPAClientApp.PedidosClientesService.AnswerMessage CancelPedidoCliente(int IdPedido, string motivo, SPAClientApp.PedidosClientesService.EProductoComprado[] productos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPedidosClientesService/CancelPedidoCliente", ReplyAction="http://tempuri.org/IPedidosClientesService/CancelPedidoClienteResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> CancelPedidoClienteAsync(int IdPedido, string motivo, SPAClientApp.PedidosClientesService.EProductoComprado[] productos);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -747,12 +1210,12 @@ namespace SPAClientApp.PedidosClientesService {
                 base(binding, remoteAddress) {
         }
         
-        public SPAClientApp.PedidosClientesService.EPedidoCliente[] GetPedidosClientesList(string criterio, System.DateTime fecha) {
-            return base.Channel.GetPedidosClientesList(criterio, fecha);
+        public SPAClientApp.PedidosClientesService.EPedidoCliente[] GetPedidosClientesList(string status, System.Nullable<int> codigo, System.Nullable<System.DateTime> fecha) {
+            return base.Channel.GetPedidosClientesList(status, codigo, fecha);
         }
         
-        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EPedidoCliente[]> GetPedidosClientesListAsync(string criterio, System.DateTime fecha) {
-            return base.Channel.GetPedidosClientesListAsync(criterio, fecha);
+        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EPedidoCliente[]> GetPedidosClientesListAsync(string status, System.Nullable<int> codigo, System.Nullable<System.DateTime> fecha) {
+            return base.Channel.GetPedidosClientesListAsync(status, codigo, fecha);
         }
         
         public SPAClientApp.PedidosClientesService.EPedidoCliente[] GetCommonPedidosList() {
@@ -801,6 +1264,30 @@ namespace SPAClientApp.PedidosClientesService {
         
         public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> ChangeStatusPedidoClienteAsync(int IdPedido, string status) {
             return base.Channel.ChangeStatusPedidoClienteAsync(IdPedido, status);
+        }
+        
+        public SPAClientApp.PedidosClientesService.EPedidoClienteDetallado GetPedidoCliente(int codigo) {
+            return base.Channel.GetPedidoCliente(codigo);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.EPedidoClienteDetallado> GetPedidoClienteAsync(int codigo) {
+            return base.Channel.GetPedidoClienteAsync(codigo);
+        }
+        
+        public SPAClientApp.PedidosClientesService.AnswerMessage RestablishChanges(SPAClientApp.PedidosClientesService.EProductoComprado[] productos) {
+            return base.Channel.RestablishChanges(productos);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> RestablishChangesAsync(SPAClientApp.PedidosClientesService.EProductoComprado[] productos) {
+            return base.Channel.RestablishChangesAsync(productos);
+        }
+        
+        public SPAClientApp.PedidosClientesService.AnswerMessage CancelPedidoCliente(int IdPedido, string motivo, SPAClientApp.PedidosClientesService.EProductoComprado[] productos) {
+            return base.Channel.CancelPedidoCliente(IdPedido, motivo, productos);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.PedidosClientesService.AnswerMessage> CancelPedidoClienteAsync(int IdPedido, string motivo, SPAClientApp.PedidosClientesService.EProductoComprado[] productos) {
+            return base.Channel.CancelPedidoClienteAsync(IdPedido, motivo, productos);
         }
     }
 }

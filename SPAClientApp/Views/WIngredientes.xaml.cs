@@ -1,4 +1,5 @@
-﻿using SPAClientApp.ProductosService;
+﻿using MaterialDesignThemes.Wpf;
+using SPAClientApp.ProductosService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -171,28 +172,39 @@ namespace SPAClientApp
 
         private void Buscar(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(ValorBusqueda.Text))
+            if (Criterio.Text == "Nombre")
             {
-                if (Criterio.Text == "Nombre")
-                {
-                    LlenarTablaInsumos((Insumos.Where(i => i.Nombre.ToLower().Contains(ValorBusqueda.Text.ToLower()))).ToList());
-                }
-                else if (Criterio.Text == "Código")
-                {
-                    int value = 0;
-                    if (int.TryParse(ValorBusqueda.Text, out value))
-                        LlenarTablaInsumos((Insumos.Where(i => i.Codigo == value)).ToList());
-                    else
-                        MostrarToastMessage("Advertencia", "El valor del código debe ser númerico");
-                }
+                if (string.IsNullOrEmpty(ValorBusqueda.Text))
+                    MostrarToastMessage("Advertencia", "Debes escribir un valor en el cuadro de búsqueda");
                 else
-                {
-                    LlenarTablaInsumos(Insumos);
-                }
+                    LlenarTablaInsumos((Insumos.Where(i => i.Nombre.ToLower().Contains(ValorBusqueda.Text.ToLower()))).ToList());
+            }
+            else if (Criterio.Text == "Código")
+            {
+                int value = 0;
+                if (int.TryParse(ValorBusqueda.Text, out value))
+                    LlenarTablaInsumos((Insumos.Where(i => i.Codigo == value)).ToList());
+                else
+                    MostrarToastMessage("Advertencia", "El valor del código debe ser númerico");
             }
             else
             {
-                MostrarToastMessage("Advertencia", "Debes escribir un valor en el cuadro de búsqueda");
+                LlenarTablaInsumos(Insumos);
+            }
+        }
+
+        private void SeleccionarCriterio(object sender, EventArgs e)
+        {
+            var criterioCbBox= sender as ComboBox;
+            if (criterioCbBox.Text == "Todos")
+            {
+                ValorBusqueda.IsEnabled = false;
+                HintAssist.SetHint(ValorBusqueda, "Valor no requerido");
+            }
+            else
+            {
+                ValorBusqueda.IsEnabled = true;
+                HintAssist.SetHint(ValorBusqueda, $"Escribe el {criterioCbBox.Text} del insumo");
             }
         }
     }

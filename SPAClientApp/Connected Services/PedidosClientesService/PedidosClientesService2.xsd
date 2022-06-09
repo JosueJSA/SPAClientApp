@@ -4,8 +4,9 @@
   <xs:element name="GetPedidosClientesList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="criterio" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codigo" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="fecha" nillable="true" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -97,6 +98,50 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="ChangeStatusPedidoClienteResult" nillable="true" type="q9:AnswerMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPedidoCliente">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codigo" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPedidoClienteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="GetPedidoClienteResult" nillable="true" type="q10:EPedidoClienteDetallado" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestablishChanges">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="productos" nillable="true" type="q11:ArrayOfEProductoComprado" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestablishChangesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="RestablishChangesResult" nillable="true" type="q12:AnswerMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelPedidoCliente">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdPedido" type="xs:int" />
+        <xs:element minOccurs="0" name="motivo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="productos" nillable="true" type="q13:ArrayOfEProductoComprado" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelPedidoClienteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Services.Model" minOccurs="0" name="CancelPedidoClienteResult" nillable="true" type="q14:AnswerMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

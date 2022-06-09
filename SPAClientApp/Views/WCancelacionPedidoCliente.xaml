@@ -1,0 +1,93 @@
+﻿<Window x:Class="SPAClientApp.Views.WCancelacionPedidoCliente"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SPAClientApp.Views"
+        
+        Icon="../Resources/img/logo.png"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="WCancelacionPedidoCliente" Height="415" Width="421" Closed="Window_Closing">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Selecciona los productos cuya cantidad será recuperada" FontWeight="Bold"/>
+
+        <DataGrid x:Name="TablaProductos" Margin="0,10,0,10" Grid.Row="1" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="11">
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="ColumnAdd">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                            x:Name="MaterialDesignFilledPasswordBoxEnabledComboBox" Checked="AgregarProductoParaRestaurar" Unchecked="RemoverProducto"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding CodigoProductoVenta}" Header="#" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Nombre}" Width="*" Header="Nombre"/>
+                <DataGridTextColumn Binding="{Binding Cantidad}" Width="90" Header="Cantidad"/>
+                <DataGridTextColumn Binding="{Binding Precio}" Width="90" Header="Costo $"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Motivo: " FontWeight="Bold"/>
+            <ComboBox
+            x:Name="CmbxMotivoCancelacion"
+            Margin="10,0,10,0" Padding="0,0,0,0" FontSize="11" VerticalAlignment="Center" Width="215">
+                <ComboBoxItem
+                    IsSelected="True"
+                Content="Decisión del cliente" />
+                <ComboBoxItem
+                Content="Accidente en cocina" />
+                <ComboBoxItem
+                Content="Accidente en repartición" />
+                <ComboBoxItem
+                Content="Error de preparación de pedido" />
+                <StackPanel>
+                    <TextBox
+                        x:Name="motivo"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Stretch"
+                    AcceptsReturn="True"
+                    VerticalScrollBarVisibility="Auto"
+                    SpellCheck.IsEnabled="True"
+                    materialDesign:HintAssist.Hint="Escribe la razón"/>
+                </StackPanel>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button
+              Style="{StaticResource MaterialDesignOutlinedDarkButton}"
+              ToolTip="MaterialDesignOutlinedButton"
+              Content="Cancelar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="12" Height="27" BorderBrush="Red" Foreground="Red" Click="Salir" />
+            <Button
+                Margin="10"
+              Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+              ToolTip="MaterialDesignFlatDarkButton"
+              Content="Continuar"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="12" Height="27" Background="#FF710B0B" BorderBrush="#FF6D0B0B" Click="CancelarPedido" />
+        </StackPanel>
+
+
+    </Grid>
+</Window>

@@ -12,6 +12,7 @@
       <xs:element minOccurs="0" name="Codigo" type="xs:int" />
       <xs:element minOccurs="0" name="CostoTotal" type="xs:double" />
       <xs:element minOccurs="0" name="Entrega" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MotivoCancelacion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumeroProductos" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Solicitud" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
@@ -72,4 +73,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AnswerMessage" nillable="true" type="tns:AnswerMessage" />
+  <xs:complexType name="EPedidoClienteDetallado">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Apellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Calle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cantidad" type="xs:double" />
+      <xs:element minOccurs="0" name="Ciudad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+      <xs:element minOccurs="0" name="CodigoPostal" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Colonia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CostoTotal" type="xs:double" />
+      <xs:element minOccurs="0" name="Edad" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Entrega" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdCliente" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdClientePedido" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdClientePropio" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdDireccion" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MotivoCancelacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nacimiento" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Numero" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Solicitud" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StatusCliente" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusPedido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoPedido" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPedidoClienteDetallado" nillable="true" type="tns:EPedidoClienteDetallado" />
 </xs:schema>

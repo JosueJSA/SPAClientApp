@@ -124,6 +124,9 @@
       <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="GoogleDriveAPI.cs" />
+    <Compile Include="Views\WCancelacionPedidoCliente.xaml.cs">
+      <DependentUpon>WCancelacionPedidoCliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WCliente.xaml.cs">
       <DependentUpon>WCliente.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,9 @@
     </Compile>
     <Compile Include="Views\WInsumo.xaml.cs">
       <DependentUpon>WInsumo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WListaClientes.xaml.cs">
+      <DependentUpon>WListaClientes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WListaInsumos.xaml.cs">
       <DependentUpon>WListaInsumos.xaml</DependentUpon>
@@ -142,6 +148,9 @@
     <Compile Include="Views\WListaProductos.xaml.cs">
       <DependentUpon>WListaProductos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WListaProveedores.xaml.cs">
+      <DependentUpon>WListaProveedores.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WPedidoCliente.xaml.cs">
       <DependentUpon>WPedidoCliente.xaml</DependentUpon>
     </Compile>
@@ -151,7 +160,14 @@
     <Compile Include="Views\WProducto.xaml.cs">
       <DependentUpon>WProducto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WProveedor.xaml.cs">
+      <DependentUpon>WProveedor.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\ClientePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WCancelacionPedidoCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,6 +182,10 @@
     <Page Include="Views\WInsumo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WListaClientes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\WListaInsumos.xaml">
       <SubType>Designer</SubType>
@@ -191,6 +211,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\WListaProveedores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\WPedidoCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +226,10 @@
     <Page Include="Views\WProducto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WProveedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +299,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PedidosClientesService\SPAClientApp.PedidosClientesService.EPedidoCliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PedidosClientesService\SPAClientApp.PedidosClientesService.EPedidoClienteDetallado.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PedidosClientesService\SPAClientApp.PedidosClientesService.EProducto.datasource">
@@ -354,21 +385,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\PedidosClientesService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\PedidosClientesService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\ProductosService\ProductosService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -379,6 +395,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ProductosService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\PedidosClientesService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosClientesService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -39,9 +39,9 @@
                 Style="{StaticResource MaterialDesignFilledTextBox}"
                 AcceptsReturn="True"
                 TextWrapping="Wrap"
-                materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda"
-                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Foreground="Black" SelectionBrush="Black" VerticalAlignment="Center" Height="26" Padding="0,0,0,0" />
-                <ComboBox x:Name="Criterio" Margin="0,0,15,0" Width="70" SelectedIndex="1" Foreground="Black" BorderBrush="Black">
+                materialDesign:HintAssist.Hint="Escribe el nombre del insumo"
+                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Foreground="Black" SelectionBrush="Black" VerticalAlignment="Center" Height="26" Padding="0,0,0,0" Cursor="Arrow" />
+                <ComboBox x:Name="Criterio" Margin="0,0,15,0" Width="70" SelectedIndex="1" Foreground="Black" BorderBrush="Black" DropDownClosed="SeleccionarCriterio">
                     <ComboBoxItem Content="Código" />
                     <ComboBoxItem Content="Nombre" />
                     <ComboBoxItem Content="Todos" />
@@ -49,7 +49,7 @@
                 <Button
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Buscar usando el filtro seleccionado"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#DD0978CE" Height="23" VerticalAlignment="Center" Click="Buscar" BorderBrush="#DD0978CE">
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#DD0978CE" Height="23" VerticalAlignment="Center" Click="Buscar" BorderBrush="#DD0978CE" Cursor="Hand">
                     <materialDesign:PackIcon Kind="Search" />
                 </Button>
             </StackPanel>

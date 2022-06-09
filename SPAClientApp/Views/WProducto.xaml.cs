@@ -84,6 +84,9 @@ namespace SPAClientApp
                     CheckBoxReceta.IsEnabled = false;
                     CheckBoxReceta.IsChecked = true;
                     LlenarCamposReceta(Receta);
+                    CantidadTxt.IsEnabled = true;
+                    CantidadTxt.Text = producto.Cantidad.ToString();
+                    CantidadTxt.IsReadOnly = true;
                 }
                 else
                 {
@@ -263,7 +266,7 @@ namespace SPAClientApp
             if (!ConReceta)
             {
                 int auxi = 0;
-                if (string.IsNullOrEmpty(CantidadTxt.Text) || !int.TryParse(PrecioCompraTxt.Text, out auxi) || auxi < 0)
+                if (string.IsNullOrEmpty(CantidadTxt.Text) || !int.TryParse(CantidadTxt.Text, out auxi) || auxi < 0)
                     throw new ArgumentException("El precio de compra del producto debe ser un número > 0");
             }
             if (ValidarAuxiliar(DescripcionTxt.Text))

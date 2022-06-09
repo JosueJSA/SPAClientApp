@@ -1,4 +1,5 @@
 ﻿using SPAClientApp.ClientesService;
+using SPAClientApp.PedidosClientesService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -199,20 +200,25 @@ namespace SPAClientApp
             cliente.Direcciones.ToList().ForEach(direccion => DireccionesCmbx.Items.Add($"{direccion.Colonia}, {direccion.Calle}, {direccion.Numero}"));
         }
 
-        private void SeleccionarDireccion(object sender, SelectionChangedEventArgs e)
+        public void MostrarClienteDePedido(EPedidoClienteDetallado pedido)
         {
-            if (DireccionesCmbx.SelectedItem != null)
-            {
-                Direccion = DireccionesCmbx.SelectedItem.ToString().Replace(",", string.Empty);
-                Direccion = Direccion.ToLower();
-                var direccion = Cliente.Direcciones.ToList().Where(d => $"{d.Colonia}{d.Calle}{d.Numero}".ToLower() == Direccion.Replace(" ", string.Empty)).First();
-                if (direccion != null)
-                {
-                    ColoniaTxt.Text = direccion.Colonia;
-                    CalleTxt.Text = direccion.Calle;
-                    NumeroTxt.Text = direccion.Numero.ToString();
-                }
-            }
+            DireccionesCmbx.Visibility = Visibility.Collapsed;
+            addBtn.Visibility = Visibility.Collapsed;
+            CamposCliente.ForEach(c => c.IsReadOnly = true);
+            CamposDireccion.ForEach(c => c.IsReadOnly = true);
+            NombreTxt.Text = pedido.Nombre;
+            ApellidosTxt.Text = pedido.Apellido;
+            TelefonoTxt.Text = pedido.Telefono;
+            CorreoElectronicoTxt.Text = pedido.Email;
+            CiudadTxt.Text = pedido.Ciudad;
+            CodigoPostalTxt.Text = pedido.CodigoPostal.ToString();
+            NacimientoDatePicker.Text = pedido.Nacimiento.ToString();
+            EdadLbl.Content = pedido.Edad.ToString();
+            StatusLbl.Content = pedido.StatusPedido.ToString();
+            CalleTxt.Text = pedido.Calle;
+            NumeroTxt.Text = pedido.Numero.ToString();
+            ColoniaTxt.Text = pedido.Colonia;
+
         }
 
         public int ObtenerIdDireccion(string direccion, List<EDireccion> direcciones)
@@ -220,7 +226,7 @@ namespace SPAClientApp
             int returnValue = -1;
             foreach(var d in direcciones)
             {
-                if($"{d.Colonia}{d.Calle}{d.Numero}".ToLower() == direccion.Replace(" ", string.Empty))
+                if($"{d.Colonia}{d.Calle}{d.Numero}".Replace(" ", string.Empty).ToLower() == direccion.Replace(" ", string.Empty).ToLower())
                 {
                     returnValue = d.Id;
                     break;
@@ -260,6 +266,21 @@ namespace SPAClientApp
                 throw new Exception("Lo sentimos, la dirección ya esta registrada para el cliente seleccionado");
 
             //Other validations
+        }
+
+        private void SeleccionarDireccion(object sender, EventArgs e)
+        {
+            if (DireccionesCmbx.SelectedItem != null)
+            {
+                Direccion = DireccionesCmbx.SelectedItem.ToString().Replace(",", string.Empty);
+                var direccion = Cliente.Direcciones.ToList().Where(d => $"{d.Colonia}{d.Calle}{d.Numero}".Replace(" ", string.Empty).ToLower() == Direccion.ToLower().Replace(" ", string.Empty)).First();
+                if (direccion != null)
+                {
+                    ColoniaTxt.Text = direccion.Colonia;
+                    CalleTxt.Text = direccion.Calle;
+                    NumeroTxt.Text = direccion.Numero.ToString();
+                }
+            }
         }
     }
 }

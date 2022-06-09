@@ -67,7 +67,7 @@ namespace SPAClientApp
 
         private void VerPedidosClientes(object sender, RoutedEventArgs e)
         {
-            new WListaPedidosClientes(this).Show();
+            WListaPedidosClientes.GetPedidosClientesWindow(this).Show();
         }
 
         private void VerCliente(object sender, RoutedEventArgs e)

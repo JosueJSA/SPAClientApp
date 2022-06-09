@@ -1,4 +1,5 @@
-﻿using SPAClientApp.ClientesService;
+﻿using MaterialDesignThemes.Wpf;
+using SPAClientApp.ClientesService;
 using SPAClientApp.PedidosClientesService;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,13 @@ namespace SPAClientApp
     /// </summary>
     public partial class WPedidoCliente : Window
     {
-        private List<string> Clientes { get; set; }
+        private List<string> Clientes { get; set; } = new List<string>();
+        private List<EProducto> Productos { get; set; } = new List<EProducto>();
         public ECliente Cliente { get; set; }
         private EPedidoCliente Pedido { get; set; }
         private ClientePage ClienteExistPage { get; set; }  
         private ClientePage NewClientPage { get; set; }
+        private static bool IsClosed { get; set; } = true;
         private Notifier notifier;
         private static WPedidoCliente PedidoWindow = null;
         private readonly PedidosClientesServiceClient client = new PedidosClientesServiceClient();
@@ -45,12 +48,19 @@ namespace SPAClientApp
             SecondFrame.Content = (NewClientPage = new ClientePage(this));
             NewClientPage.ObtenerCmbBoxDirecciones().Visibility = Visibility.Collapsed;
             NewClientPage.ObtenerTogglerAgregarDireccion().Visibility = Visibility.Collapsed;
+            NewClientPage.direccionSection.IsEnabled = true;
+            NewClientPage.edadLbl.Visibility = Visibility.Collapsed;
+            NewClientPage.statusLbl.Visibility = Visibility.Collapsed;
         }
 
         public static WPedidoCliente GetWListaPedidosClientesWindow(WListaPedidosClientes parent)
         {
-            if (PedidoWindow == null)
+            if (PedidoWindow == null || IsClosed)
+            {
+                IsClosed = false;
                 return (PedidoWindow = new WPedidoCliente() { Parent = parent });
+
+            }
             return PedidoWindow;
         }
 
@@ -90,9 +100,9 @@ namespace SPAClientApp
 
         private void CargarProductos()
         {
-            var result = client.GetProductosList().ToList();
-            if (result != null)
-                TablaProductos.ItemsSource = result;
+            Productos = client.GetProductosList().ToList();
+            if (Productos != null)
+                TablaProductos.ItemsSource = Productos;
             else
                 MostrarToastMessage("Error", "Lo sentimos, el servidor no respondió correctamente, " +
                     "si el problema persiste, favor de contactar a soporte técnico");
@@ -164,6 +174,8 @@ namespace SPAClientApp
                 producto.Precio = producto.Cantidad * producto.PrecioVenta;
                 if (producto.Cantidad > producto.stock)
                     producto.Cantidad = producto.stock;
+                else if(producto.Cantidad <= 0)
+                    producto.Cantidad = 1;
             }
             ActualizarTotal();
         }
@@ -178,18 +190,11 @@ namespace SPAClientApp
             ClientSection.IsEnabled = false;
         }
 
-        private async void VerClientes(object sender, EventArgs e)
-        {
-            var result = await clientCliente.GetClientesListAsync();
-            Clientes = result.ToList();
-            ClientesCbmbx.ItemsSource = Clientes;
-            ClientesCbmbx.IsDropDownOpen = true;
-        }
-
         private async void SeleccionarCliente(object sender, SelectionChangedEventArgs e)
         {
             if (ClientesCbmbx.SelectedItem != null)
             {
+                ClienteExistPage.direccionSection.IsEnabled = true;
                 int clave = Convert.ToInt32(ClientesCbmbx.SelectedItem.ToString().Substring(0, ClientesCbmbx.SelectedItem.ToString().IndexOf(':')));
                 Cliente = await clientCliente.GetClienteAsync(clave);
                 MostrarCleinteInfo(Cliente);
@@ -209,7 +214,7 @@ namespace SPAClientApp
         {
             try
             {
-                ValidarPedido();
+                await ValidarPedido();
                 PrepararPedidoCliente();
                 PedidosClientesService.AnswerMessage response;
                 if (Convert.ToBoolean(CheckBoxPedido.IsChecked))
@@ -258,13 +263,10 @@ namespace SPAClientApp
             Pedido.NumeroProductos = TablaProductosSeleccionados.Items.Count;
         }
 
-        private async void ValidarPedido()
+        private async Task ValidarPedido()
         {
             if (TablaProductosSeleccionados.Items.Count == 0)
                 throw new FormatException("Debes seleccionar al menos 1 producto para comprar");
-            var result = await client.CheckProductosSeleccionadosAsync(ObtenerProductosSeleccionados().ToArray());
-            if (!string.IsNullOrEmpty(result))
-                throw new FormatException(result);
             if (Convert.ToBoolean(CheckBoxPedido.IsChecked))
             {
                 if (ClienteExistenteTab.IsSelected)
@@ -272,6 +274,9 @@ namespace SPAClientApp
                 else
                     NewClientPage.ValidarCliente("Registro");
             }
+            var result = await client.CheckProductosSeleccionadosAsync(ObtenerProductosSeleccionados().ToArray());
+            if (!string.IsNullOrEmpty(result))
+                throw new FormatException(result);
         }
 
         private List<EProductoComprado> ObtenerProductosSeleccionados()
@@ -286,7 +291,7 @@ namespace SPAClientApp
 
         private void BuscarCliente(object sender, KeyEventArgs e)
         {
-            if (ClientesCbmbx.Items.Count > 0)
+            if (Clientes.Count > 0)
             {
                 if (string.IsNullOrEmpty(ClientesCbmbx.Text))
                 {
@@ -303,13 +308,73 @@ namespace SPAClientApp
         private void CancelarOperacion(object sender, RoutedEventArgs e)
         {
             if (MostrarCuadroConfirmacion("¿Estás seguro(a) que deseas cancelar el registro del pedido?"))
+            {
+                IsClosed = true;
                 Close();
+            } 
+        }
+
+        private void Window_Closing(object sender, EventArgs e)
+        {
+            IsClosed = true;
+            Close();
         }
 
         private bool MostrarCuadroConfirmacion(string message)
         {
             MessageBoxResult boxResult = MessageBox.Show(message, "Advertencia", MessageBoxButton.YesNoCancel);
             return MessageBoxResult.Yes == boxResult;
+        }
+
+        private void BuscarProductos(object sender, RoutedEventArgs e)
+        {
+            if (Criterio.Text == "Nombre")
+            {
+                if (string.IsNullOrEmpty(ValorBusqueda.Text))
+                    MostrarToastMessage("Advertencia", "Debes escribir un valor en el cuadro de búsqueda");
+                else
+                    LlenarTablaProductos((Productos.Where(i => i.Nombre.ToLower().Contains(ValorBusqueda.Text.ToLower()))).ToList());
+            }
+            else if (Criterio.Text == "Código")
+            {
+                int value = 0;
+                if (int.TryParse(ValorBusqueda.Text, out value))
+                    LlenarTablaProductos((Productos.Where(i => i.Codigo == value)).ToList());
+                else
+                    MostrarToastMessage("Advertencia", "El valor del código debe ser númerico");
+            }
+            else
+            {
+                LlenarTablaProductos(Productos);
+            }
+        }
+
+        private void LlenarTablaProductos(List<EProducto> productos)
+        {
+            TablaProductos.ItemsSource = productos;
+        }
+
+        private void SeleccionarCriterio(object sender, EventArgs e)
+        {
+            var criterio = sender as ComboBox;
+            if (criterio.Text == "Todos")
+            {
+                ValorBusqueda.IsEnabled = false;
+                HintAssist.SetHint(ValorBusqueda, "Valor no requerido");
+            }
+            else
+            {
+                ValorBusqueda.IsEnabled = true;
+                HintAssist.SetHint(ValorBusqueda, $"Escribe el {criterio.Text} del producto");
+            }
+        }
+
+        private void RefrescarClientes(object sender, RoutedEventArgs e)
+        {
+            var result = clientCliente.GetClientesList();
+            Clientes = result.ToList();
+            ClientesCbmbx.ItemsSource = Clientes;
+            ClientesCbmbx.IsDropDownOpen = true;
         }
     }
 }

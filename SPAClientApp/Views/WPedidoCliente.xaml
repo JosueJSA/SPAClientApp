@@ -16,7 +16,7 @@
         
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="WPedidoCliente" Height="708" Width="786">
+        Title="WPedidoCliente" Height="708" Width="786" Closed="Window_Closing">
     <ScrollViewer>
         <Grid Margin="15">
             <Grid.ColumnDefinitions>
@@ -41,7 +41,7 @@
                     TextWrapping="Wrap"
                     materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda"
                     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Foreground="Black" SelectionBrush="Black" VerticalAlignment="Center" Height="26" Padding="0,0,0,0" />
-                <ComboBox x:Name="Criterio" Margin="0,0,15,0" Width="70" SelectedIndex="1" Foreground="Black" BorderBrush="Black">
+                <ComboBox x:Name="Criterio" Margin="0,0,15,0" Width="70" SelectedIndex="1" Foreground="Black" BorderBrush="Black" DropDownClosed="SeleccionarCriterio">
                     <ComboBoxItem Content="Código" />
                     <ComboBoxItem Content="Nombre" />
                     <ComboBoxItem Content="Todos" />
@@ -49,7 +49,7 @@
                 <Button
                           Style="{StaticResource MaterialDesignRaisedDarkButton}"
                           ToolTip="Buscar usando el filtro seleccionado"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#FF313B8E" Height="23" VerticalAlignment="Center">
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="30" Background="#FF313B8E" Height="23" VerticalAlignment="Center" Click="BuscarProductos">
                     <materialDesign:PackIcon Kind="Search" />
                 </Button>
             </StackPanel>
@@ -85,7 +85,7 @@
                     <DataGridTextColumn Binding="{Binding PrecioVenta}" Width="90" Header="Costo $"/>
                 </DataGrid.Columns>
             </DataGrid>
-        
+
             <DataGrid x:Name="TablaProductosSeleccionados" Margin="0,0,10,0" Grid.Row="1" Grid.Column="1" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
                 <DataGrid.CellStyle>
                     <Style/>
@@ -141,12 +141,22 @@
 
                         <ScrollViewer Margin="10" HorizontalScrollBarVisibility="Visible">
                             <StackPanel>
-                                <ComboBox
-                                    x:Name="ClientesCbmbx"
-                                    Width="270"
+                                <StackPanel Orientation="Horizontal" Width="270" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <ComboBox
+                                        Width="200"
+                                    x:Name="ClientesCbmbx" 
                                   materialDesign:HintAssist.Hint="Seleccionar cliente"
                                   materialDesign:HintAssist.HintOpacity=".26"
-                                    IsEditable="True" VerticalAlignment="Center" HorizontalAlignment="Left" DropDownOpened="VerClientes" SelectionChanged="SeleccionarCliente" KeyUp="BuscarCliente"/>
+                                    IsEditable="True" SelectionChanged="SeleccionarCliente" KeyUp="BuscarCliente"/>
+                                    <Button
+                                        Margin="10,0,0,0"
+                                      Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                      ToolTip="MaterialDesignFloatingActionMiniButton"
+                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Height="18" Width="18" Click="RefrescarClientes">
+                                        <materialDesign:PackIcon
+                                        Kind="Refresh"/>
+                                    </Button>
+                                </StackPanel>
                                 <Frame x:Name="Frame"></Frame>
                             </StackPanel>
                         </ScrollViewer>

@@ -14,7 +14,7 @@
         
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="WListaPedidosClientes" Height="560" Width="923">
+        Title="WListaPedidosClientes" Height="560" Width="923" Closed="Window_Closing">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -192,7 +192,7 @@
                                           Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
                                           ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
                                           IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF14A298" BorderBrush="#FF14A298" Click="EntregarPedido">
-                                            <materialDesign:PackIcon Kind="Moped" />
+                                            <materialDesign:PackIcon Kind="NoteCheck" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -231,7 +231,7 @@
 
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="140"/>
+                            <RowDefinition Height="100"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
@@ -243,64 +243,51 @@
                             UniformCornerRadius="6">
 
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="400"/>
-                                    </Grid.ColumnDefinitions>
-
-
-                                    <StackPanel Grid.Column="1" Orientation="Vertical">
-                                        <Label Content="Filtro" FontWeight="Bold"/>
-                                        <ComboBox Margin="0,0,15,0" SelectedIndex="0" Foreground="Black" BorderBrush="Black" >
-                                            <ComboBoxItem Content="Todos" />
-                                            <ComboBoxItem Content="En establecimiento" />
-                                            <ComboBoxItem Content="A domicilio" />
-                                        </ComboBox>
-                                    </StackPanel>
-
-                                    <StackPanel Margin="0,0,20,0" Orientation="Vertical">
-                                        <Label Content="A partir de" FontWeight="Bold"/>
-                                        <StackPanel>
-                                            <DatePicker x:Name="FechaLimite" Foreground="Black"
-                                                IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxConFecha}" />
-                                            <CheckBox
+                                <StackPanel Margin="10,10,10,0" Orientation="Vertical">
+                                    <StackPanel>
+                                        <DatePicker x:Name="FechaLimiteEntregados" Foreground="Black"
+                                                IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxConFechaEntregados}" />
+                                        <CheckBox
                                                 Margin="0,5,0,0"
-                                                x:Name="CheckBoxConFecha"
+                                                x:Name="CheckBoxConFechaEntregados"
                                                 Content="Contemplar fecha" Foreground="Black" />
-                                        </StackPanel>
                                     </StackPanel>
+                                </StackPanel>
 
-                                    <StackPanel Margin="10,0,10,0" Grid.Column="3" Orientation="Vertical">
-                                        <Label Content="Valor de búsqueda" FontWeight="Bold"/>
-                                        <TextBox
-                                            x:Name="ValorBusqueda"
+                                <StackPanel Margin="10,0,10,0" Grid.Column="1" Orientation="Vertical">
+                                    <Label Content="Código del producto" FontWeight="Bold"/>
+                                    <TextBox
+                                            x:Name="busquedaEntregados"
                                             Style="{StaticResource MaterialDesignFilledTextBox}"
                                             AcceptsReturn="True"
                                             TextWrapping="Wrap"
-                                            materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda según el criterio"
+                                            materialDesign:HintAssist.Hint="#Todos"
                                             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Padding="3,3,3,3" Foreground="Black" SelectionBrush="Black" />
-                                    </StackPanel>
-                                </Grid>
+                                </StackPanel>
 
-                                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left">
                                     <Button
-                                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                      ToolTip="Limpiar formulario"
-                                      Content="Limpiar"
-                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="60" Foreground="#DD171717" Background="#FFFDFCFF" Height="22" />
+                                        Margin="10"
+                                          Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                          ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="White" BorderBrush="White" Foreground="#DD2C0958" Height="27" Width="28" Click="LimpiarBusquedaEntregados">
+                                        <materialDesign:PackIcon Kind="Broom" Foreground="#FF2D085B" Height="21" Width="20">
+                                        </materialDesign:PackIcon>
+                                    </Button>
                                     <Button
-                                        Margin="10,0,10,0"
-                                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                      ToolTip="Buscar usando el filtro seleccionado"
-                                      Content="Buscar"
-                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="59" Background="#DD5D12AB" Height="23" BorderBrush="#DD5D12AB" />
+                                          Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                          ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="#FF2D085B" BorderBrush="#FF2D085B" Foreground="#DD2C0958" Height="27" Width="28" Click="BuscarProductosEntregados">
+                                        <materialDesign:PackIcon Kind="Search" Foreground="#FFFBFBFB" Height="21" Width="20">
+                                        </materialDesign:PackIcon>
+                                    </Button>
                                 </StackPanel>
 
                             </Grid>
@@ -348,11 +335,71 @@
 
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="140"/>
+                            <RowDefinition Height="100"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <DataGrid Grid.Row="0" Grid.RowSpan="2" x:Name="TablaCancelado" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+                        <materialDesign:Card
+                            Background="#210027FF"
+                            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                            Padding="5"
+                            Margin="15"
+                            UniformCornerRadius="6">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Margin="10,10,10,0" Orientation="Vertical">
+                                    <StackPanel>
+                                        <DatePicker Foreground="Black"
+                                                    x:Name="fechaEliminados"
+                                                IsEnabled="{Binding Path=IsChecked, ElementName=CheckBoxEliminados}" />
+                                        <CheckBox
+                                                x:Name="CheckBoxEliminados"
+                                                Margin="0,5,0,0"
+                                                Content="Contemplar fecha" Foreground="Black" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Margin="10,0,10,0" Grid.Column="1" Orientation="Vertical">
+                                    <Label Content="Código del producto" FontWeight="Bold"/>
+                                    <TextBox
+                                            x:Name="busquedaEliminados"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            AcceptsReturn="True"
+                                            TextWrapping="Wrap"
+                                            materialDesign:HintAssist.Hint="#Todos"
+                                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Padding="3,3,3,3" Foreground="Black" SelectionBrush="Black" />
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Button
+                                        Margin="10"
+                                          Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                          ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="White" BorderBrush="White" Foreground="#DD2C0958" Height="27" Width="28" Click="LimpiarBusquedaEliminados">
+                                        <materialDesign:PackIcon Kind="Broom" Foreground="#FF2D085B" Height="21" Width="20">
+                                        </materialDesign:PackIcon>
+                                    </Button>
+                                    <Button
+                                          Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                          ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="#FF2D085B" BorderBrush="#FF2D085B" Foreground="#DD2C0958" Height="27" Width="28" Click="BuscarPedidosEliminados">
+                                        <materialDesign:PackIcon Kind="Search" Foreground="#FFFBFBFB" Height="21" Width="20">
+                                        </materialDesign:PackIcon>
+                                    </Button>
+                                </StackPanel>
+
+                            </Grid>
+
+                        </materialDesign:Card>
+
+                        <DataGrid Grid.Row="1" Grid.RowSpan="1" x:Name="TablaCancelado" SelectionMode="Extended"  SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
                             <DataGrid.CellStyle>
                                 <Style/>
                             </DataGrid.CellStyle>

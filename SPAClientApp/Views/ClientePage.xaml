@@ -101,15 +101,15 @@
             </Grid>
 
             <StackPanel Grid.Row="5" Orientation="Horizontal">
-                <Label Content="Edad: "/>
+                <Label x:Name="edadLbl" Content="Edad: "/>
                 <Label x:Name="EdadLbl" Width="60"/>
-                <Label Content="Status: "/>
+                <Label x:Name="statusLbl" Content="Status: "/>
                 <Label x:Name="StatusLbl" Width="100"/>
             </StackPanel>
 
         </Grid>
 
-        <Grid Grid.Column="1" Margin="20"  Grid.Row="1">
+        <Grid x:Name="direccionSection" Grid.Column="1" Margin="20"  Grid.Row="1" IsEnabled="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -125,7 +125,7 @@
               Style="{StaticResource MaterialDesignOutlinedComboBox}"
               materialDesign:HintAssist.Hint="Selecciona una dirección"
               ItemsSource="{Binding ShortStringList}"
-              materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White" FontSize="10" Height="24" SelectionChanged="SeleccionarDireccion" Width="231">
+              materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White" FontSize="10" Height="24" Width="231" DropDownClosed="SeleccionarDireccion">
                     <ComboBox.SelectedItem>
                         <Binding
                           Path="SelectedValidationOutlined"
@@ -141,6 +141,7 @@
                     x:Name="MostrarDomrularioDireccionBtn"
                   Orientation="Horizontal">
                     <materialDesign:PopupBox
+                        x:Name="addBtn"
                         StaysOpen="True"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right">
                         <Grid

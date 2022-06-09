@@ -25,6 +25,8 @@ namespace SPAClientApp
     /// </summary>
     public partial class WListaPedidosClientes : Window
     {
+        private static WListaPedidosClientes CurrentWindow { get; set; } = null;
+        private static bool IsClosed { get; set; } = true;
         private const int INTERVAL = 10000; //1/6 minuto
         private readonly PedidosClientesServiceClient client = new PedidosClientesServiceClient();
         private Notifier notifier;
@@ -33,10 +35,11 @@ namespace SPAClientApp
         readonly System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             
 
-        public WListaPedidosClientes(WHome home)
+        private WListaPedidosClientes(WHome home)
         {
             InitializeComponent();
             HomeWindow = home;
+            FechaLimiteEntregados.Text = DateTime.Now.ToString();
             ConfigurarToastNotifier(this, 3);
             tablas = new Dictionary<string, DataGrid>()
             {
@@ -52,12 +55,26 @@ namespace SPAClientApp
             timer.Start();
         }
 
+        public static WListaPedidosClientes GetPedidosClientesWindow(WHome home)
+        {
+            if(CurrentWindow == null || IsClosed)
+            {
+                IsClosed = false;
+                return (CurrentWindow = new WListaPedidosClientes(home));
+            }
+            else
+            {
+                IsClosed = false;
+                return CurrentWindow;
+            }
+        }
+
         private void RefrescarTabla(object sender, EventArgs e)
         {
             ActualizarTabla();
         }
 
-        private void ActualizarTabla()
+        public void ActualizarTabla()
         {
             CleanTables();
             var result = client.GetCommonPedidosList();
@@ -74,7 +91,7 @@ namespace SPAClientApp
             DataGrid tabla = null;
             foreach (var item in tablas.Keys)
             {
-                if(item != "Entregao" && item != "Cancelado")
+                if(item != "Entregado" && item != "Cancelado")
                     tablas.TryGetValue(item, out tabla);
                 if (tabla != null)
                     tabla.Items.Clear();
@@ -110,6 +127,7 @@ namespace SPAClientApp
         private void Salir(object sender, RoutedEventArgs e)
         {
             timer.Stop();   
+            IsClosed = true;
             Close();
         }
 
@@ -166,18 +184,11 @@ namespace SPAClientApp
             }
         }
 
-        private async void CancelarPedido(object sender, RoutedEventArgs e)
+        private void CancelarPedido(object sender, RoutedEventArgs e)
         {
             var pedido = ((FrameworkElement)sender).DataContext as EPedidoCliente;
-            if (MostrarCuadroConfirmacion("El pedido pasará a entregado sin posibilidad de volver a preparación, ¿Seguro que deseas continuar?"))
-            {
-                var result = await client.ChangeStatusPedidoClienteAsync(pedido.Codigo, "Cancelado");
-                if (result.Key > 0)
-                    MostrarToastMessage("Exito", "Info cancelado");
-                else
-                    MostrarToastMessage("Error", result.Message);
-                ActualizarTabla();
-            }
+            var window = WCancelacionPedidoCliente.GetCancelationWindow(this, pedido);
+            window.Show();
         }
 
         private void ConsultarPedido(object sender, RoutedEventArgs e)
@@ -185,6 +196,70 @@ namespace SPAClientApp
             var pedido = ((FrameworkElement)sender).DataContext as EPedidoCliente;
             var window = new WPedidoClienteConsulta(this, pedido);
             window.Show();
+        }
+
+        private void Window_Closing(object sender, EventArgs e)
+        {
+            timer.Stop();
+            IsClosed = true;
+            Close();
+        }
+
+        private int? ValidarFiltros(TextBox campo)
+        {
+            if (!int.TryParse(campo.Text, out int codigo))
+                throw new Exception("Lo sentimos, el código debe ser un número entero");
+            return codigo;
+        }
+
+        private async void BuscarProductosEntregados(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int? codigo = string.IsNullOrEmpty(busquedaEntregados.Text) ? null : ValidarFiltros(busquedaEntregados);
+                DateTime? fecha = null;
+                if (FechaLimiteEntregados.IsEnabled)
+                    fecha = Convert.ToDateTime(FechaLimiteEntregados.Text);
+                var pedidos = await client.GetPedidosClientesListAsync("Entregado", codigo, fecha);
+                TablaEntregado.ItemsSource = pedidos.ToList();
+                BadgedEntregado.Badge = TablaEntregado.Items.Count;
+            }
+            catch(Exception ex)
+            {
+                MostrarToastMessage("Advertencia", ex.Message);
+            }
+        }
+
+        private void LimpiarBusquedaEntregados(object sender, RoutedEventArgs e)
+        {
+            CheckBoxConFechaEntregados.IsChecked = true;
+            busquedaEntregados.Text = string.Empty;
+            FechaLimiteEntregados.Text = DateTime.Now.ToString();
+        }
+
+        private async void BuscarPedidosEliminados(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int? codigo = string.IsNullOrEmpty(busquedaEliminados.Text) ? null : ValidarFiltros(busquedaEliminados);
+                DateTime? fecha = null;
+                if (fechaEliminados.IsEnabled)
+                    fecha = Convert.ToDateTime(fechaEliminados.Text);
+                var pedidos = await client.GetPedidosClientesListAsync("Cancelado", codigo, fecha);
+                TablaCancelado.ItemsSource = pedidos.ToList();
+                BadgedCancelado.Badge = TablaCancelado.Items.Count;
+            }
+            catch (Exception ex)
+            {
+                MostrarToastMessage("Advertencia", ex.Message);
+            }
+        }
+
+        private void LimpiarBusquedaEliminados(object sender, RoutedEventArgs e)
+        {
+            CheckBoxEliminados.IsChecked = true;
+            busquedaEliminados.Text = string.Empty;
+            fechaEliminados.Text = DateTime.Now.ToString();
         }
     }
 }
