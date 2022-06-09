@@ -47,7 +47,7 @@
 
                     <StackPanel Grid.Column="0" Orientation="Vertical" Margin="15,0,0,0" >
                         <Label Content="Criterio" FontWeight="Bold"/>
-                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" MouseLeftButtonDown="SeleccionarCriterio" DropDownClosed="SeleccionarCriterio">
+                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" MouseLeftButtonDown="SeleccionarCriterio">
                             <ComboBoxItem Content="Nombre" />
                             <ComboBoxItem Content="Telefono" />
                             <ComboBoxItem Content="Todos" />

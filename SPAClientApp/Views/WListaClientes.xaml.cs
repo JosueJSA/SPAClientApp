@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPAClientApp.ClientesService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace SPAClientApp
     /// </summary>
     public partial class WListaClientes : Window
     {
-
+        private readonly ClientesServiceClient client = new ClientesServiceClient();
         //private readonly ProveedorService client = new ProveedorService();
         private WHome HomeWindow { get; set; }
         private Notifier notifier;
@@ -52,7 +53,7 @@ namespace SPAClientApp
                 return CurrentWindow;
         }
 
-        private void BuscarClientes(object sender, RoutedEventArgs e)
+        private async Task BuscarClientesAsync(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -63,8 +64,8 @@ namespace SPAClientApp
                 if (Criterio.Text == "Todos")
                     Valor = null;
                 string criterio = Criterio.Text;
-                var result = await client.GetClientesAsync(CriterioSeleccionado, Valor, Status);
-                ActualizarTablaClientes(result.ToList());
+                //var result = await client.GetClientesAsync(CriterioSeleccionado, Valor, Status);
+                //ActualizarTablaClientes(result.ToList());
             }
             catch (ArgumentException ae)
             {
@@ -125,17 +126,17 @@ namespace SPAClientApp
                 string mensaje = $"¿Seguro(a) que deseas dar de baja al Proveedor '{cliente.Nombre}' seleccionado?";
                 if (MostrarCuadroConfirmacion(mensaje))
                 {
-                    AnswerMessage response = client.ChangeClienteStatus(cliente.id, "Dado de baja");
-                    if (response.Key >= 0)
-                    {
-                        MostrarToastMessage("Exito", "El Proveedor ha sido dado de baja");
-                        var result = client.GetClientes(CriterioSeleccionado, Valor, Status).ToList();
-                        ActualizarTablaClientes(result);
-                    }
-                    else
-                    {
-                        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                    }
+                    //AnswerMessage response = client.ChangeClienteStatus(cliente.id, "Dado de baja");
+                    //if (response.Key >= 0)
+                    //{
+                    //    MostrarToastMessage("Exito", "El Proveedor ha sido dado de baja");
+                    //    var result = client.GetClientes(CriterioSeleccionado, Valor, Status).ToList();
+                    //    ActualizarTablaClientes(result);
+                    //}
+                    //else
+                    //{
+                    //    MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
+                    //}
                 }
             }
             else
@@ -148,21 +149,21 @@ namespace SPAClientApp
         {
             if (TablaActualizada())
             {
-                var cliente = ((FrameworkElement)sender).DataContext as EProveedor;
-                string mensaje = $"¿Seguro(a) que deseas dar de alta el Proveedor '{cliente.Nombre}' seleccionado?";
-                if (MostrarCuadroConfirmacion(mensaje))
-                {
-                    AnswerMessage response = proveedor.ChangeInsumoStatus(cliente.Id, "Activo");
-                    if (response.Key >= 0)
-                    {
-                        MostrarToastMessage("Exito", "El Proveedor ha sido dado de alta");
-                        RefrescarTablaCliente();
-                    }
-                    else
-                    {
-                        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                    }
-                }
+                //var cliente = ((FrameworkElement)sender).DataContext as EProveedor;
+                //string mensaje = $"¿Seguro(a) que deseas dar de alta el Proveedor '{cliente.Nombre}' seleccionado?";
+                //if (MostrarCuadroConfirmacion(mensaje))
+                //{
+                //    AnswerMessage response = proveedor.ChangeInsumoStatus(cliente.Id, "Activo");
+                //    if (response.Key >= 0)
+                //    {
+                //        MostrarToastMessage("Exito", "El Proveedor ha sido dado de alta");
+                //        RefrescarTablaCliente();
+                //    }
+                //    else
+                //    {
+                //        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
+                //    }
+                //}
             }
             else
             {
@@ -175,9 +176,9 @@ namespace SPAClientApp
             if (TablaActualizada())
             {
                 var cliente = ((FrameworkElement)sender).DataContext as ECliente;
-                var window = new WCliente(this);
-                window.ActivarModoLectura(cliente);
-                window.Show();
+                //var window = new WCliente(this);
+                //window.ActivarModoLectura(cliente);
+                //window.Show();
             }
             else
             {
@@ -195,9 +196,9 @@ namespace SPAClientApp
             if (TablaActualizada())
             {
                 var cliente = ((FrameworkElement)sender).DataContext as ECliente;
-                var window = new WCliente(this);
-                window.ActivarModoEdicion("Actualizacion", cliente);
-                window.Show();
+                //var window = new WCliente(this);
+                //window.ActivarModoEdicion("Actualizacion", cliente);
+                //window.Show();
             }
             else
             {
@@ -209,7 +210,7 @@ namespace SPAClientApp
         private void AgregarCliente(object sender, RoutedEventArgs e)
         {
             //var window = new WCliente(HomeWindow);
-            WCliente.GetWClient(HomeWindow, "Registro").Show();
+            //WCliente.GetWClient(HomeWindow, "Registro").Show();
             //window.ActivarModoEdicion("Registro", new ECliente());
             //window.Show();
         }
@@ -221,8 +222,8 @@ namespace SPAClientApp
 
         public void RefrescarTablaCliente()
         {
-            var result = client.GetProveedorList(CriterioSeleccionado, Valor, Status).ToList();
-            ActualizarTablaClientes(result);
+            //var result = client.GetProveedorList(CriterioSeleccionado, Valor, Status).ToList();
+            //ActualizarTablaClientes(result);
         }
 
 
@@ -264,6 +265,11 @@ namespace SPAClientApp
                 cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(notificationLifetime: TimeSpan.FromSeconds(segundos), maximumNotificationCount: MaximumNotificationCount.FromCount(segundos));
                 cfg.Dispatcher = Application.Current.Dispatcher;
             });
+        }
+
+        private void BuscarClientes(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

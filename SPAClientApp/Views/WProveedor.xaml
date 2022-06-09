@@ -101,7 +101,7 @@
               Style="{StaticResource MaterialDesignOutlinedComboBox}"
               materialDesign:HintAssist.Hint="Selecciona una dirección"
               ItemsSource="{Binding ShortStringList}"
-              materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White" FontSize="10" Height="24" SelectionChanged="SeleccionarDireccion" Width="231">
+              materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White" FontSize="10" Height="24" Width="231">
                     <ComboBox.SelectedItem>
                         <Binding
                           Path="SelectedValidationOutlined"
@@ -191,7 +191,7 @@
                         HorizontalAlignment="Right">
                                 <Button
                           Content="Agregar"
-                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="AgregarDireccion" />
+                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" />
                                 <Button
                           Content="Cancelar"
                           Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
@@ -236,28 +236,28 @@
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
                       ToolTip="Regresar a la lista"
                       Content="Salir"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Salir" />
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                 <Button
 					x:Name="ActualizarBtn"
 					Margin="0,0,15,0"
 				  Style="{StaticResource MaterialDesignRaisedDarkButton}"
 				  ToolTip="Actualizar datos"
 				  Content="Actualizar"
-				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Actualizar" />
+				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" />
                 <Button
 					x:Name="RegistrarBtn"
 					Margin="0,0,15,0"
 				  Style="{StaticResource MaterialDesignRaisedDarkButton}"
 				  ToolTip="Registrar Proveedor"
 				  Content="Registrar"
-				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" Click="Registrar" />
+				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" />
                 <Button
 					x:Name="CancelarBtn"
 					Margin="0,1,15,0.6"
 				  Style="{StaticResource MaterialDesignRaisedDarkButton}"
 				  ToolTip="Cancelar proceso"
 				  Content="Cerrar"
-				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#EE000000" Background="White"  Visibility="Collapsed" Click="CancelarProceso" />
+				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#EE000000" Background="White"  Visibility="Collapsed" />
             </StackPanel>
 
 

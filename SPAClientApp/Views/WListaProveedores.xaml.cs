@@ -60,8 +60,8 @@ namespace SPAClientApp.Views
                 if (Criterio.Text == "Todos")
                     Valor = null;
                 string criterio = Criterio.Text;
-                var result = await client.GetProveedoresAsync(CriterioSeleccionado, Valor, Status);
-                ActualizarTablaProveedores(result.ToList());
+                //var result = await client.GetProveedoresAsync(CriterioSeleccionado, Valor, Status);
+                //ActualizarTablaProveedores(result.ToList());
             }
             catch (ArgumentException ae)
             {
@@ -82,25 +82,25 @@ namespace SPAClientApp.Views
                     throw new ArgumentException("Debes escribir un RFC en el valor de búsqueda");
         }
 
-        private void ActualizarTablaProveedores(List<EProveedor> proveedores)
-        {
-            if (proveedores != null)
-                tablaDatos.ItemsSource = proveedores;
-            else
-                MostrarToastMessage("Error", "Hubo un error en el servidor, si los " +
-                    "problemas persisten, favor de contactar a soporte técnico");
-            if ((bool)CheckBoxActivos.IsChecked)
-            {
-                ColumnActive.Visibility = Visibility.Collapsed;
-                ColumnEliminate.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                ColumnActive.Visibility = Visibility.Visible;
-                ColumnEliminate.Visibility = Visibility.Collapsed;
-            }
-            Tiempo = DateTime.Now;
-        }
+        //private void ActualizarTablaProveedores(List<EProveedor> proveedores)
+        //{
+        //    if (proveedores != null)
+        //        tablaDatos.ItemsSource = proveedores;
+        //    else
+        //        MostrarToastMessage("Error", "Hubo un error en el servidor, si los " +
+        //            "problemas persisten, favor de contactar a soporte técnico");
+        //    if ((bool)CheckBoxActivos.IsChecked)
+        //    {
+        //        ColumnActive.Visibility = Visibility.Collapsed;
+        //        ColumnEliminate.Visibility = Visibility.Visible;
+        //    }
+        //    else
+        //    {
+        //        ColumnActive.Visibility = Visibility.Visible;
+        //        ColumnEliminate.Visibility = Visibility.Collapsed;
+        //    }
+        //    Tiempo = DateTime.Now;
+        //}
 
         private void SeleccionarCriterio(object sender, MouseButtonEventArgs e)
         {
@@ -121,22 +121,22 @@ namespace SPAClientApp.Views
         {
             if (TablaActualizada())
             {
-                var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
-                string mensaje = $"¿Seguro(a) que deseas dar de baja al Proveedor '{proveedor.Nombre}' seleccionado?";
-                if (MostrarCuadroConfirmacion(mensaje))
-                {
-                   AnswerMessage response = client.ChangeProveedorStatus(proveedor.Clave, "Dado de baja");
-                   if (response.Key >= 0)
-                   {
-                      MostrarToastMessage("Exito", "El Proveedor ha sido dado de baja");
-                      var result = client.GetProveedores(CriterioSeleccionado, Valor, Status).ToList();
-                      ActualizarTablaProveedores(result);
-                   }
-                   else
-                   {
-                      MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                   }
-                }
+                //var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
+                //string mensaje = $"¿Seguro(a) que deseas dar de baja al Proveedor '{proveedor.Nombre}' seleccionado?";
+                //if (MostrarCuadroConfirmacion(mensaje))
+                //{
+                //   AnswerMessage response = client.ChangeProveedorStatus(proveedor.Clave, "Dado de baja");
+                //   if (response.Key >= 0)
+                //   {
+                //      MostrarToastMessage("Exito", "El Proveedor ha sido dado de baja");
+                //      var result = client.GetProveedores(CriterioSeleccionado, Valor, Status).ToList();
+                //      ActualizarTablaProveedores(result);
+                //   }
+                //   else
+                //   {
+                //      MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
+                //   }
+                //}
             }
             else
             {
@@ -150,21 +150,21 @@ namespace SPAClientApp.Views
         {
             if (TablaActualizada())
             {
-                var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
-                string mensaje = $"¿Seguro(a) que deseas dar de alta el Proveedor '{proveedor.Nombre}' seleccionado?";
-                if (MostrarCuadroConfirmacion(mensaje))
-                {
-                    AnswerMessage response = client.ChangeInsumoStatus(proveedor.Clave, "Activo");
-                    if (response.Key >= 0)
-                    {
-                        MostrarToastMessage("Exito", "El Proveedor ha sido dado de alta");
-                        RefrescarTablaProveedor();
-                    }
-                    else
-                    {
-                        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                    }
-                }
+                //var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
+                //string mensaje = $"¿Seguro(a) que deseas dar de alta el Proveedor '{proveedor.Nombre}' seleccionado?";
+                //if (MostrarCuadroConfirmacion(mensaje))
+                //{
+                //    AnswerMessage response = client.ChangeInsumoStatus(proveedor.Clave, "Activo");
+                //    if (response.Key >= 0)
+                //    {
+                //        MostrarToastMessage("Exito", "El Proveedor ha sido dado de alta");
+                //        RefrescarTablaProveedor();
+                //    }
+                //    else
+                //    {
+                //        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
+                //    }
+                //}
             }
             else
             {
@@ -176,10 +176,10 @@ namespace SPAClientApp.Views
         {
             if (TablaActualizada())
             {
-                var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
-                var window = new WProveedor(this);
-                window.ActivarModoLectura(proveedor);
-                window.Show();
+                //var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
+                //var window = new WProveedor(this);
+                //window.ActivarModoLectura(proveedor);
+                //window.Show();
             }
             else
             {
@@ -196,10 +196,10 @@ namespace SPAClientApp.Views
         {
             if (TablaActualizada())
             {
-                var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
-                var window = new WProveedor(this);
-                window.ActivarModoEdicion("Actualizacion", proveedor);
-                window.Show();
+                //var proveedor = ((FrameworkElement)sender).DataContext as EProveedor;
+                //var window = new WProveedor(this);
+                //window.ActivarModoEdicion("Actualizacion", proveedor);
+                //window.Show();
             }
             else
             {
@@ -209,9 +209,9 @@ namespace SPAClientApp.Views
 
         private void AgregarProveedor(object sender, RoutedEventArgs e)
         {
-            var window = new WProveedor(this);
-            window.ActivarModoEdicion("Registro", new EProveedor());
-            window.Show();
+            //var window = new WProveedor(this);
+            //window.ActivarModoEdicion("Registro", new EProveedor());
+            //window.Show();
         }
 
         private void Salir(object sender, RoutedEventArgs e)
@@ -222,8 +222,8 @@ namespace SPAClientApp.Views
 
         public void RefrescarTablaProveedor()
         {
-            var result = client.GetProveedorList(CriterioSeleccionado, Valor, Status).ToList();
-            ActualizarTablaProveedores(result);
+            //var result = client.GetProveedorList(CriterioSeleccionado, Valor, Status).ToList();
+            //ActualizarTablaProveedores(result);
         }
 
 
