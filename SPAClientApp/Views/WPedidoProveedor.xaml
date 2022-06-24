@@ -1,0 +1,60 @@
+﻿<Window x:Class="SPAClientApp.WPedidoProveedor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SPAClientApp"
+        mc:Ignorable="d"
+        
+        Icon="../Resources/img/logo.png"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Title="WIngredientes" Height="513" Width="546" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Selecciona el proveedor" FontWeight="Bold"/>
+                <Label Grid.Row="1" x:Name="proveedor"/>
+            </StackPanel>
+            
+
+            <DataGrid Margin="10,0,0,0" Grid.Column="1" Grid.Row="1" SelectionMode="Extended"  SelectionUnit="FullRow" x:Name="tablaInsumos" IsReadOnly="True" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ColumnWidth="SizeToHeader" HorizontalContentAlignment="Center" CanUserResizeColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" IsSynchronizedWithCurrentItem="False">
+                <DataGrid.CellStyle>
+                    <Style/>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding CodigoInsumo}" Header="#" Width="50"/>
+                    <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre" Width="200"/>
+                    <DataGridTextColumn Binding="{Binding Cantidad}" Header="Cantidad"/>
+                    <DataGridTextColumn Binding="{Binding Precio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" Header="$"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button
+              DockPanel.Dock="Left"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}"
+              ToolTip="Cancelar"
+              Content="Salir"
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Margin="0,0,15,0" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF1E7EC9" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Click="Salir" />
+
+            </StackPanel>
+
+        </Grid>
+    </DockPanel>
+</Window>

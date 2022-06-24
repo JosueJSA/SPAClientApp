@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="7df32439-2510-4b7e-b06c-95afc4ffde71" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1234/PedidosProveedoresService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PedidosProveedoresService.xsd" MetadataType="Schema" ID="43a66bb6-64b4-42a2-aa9d-d8840da0320d" SourceId="1" SourceUrl="http://localhost:1234/PedidosProveedoresService.svc?xsd=xsd0" />
+    <MetadataFile FileName="PedidosProveedoresService.wsdl" MetadataType="Wsdl" ID="70d653f6-c690-4a78-914f-bafbe888cb0a" SourceId="1" SourceUrl="http://localhost:1234/PedidosProveedoresService.svc?wsdl" />
+    <MetadataFile FileName="PedidosProveedoresService.disco" MetadataType="Disco" ID="a8632435-7c14-4799-b7f4-c922c1868d96" SourceId="1" SourceUrl="http://localhost:1234/PedidosProveedoresService.svc?disco" />
+    <MetadataFile FileName="PedidosProveedoresService1.xsd" MetadataType="Schema" ID="c1dcc966-b56e-4480-b284-5c62144d5b86" SourceId="1" SourceUrl="http://localhost:1234/PedidosProveedoresService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PedidosProveedoresService2.xsd" MetadataType="Schema" ID="6bbcdbd5-c7a2-49ca-a639-a584afdeba56" SourceId="1" SourceUrl="http://localhost:1234/PedidosProveedoresService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

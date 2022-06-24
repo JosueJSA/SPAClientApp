@@ -14,12 +14,11 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         mc:Ignorable="d"
-        Title="WProveedor" Height="290" Width="576">
+        Title="WProveedor" Height="370" Width="276">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -27,12 +26,14 @@
 
         <Border Margin="10" Grid.Row="1" Background="#41768FCE" CornerRadius="5"/>
 
-        <Border Margin="10.4,60,9.6,84.8" Grid.Column="1" Background="#41768FCE" CornerRadius="5">
+        <Border Margin="10.4,50,9.6,95.8" Grid.Column="1" Background="#41768FCE" CornerRadius="5">
             <StackPanel Margin="10" Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right"/>
         </Border>
 
         <Grid Margin="20" Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -76,193 +77,55 @@
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                 VerticalAlignment="Top"
                 materialDesign:HintAssist.Hint="Insumo" Padding="5,5,5,5" Background="White" FontSize="10"/>
-
-            <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBox
+                x:Name="DireccionTxt"
+                Margin="0,0,5,0"
+                Grid.Row="5"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                materialDesign:HintAssist.Hint="Direecion" Padding="5,5,5,5" Background="White" FontSize="10"/>
+            
+            <StackPanel Grid.Row="6" Orientation="Horizontal">
                 <Label x:Name="StatusTxt" Content="Status: "/>
                 <Label x:Name="StatusLbl" Width="100"/>
             </StackPanel>
 
-        </Grid>
-
-        <Grid Grid.Column="1" Margin="20.4,20,19.6,44.8">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <StackPanel Orientation="Horizontal">
-
-                <ComboBox
-                x:Name="DireccionesCmbx"
-              Style="{StaticResource MaterialDesignOutlinedComboBox}"
-              materialDesign:HintAssist.Hint="Selecciona una dirección"
-              ItemsSource="{Binding ShortStringList}"
-              materialDesign:TextFieldAssist.HasClearButton="True" Padding="5,5,5,5" Background="White" FontSize="10" Height="24" Width="231">
-                    <ComboBox.SelectedItem>
-                        <Binding
-                          Path="SelectedValidationOutlined"
-                          Mode="TwoWay"
-                          UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                </ComboBox>
-
-                <StackPanel
-                  Orientation="Horizontal">
-                    <materialDesign:PopupBox
-                    StaysOpen="True"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right">
-                        <Grid
-                      Width="300"
-                      Margin="8,8,8,8">
-                            <Grid.Resources>
-                                <Style
-                          TargetType="CheckBox"
-                          BasedOn="{StaticResource MaterialDesignCheckBox}">
-                                    <Setter
-                            Property="Margin"
-                            Value="8,8,10,8" />
-                                </Style>
-                                <Style
-                          TargetType="TextBox"
-                          BasedOn="{StaticResource MaterialDesignTextBox}">
-                                    <Setter
-                            Property="materialDesign:HintAssist.IsFloating"
-                            Value="True" />
-                                    <Setter
-                            Property="Margin"
-                            Value="8,8,8,8" />
-                                </Style>
-                            </Grid.Resources>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition
-                          Width="*" />
-                                <ColumnDefinition
-                          Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition
-                          Height="*" />
-                                <RowDefinition
-                          Height="*" />
-                                <RowDefinition
-                          Height="*" />
-                                <RowDefinition
-                          Height="*" />
-                                <RowDefinition
-                          Height="*" />
-                                <RowDefinition
-                          Height="*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Margin="8,8,8,16"
-                        Text="Nueva dirección" />
-                            <TextBox
-                        x:Name="ColoniaNuevaTxt"
-                        Grid.Column="0"
-                        Grid.Row="1"
-                        materialDesign:HintAssist.Hint="Colonia"
-                        Text="" />
-                            <TextBox
-                          x:Name="CalleNuevaTxt"
-                        Grid.Column="0"
-                        Grid.Row="2"
-                        materialDesign:HintAssist.Hint="Calle"
-                        Text="" />
-                            <TextBox
-                          x:Name="NumeroNuevoTxt"
-                        Grid.Column="0"
-                        Grid.Row="3"
-                        materialDesign:HintAssist.Hint="Numero"
-                        Text="" />
-                            <StackPanel
-                        Grid.Row="5"
-                        Grid.ColumnSpan="2"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                                <Button
-                          Content="Agregar"
-                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" />
-                                <Button
-                          Content="Cancelar"
-                          Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
-                                    <Button.Style>
-                                        <Style
-                              TargetType="Button">
-                                            <Setter
-                                Property="Foreground"
-                                Value="Red" />
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                    </materialDesign:PopupBox>
-                </StackPanel>
-            </StackPanel>
-
-
-            <TextBox
-            x:Name="CalleTxt"
-            Grid.Row="2"
-            FontSize="10" 
-            Margin="0,10,0,0"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Calle" Padding="5,5,5,5" Background="White" />
-
-            <TextBox
-                x:Name="NumeroTxt"
-            Grid.Row="3"
-            FontSize="10" 
-            Margin="0,10,0,0"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint="Número" Padding="5,5,5,5" Background="White" />
-
-            <StackPanel Grid.Row="3" Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,50,0,-40">
-                <Button
-                        x:Name="SalirBtn"
-                        Margin="0,0,15,0"
-                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                      ToolTip="Regresar a la lista"
-                      Content="Salir"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
-                <Button
+        <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right"  >
+            <Button
+                    Click="Actualizar"
 					x:Name="ActualizarBtn"
 					Margin="0,0,15,0"
 				  Style="{StaticResource MaterialDesignRaisedDarkButton}"
 				  ToolTip="Actualizar datos"
 				  Content="Actualizar"
 				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" />
-                <Button
+            <Button
+                    Click="Registrar"
 					x:Name="RegistrarBtn"
 					Margin="0,0,15,0"
 				  Style="{StaticResource MaterialDesignRaisedDarkButton}"
 				  ToolTip="Registrar Proveedor"
 				  Content="Registrar"
 				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Visibility="Collapsed" />
-                <Button
+            <Button
+                    Click="CancelarProceso"
 					x:Name="CancelarBtn"
 					Margin="0,1,15,0.6"
 				  Style="{StaticResource MaterialDesignRaisedDarkButton}"
 				  ToolTip="Cancelar proceso"
 				  Content="Cerrar"
 				  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#EE000000" Background="White"  Visibility="Collapsed" />
-            </StackPanel>
 
-
+            <Button
+                    Click="Salir"
+                        x:Name="SalirBtn"
+                        Margin="0,1,15,0.6"
+                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                      ToolTip="Regresar a la lista"
+                      Content="Salir"
+                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Grid.Row="5" />
+        </StackPanel>
 
         </Grid>
-
     </Grid>
 </Window>

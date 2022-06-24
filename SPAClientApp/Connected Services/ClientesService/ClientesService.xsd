@@ -39,4 +39,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AnswerMessage" nillable="true" type="tns:AnswerMessage" />
+  <xs:complexType name="ArrayOfECliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ECliente" nillable="true" type="tns:ECliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfECliente" nillable="true" type="tns:ArrayOfECliente" />
 </xs:schema>

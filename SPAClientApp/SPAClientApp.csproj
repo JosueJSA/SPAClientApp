@@ -115,7 +115,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PedidosProveedoresService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ProductosService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ProveedoresService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UsuariosService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -130,6 +145,12 @@
     <Compile Include="Views\WCliente.xaml.cs">
       <DependentUpon>WCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WPedidoProveedor.xaml.cs">
+      <DependentUpon>WPedidoProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WInsumosDePedido.xaml.cs">
+      <DependentUpon>WInsumosDePedido.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WIngredientes.xaml.cs">
       <DependentUpon>WIngredientes.xaml</DependentUpon>
     </Compile>
@@ -138,6 +159,12 @@
     </Compile>
     <Compile Include="Views\WListaClientes.xaml.cs">
       <DependentUpon>WListaClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WListaPedidosProveedores.xaml.cs">
+      <DependentUpon>WListaPedidosProveedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WListaUsuarios.xaml.cs">
+      <DependentUpon>WListaUsuarios.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WListaInsumos.xaml.cs">
       <DependentUpon>WListaInsumos.xaml</DependentUpon>
@@ -151,6 +178,9 @@
     <Compile Include="Views\WListaProveedores.xaml.cs">
       <DependentUpon>WListaProveedores.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WLogin.xaml.cs">
+      <DependentUpon>WLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WPedidoCliente.xaml.cs">
       <DependentUpon>WPedidoCliente.xaml</DependentUpon>
     </Compile>
@@ -162,6 +192,9 @@
     </Compile>
     <Compile Include="Views\WProveedor.xaml.cs">
       <DependentUpon>WProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WUsuario.xaml.cs">
+      <DependentUpon>WUsuario.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ClientePage.xaml">
       <SubType>Designer</SubType>
@@ -175,6 +208,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\WPedidoProveedor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WInsumosDePedido.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\WIngredientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +225,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WListaClientes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WListaPedidosProveedores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WListaUsuarios.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -215,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\WLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WPedidoCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,6 +283,10 @@
     <Page Include="Views\WProveedor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +367,22 @@
     <None Include="Connected Services\PedidosClientesService\SPAClientApp.PedidosClientesService.EProductoComprado.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PedidosProveedoresService\PedidosProveedoresService.wsdl" />
+    <None Include="Connected Services\PedidosProveedoresService\PedidosProveedoresService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PedidosProveedoresService\PedidosProveedoresService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PedidosProveedoresService\PedidosProveedoresService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PedidosProveedoresService\SPAClientApp.PedidosProveedoresService.AnswerMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PedidosProveedoresService\SPAClientApp.PedidosProveedoresService.EPedidoProveedor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ProductosService\ProductosService.wsdl" />
     <None Include="Connected Services\ProductosService\ProductosService.xsd">
       <SubType>Designer</SubType>
@@ -332,6 +405,38 @@
     <None Include="Connected Services\ProductosService\SPAClientApp.ProductosService.EReceta.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ProveedoresService\ProveedoresService.wsdl" />
+    <None Include="Connected Services\ProveedoresService\ProveedoresService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProveedoresService\ProveedoresService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProveedoresService\ProveedoresService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProveedoresService\SPAClientApp.ProveedoresService.AnswerMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProveedoresService\SPAClientApp.ProveedoresService.EProveedor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuariosService\SPAClientApp.UsuariosService.AnswerMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuariosService\SPAClientApp.UsuariosService.EUsuario.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuariosService\UsuariosService.wsdl" />
+    <None Include="Connected Services\UsuariosService\UsuariosService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UsuariosService\UsuariosService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UsuariosService\UsuariosService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -352,22 +457,10 @@
     <WCFMetadataStorage Include="Connected Services\ClientesService\" />
     <WCFMetadataStorage Include="Connected Services\InsumosService\" />
     <WCFMetadataStorage Include="Connected Services\PedidosClientesService\" />
+    <WCFMetadataStorage Include="Connected Services\PedidosProveedoresService\" />
     <WCFMetadataStorage Include="Connected Services\ProductosService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ClientesService\ClientesService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ClientesService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ClientesService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ClientesService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <WCFMetadataStorage Include="Connected Services\ProveedoresService\" />
+    <WCFMetadataStorage Include="Connected Services\UsuariosService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\InsumosService\InsumosService.disco" />
@@ -410,6 +503,66 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\PedidosClientesService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UsuariosService\UsuariosService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UsuariosService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UsuariosService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\UsuariosService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProveedoresService\ProveedoresService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProveedoresService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProveedoresService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProveedoresService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosProveedoresService\PedidosProveedoresService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosProveedoresService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosProveedoresService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PedidosProveedoresService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ClientesService\ClientesService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ClientesService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ClientesService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ClientesService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

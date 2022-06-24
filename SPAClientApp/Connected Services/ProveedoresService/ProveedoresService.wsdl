@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ProveedoresService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:1234/ProveedoresService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:1234/ProveedoresService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1234/ProveedoresService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IProveedoresService_GetProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_GetProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_GetProveedoresList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProveedoresList" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_GetProveedoresList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProveedoresListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_AddProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_AddProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_UpdateProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_UpdateProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_ChangeProveedorStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeProveedorStatus" />
+  </wsdl:message>
+  <wsdl:message name="IProveedoresService_ChangeProveedorStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeProveedorStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IProveedoresService">
+    <wsdl:operation name="GetProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProveedoresService/GetProveedor" message="tns:IProveedoresService_GetProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProveedoresService/GetProveedorResponse" message="tns:IProveedoresService_GetProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProveedoresList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProveedoresService/GetProveedoresList" message="tns:IProveedoresService_GetProveedoresList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProveedoresService/GetProveedoresListResponse" message="tns:IProveedoresService_GetProveedoresList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProveedoresService/AddProveedor" message="tns:IProveedoresService_AddProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProveedoresService/AddProveedorResponse" message="tns:IProveedoresService_AddProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProveedoresService/UpdateProveedor" message="tns:IProveedoresService_UpdateProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProveedoresService/UpdateProveedorResponse" message="tns:IProveedoresService_UpdateProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeProveedorStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProveedoresService/ChangeProveedorStatus" message="tns:IProveedoresService_ChangeProveedorStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProveedoresService/ChangeProveedorStatusResponse" message="tns:IProveedoresService_ChangeProveedorStatus_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IProveedoresService" type="tns:IProveedoresService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProveedor">
+      <soap:operation soapAction="http://tempuri.org/IProveedoresService/GetProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProveedoresList">
+      <soap:operation soapAction="http://tempuri.org/IProveedoresService/GetProveedoresList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddProveedor">
+      <soap:operation soapAction="http://tempuri.org/IProveedoresService/AddProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProveedor">
+      <soap:operation soapAction="http://tempuri.org/IProveedoresService/UpdateProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeProveedorStatus">
+      <soap:operation soapAction="http://tempuri.org/IProveedoresService/ChangeProveedorStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProveedoresService">
+    <wsdl:port name="BasicHttpBinding_IProveedoresService" binding="tns:BasicHttpBinding_IProveedoresService">
+      <soap:address location="http://localhost:1234/ProveedoresService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

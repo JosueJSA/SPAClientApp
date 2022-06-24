@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPAClientApp.ClientesService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,17 +26,28 @@ namespace SPAClientApp
     {
         private static WCliente window = null;
         public Notifier notifier { get; set; }
-        public WHome Home { get; set; }
+        public WListaClientes Home { get; set; }
+        public ClientePage Page { get; set; }
+        public ECliente Cliente { get; set; }
 
-        public static WCliente GetWClient(WHome home)
+        public WCliente(WListaClientes home, string mode, ECliente cliente)
         {
-            if(window == null)
-            {
-                return (window = new WCliente() {Home = home});
+            InitializeComponent();
+            ConfigurarToastNotifier(this, 3);
+            Cliente = cliente;
+            Home = home;
+            if (mode == "Consulta") {
+                container.Content = (Page = new ClientePage());
+                Page.MostrarClienteInfo(cliente);
+                Page.CamposSoloLectura();
             }
             else
             {
-                return window;
+                container.Content = (Page = new ClientePage());
+                Page.MostrarClienteInfo(cliente);
+                requestBtn.Visibility = Visibility.Collapsed;
+                updateBtn.Visibility = Visibility.Visible;
+                cancelBtn.Visibility = Visibility.Visible;
             }
         }
 
@@ -81,6 +93,18 @@ namespace SPAClientApp
         {
             InitializeComponent();
             ConfigurarToastNotifier(this, 3);
+        }
+
+        private void Cancelar(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Actualizar(object sender, RoutedEventArgs e)
+        {
+            Page.ActualizarClienteBasico(Cliente);
+            MostrarToastMessage("Exito", "La actualización se ha realizado correctamente");
+            Close();
         }
     }
 }

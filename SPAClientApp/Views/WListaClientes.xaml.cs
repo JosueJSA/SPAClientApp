@@ -30,9 +30,7 @@ namespace SPAClientApp
         private Notifier notifier;
         private string Status { get; set; } = string.Empty;
         private string Valor { get; set; } = string.Empty;
-        private DateTime Tiempo { get; set; }
-        private static bool IsClosed { get; set; } = false;
-        private string CriterioSeleccionado { get; set; } = "Todos";
+        private static bool IsClosed { get; set; } = true;
         private static WListaClientes CurrentWindow { get; set; } = null;
 
 
@@ -45,174 +43,52 @@ namespace SPAClientApp
 
         }
 
-        public static WListaClientes GetWListaClientes(WHome window = null)
-        {
-            if (IsClosed || CurrentWindow == null)
-                return (CurrentWindow = new WListaClientes(window));
-            else
-                return CurrentWindow;
-        }
-
-        private async Task BuscarClientesAsync(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ValidarFiltro();
-                CriterioSeleccionado = Criterio.Text;
-                Status = ((bool)CheckBoxActivos.IsChecked) ? "Activo" : "Dado de baja";
-                Valor = (Criterio.Text == "Nombre") ? $"%{ValorBusqueda.Text}%" : ValorBusqueda.Text;
-                if (Criterio.Text == "Todos")
-                    Valor = null;
-                string criterio = Criterio.Text;
-                //var result = await client.GetClientesAsync(CriterioSeleccionado, Valor, Status);
-                //ActualizarTablaClientes(result.ToList());
-            }
-            catch (ArgumentException ae)
-            {
-                MostrarToastMessage("Warning", ae.Message);
-            }
-        }
-
-        public void ValidarFiltro()
-        {
-            if (Criterio.Text == "Nombre")
-                if (string.IsNullOrEmpty(ValorBusqueda.Text) || string.IsNullOrEmpty(ValorBusqueda.Text.Trim()))
-                    throw new ArgumentException("Debes escribir un nombre en el valor de búsqueda");
-            if (Criterio.Text == "Telefono")
-                if (string.IsNullOrEmpty(ValorBusqueda.Text) || string.IsNullOrEmpty(ValorBusqueda.Text.Trim()) || !int.TryParse(ValorBusqueda.Text, out _))
-                    throw new ArgumentException("El valor de búsquda debe ser un número valido");
-        }
-
-        private void ActualizarTablaClientes(List<ECliente> clientes)
-        {
-            if (clientes != null)
-                tablaDatos.ItemsSource = clientes;
-            else
-                MostrarToastMessage("Error", "Hubo un error en el servidor, si los " +
-                    "problemas persisten, favor de contactar a soporte técnico");
-            if ((bool)CheckBoxActivos.IsChecked)
-            {
-                ColumnActive.Visibility = Visibility.Collapsed;
-                ColumnEliminate.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                ColumnActive.Visibility = Visibility.Visible;
-                ColumnEliminate.Visibility = Visibility.Collapsed;
-            }
-            Tiempo = DateTime.Now;
-        }
-
-        private void SeleccionarCriterio(object sender, MouseButtonEventArgs e)
-        {
-            if (Criterio.Text == "Todos")
-                ValorBusqueda.IsEnabled = false;
-            else
-                ValorBusqueda.IsEnabled = true;
-        }
-
-        private void LimpiarFiltro(object sender, RoutedEventArgs e)
-        {
-            ValorBusqueda.Text = String.Empty;
-            CheckBoxActivos.IsChecked = true;
-            Criterio.SelectedIndex = 0;
-        }
-
         private void DarDeBaja(object sender, RoutedEventArgs e)
         {
-            if (TablaActualizada())
+            if(MostrarCuadroConfirmacion("¿Estas seguro de que quieres dar de baja al usaurio seleccionado?"))
             {
-                var cliente = ((FrameworkElement)sender).DataContext as ECliente;
-                string mensaje = $"¿Seguro(a) que deseas dar de baja al Proveedor '{cliente.Nombre}' seleccionado?";
-                if (MostrarCuadroConfirmacion(mensaje))
+                try
                 {
-                    //AnswerMessage response = client.ChangeClienteStatus(cliente.id, "Dado de baja");
-                    //if (response.Key >= 0)
-                    //{
-                    //    MostrarToastMessage("Exito", "El Proveedor ha sido dado de baja");
-                    //    var result = client.GetClientes(CriterioSeleccionado, Valor, Status).ToList();
-                    //    ActualizarTablaClientes(result);
-                    //}
-                    //else
-                    //{
-                    //    MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                    //}
+                    var cliente = ((FrameworkElement)sender).DataContext as ECliente;
+                    client.ChangeStatusCliente(cliente.Id, "Dado de baja");
+                    MostrarToastMessage("Exito", "Cliente dado de baja");
                 }
-            }
-            else
-            {
-                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
+                catch (Exception)
+                {
+                    MostrarToastMessage("Error", "Lo sentimos, algo ha salido mal");
+                }
+                RefrescarTabla();
             }
         }
 
         private void Activar(object sender, RoutedEventArgs e)
         {
-            if (TablaActualizada())
+            if(MostrarCuadroConfirmacion("¿Eatas seguro de que quieres dar de alta al usuario seleccionado?"))
             {
-                //var cliente = ((FrameworkElement)sender).DataContext as EProveedor;
-                //string mensaje = $"¿Seguro(a) que deseas dar de alta el Proveedor '{cliente.Nombre}' seleccionado?";
-                //if (MostrarCuadroConfirmacion(mensaje))
-                //{
-                //    AnswerMessage response = proveedor.ChangeInsumoStatus(cliente.Id, "Activo");
-                //    if (response.Key >= 0)
-                //    {
-                //        MostrarToastMessage("Exito", "El Proveedor ha sido dado de alta");
-                //        RefrescarTablaCliente();
-                //    }
-                //    else
-                //    {
-                //        MostrarToastMessage("Error", "Lo sentimos, ha ocurrido un error en el servidor, favor de contactar a soporte técnico");
-                //    }
-                //}
-            }
-            else
-            {
-                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
+                try
+                {
+                    var cliente = ((FrameworkElement)sender).DataContext as ECliente;
+                    client.ChangeStatusCliente(cliente.Id, "Activo");
+                    MostrarToastMessage("Exito", "Cliente dado de alta");
+                }
+                catch (Exception)
+                {
+                    MostrarToastMessage("Error", "Lo sentimos, algo ha salido mal");
+                }
+                RefrescarTabla();
             }
         }
 
         private void ConsultarCliente(object sender, RoutedEventArgs e)
         {
-            if (TablaActualizada())
-            {
-                var cliente = ((FrameworkElement)sender).DataContext as ECliente;
-                //var window = new WCliente(this);
-                //window.ActivarModoLectura(cliente);
-                //window.Show();
-            }
-            else
-            {
-                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
-            }
-        }
-
-        private void ConsultarDirecciones(object sender, RoutedEventArgs e)
-        {
-            //
+            var cliente = ((FrameworkElement)sender).DataContext as ECliente;
+            new WCliente(this, "Consulta", cliente).Show();
         }
 
         private void Modificar(object sender, RoutedEventArgs e)
         {
-            if (TablaActualizada())
-            {
-                var cliente = ((FrameworkElement)sender).DataContext as ECliente;
-                //var window = new WCliente(this);
-                //window.ActivarModoEdicion("Actualizacion", cliente);
-                //window.Show();
-            }
-            else
-            {
-                MostrarToastMessage("Warning", "La tabla ha sido refresacada debido a que el tiempo de actividad superó los 5 min.");
-            }
-        }
-
-
-        private void AgregarCliente(object sender, RoutedEventArgs e)
-        {
-            //var window = new WCliente(HomeWindow);
-            //WCliente.GetWClient(HomeWindow, "Registro").Show();
-            //window.ActivarModoEdicion("Registro", new ECliente());
-            //window.Show();
+            var cliente = ((FrameworkElement)sender).DataContext as ECliente;
+            new WCliente(this, "Actualización", cliente).Show();
         }
 
         private void Salir(object sender, RoutedEventArgs e)
@@ -220,23 +96,6 @@ namespace SPAClientApp
             Close();
         }
 
-        public void RefrescarTablaCliente()
-        {
-            //var result = client.GetProveedorList(CriterioSeleccionado, Valor, Status).ToList();
-            //ActualizarTablaClientes(result);
-        }
-
-
-        private bool TablaActualizada()
-        {
-            bool isCurrent = true;
-            if ((DateTime.Now - Tiempo).TotalMinutes > 5)
-            {
-                isCurrent = false;
-                RefrescarTablaCliente();
-            }
-            return isCurrent;
-        }
         private bool MostrarCuadroConfirmacion(string message)
         {
             MessageBoxResult boxResult = MessageBox.Show(message, "Advertencia", MessageBoxButton.YesNoCancel);
@@ -267,9 +126,18 @@ namespace SPAClientApp
             });
         }
 
+        private void RefrescarTabla()
+        {
+            var clientes = client.GetClientes(Status, Valor);
+            tablaDatos.ItemsSource = clientes.ToList();
+        }
+
         private void BuscarClientes(object sender, RoutedEventArgs e)
         {
-
+            Valor = string.IsNullOrEmpty(ValorBusqueda.Text) ? null : ValorBusqueda.Text;
+            Status = (bool)soloActivos.IsChecked ? "Activo" : "Dado de baja";
+            var clientes = client.GetClientes(Status, Valor);
+            tablaDatos.ItemsSource = clientes.ToList();
         }
     }
 }

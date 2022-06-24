@@ -15,35 +15,32 @@
          FontFamily="{DynamicResource MaterialDesignFont}"
         
         mc:Ignorable="d"
-        Title="WCliente" Height="393" Width="724">
-    <Grid>
-        <Frame Source="ClientePage.xaml">
+        Title="WCliente" Height="460" Width="715">
+    <DockPanel>
+
+        <Frame DockPanel.Dock="Top" x:Name="container" Height="300">
 
         </Frame>
 
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Margin="20" DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Button
+                x:Name="cancelBtn"
                 Margin="10,0,20,0"
               DockPanel.Dock="Left"
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Agregar cliente"
               Content="Cancelar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="90" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Visibility="Collapsed" />
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="90" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Padding="0,0,0,0" VerticalAlignment="Top" FontSize="12" Visibility="Collapsed" Click="Cancelar" />
             <Button
-              Margin="0,0,20,0"
-                DockPanel.Dock="Right"
-              Style="{StaticResource MaterialDesignRaisedDarkButton}"
-              ToolTip="Volver atrás"
-              Content="Registrar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" />
-            <Button
+                x:Name="updateBtn"
               Margin="0,0,20,0"
                 DockPanel.Dock="Right"
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
               ToolTip="Volver atrás"
               Content="Actualizar"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" />
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="100" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" Click="Actualizar" />
             <Button
+                x:Name="requestBtn"
               Margin="0,0,20,0"
                 DockPanel.Dock="Right"
               Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -51,6 +48,6 @@
               Content="Salir"
               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" />
         </StackPanel>
-    </Grid>
+    </DockPanel>
 
 </Window>

@@ -54,6 +54,11 @@ namespace SPAClientApp
             };
         }
 
+        public void CamposSoloLectura()
+        {
+            CamposCliente.ForEach(c => c.IsReadOnly = true);
+        }
+
         public ClientePage(WPedidoCliente parent)
         {
             InitializeComponent();
@@ -85,6 +90,7 @@ namespace SPAClientApp
         {
             return DireccionesCmbx;
         }
+
         public async Task<ECliente> ActualizarCliente()
         {
             try
@@ -99,6 +105,21 @@ namespace SPAClientApp
             {
                 MostrarToastMessage("Error", ex.Message);
                 return null;
+            }
+        }
+
+        public void ActualizarClienteBasico(ECliente cliente)
+        {
+            try
+            {
+                cliente = PrepararClienteNormal();
+                var result = client.UpdateBasicClient(cliente);
+                if (result.Key < 0)
+                    throw new Exception(result.Message);
+            }
+            catch (Exception ex)
+            {
+                MostrarToastMessage("Error", ex.Message);
             }
         }
 
@@ -130,6 +151,21 @@ namespace SPAClientApp
             }
             
             //Other instructions
+        }
+
+        private ECliente PrepararClienteNormal()
+        {
+            if (Cliente == null)
+                Cliente = new ECliente();
+            Cliente.Email = CorreoElectronicoTxt.Text;
+            Cliente.CodigoPostal = Convert.ToInt32(CodigoPostalTxt.Text);
+            Cliente.Nombre = NombreTxt.Text;
+            Cliente.Apellido = ApellidosTxt.Text;
+            Cliente.Status = "Activo";
+            Cliente.Ciudad = CiudadTxt.Text;
+            Cliente.Telefono = TelefonoTxt.Text;
+            Cliente.Nacimiento = Convert.ToDateTime(NacimientoDatePicker.Text);
+            return Cliente;
         }
 
         private ECliente PrepararCliente()
@@ -197,7 +233,10 @@ namespace SPAClientApp
             EdadLbl.Content = cliente.Edad.ToString();
             StatusLbl.Content = cliente.Status.ToString();
             DireccionesCmbx.Items.Clear();
-            cliente.Direcciones.ToList().ForEach(direccion => DireccionesCmbx.Items.Add($"{direccion.Colonia}, {direccion.Calle}, {direccion.Numero}"));
+            if (cliente.Direcciones != null)
+            {
+                cliente.Direcciones.ToList().ForEach(direccion => DireccionesCmbx.Items.Add($"{direccion.Colonia}, {direccion.Calle}, {direccion.Numero}"));
+            }
         }
 
         public void MostrarClienteDePedido(EPedidoClienteDetallado pedido)

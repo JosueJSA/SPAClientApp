@@ -45,22 +45,8 @@
                         <ColumnDefinition Width="650"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="15,0,0,0" >
-                        <Label Content="Criterio" FontWeight="Bold"/>
-                        <ComboBox x:Name="Criterio" Margin="0,0,15,0" SelectedIndex="1" Foreground="Black" BorderBrush="Black" MouseLeftButtonDown="SeleccionarCriterio">
-                            <ComboBoxItem Content="Nombre" />
-                            <ComboBoxItem Content="Telefono" />
-                            <ComboBoxItem Content="Todos" />
-                        </ComboBox>
-                        <CheckBox
-                            x:Name="CheckBoxActivos"
-                            IsChecked="True"
-                            Margin="0,5,0,8"
-                            Content="Solo activos" Foreground="#DD000000" BorderBrush="#FF361FAB" Background="#FF2916B5" />
-                    </StackPanel>
-
-                    <StackPanel Margin="10,0,10,0" Grid.Column="1" Orientation="Vertical">
-                        <Label Content="Valor de búsqueda" FontWeight="Bold"/>
+                    <StackPanel Margin="10,0,10,0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical">
+                        <Label Content="Nombre cliente" FontWeight="Bold"/>
                         <TextBox
                             x:Name="ValorBusqueda"
                             Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -68,16 +54,12 @@
                             TextWrapping="Wrap"
                             materialDesign:HintAssist.Hint="Ingresa el valor de búsqueda según el criterio"
                             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}" Padding="3,3,3,3" Foreground="Black" SelectionBrush="Black" />
+                        <CheckBox x:Name="soloActivos" Content="Activos" Foreground="#DD000000"/>
                     </StackPanel>
 
                 </Grid>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button
-                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                      ToolTip="Limpiar formulario"
-                      Content="Limpiar"
-                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="11" Padding="0,0,0,0" MinWidth="60" Foreground="#DD171717" Background="#FFFDFCFF" Height="22" Click="LimpiarFiltro" />
                     <Button
                         Margin="10,0,10,0"
                       Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -147,19 +129,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button
-                                x:Name="DireccionesBtn"
-                              Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
-                              ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
-                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="20" Height="20" Padding="0,0,0,0" Background="#FF0E487F" BorderBrush="#FF07386F" Click="ConsultarDirecciones">
-                                <materialDesign:PackIcon Kind="Home" />
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Nombre}"  Width="200" Header="Nombre"/>
                 <DataGridTextColumn Binding="{Binding Apellido}" Width="200" Header="Apellido"/>
                 <DataGridTextColumn Binding="{Binding Telefono}" Width="100"  Header="Teléfono"/>
@@ -176,13 +145,6 @@
               ToolTip="Volver atrás (Home)"
               Content="Salir"
               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="70" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" VerticalAlignment="Top" Click="Salir" />
-
-            <Button
-              DockPanel.Dock="Left"
-              Style="{StaticResource MaterialDesignRaisedDarkButton}"
-              ToolTip="Registre un nuevo Cliente"
-              Content="Registrar Cliente"
-              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Width="190" Height="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" Foreground="#DD000000" BorderBrush="#FF4A1FB1" Background="White" Click="AgregarCliente" Padding="0,0,0,0" Margin="23,0,0,0" VerticalAlignment="Top" FontSize="12" />
         </DockPanel>
 
     </Grid>

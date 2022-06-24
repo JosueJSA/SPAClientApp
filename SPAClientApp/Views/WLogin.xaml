@@ -1,0 +1,34 @@
+﻿<Window x:Class="SPAClientApp.Views.WLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SPAClientApp.Views"
+        
+        Icon="../Resources/img/logo.png"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        mc:Ignorable="d"
+        Title="WLogin" Height="521" Width="341">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="50">
+            <Label Content="Inicio de sesión" FontWeight="Bold" FontSize="18"/>
+
+            <Label Margin="0,20,0,0" Content="Email"/>
+            <TextBox x:Name="email"/>
+
+            <Label Margin="0,20,0,0" Content="Contraseña"/>
+            <PasswordBox x:Name="password"/>
+
+            <Button Margin="0,100,0,5" Content="Entrar" Click="SignIn"/>
+            <Button Margin="0,5,0,5" Content="Soy nuevo" Click="SignUp"/>
+            <Button Margin="0,5,0,5" Content="Salir" Background="White" BorderBrush="#FF5C00FF" Foreground="#DD000000" Click="Exit"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

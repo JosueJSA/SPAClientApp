@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="PedidosProveedoresService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:1234/PedidosProveedoresService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:1234/PedidosProveedoresService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1234/PedidosProveedoresService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPedidosProveedoresService_AddPedidoProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPedidoProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosProveedoresService_AddPedidoProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPedidoProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosProveedoresService_ChangeStatusPeidoProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusPeidoProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosProveedoresService_ChangeStatusPeidoProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusPeidoProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosProveedoresService_GetPedidosProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPedidosProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IPedidosProveedoresService_GetPedidosProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPedidosProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPedidosProveedoresService">
+    <wsdl:operation name="AddPedidoProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosProveedoresService/AddPedidoProveedor" message="tns:IPedidosProveedoresService_AddPedidoProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosProveedoresService/AddPedidoProveedorResponse" message="tns:IPedidosProveedoresService_AddPedidoProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatusPeidoProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosProveedoresService/ChangeStatusPeidoProveedor" message="tns:IPedidosProveedoresService_ChangeStatusPeidoProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosProveedoresService/ChangeStatusPeidoProveedorResponse" message="tns:IPedidosProveedoresService_ChangeStatusPeidoProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPedidosProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPedidosProveedoresService/GetPedidosProveedores" message="tns:IPedidosProveedoresService_GetPedidosProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPedidosProveedoresService/GetPedidosProveedoresResponse" message="tns:IPedidosProveedoresService_GetPedidosProveedores_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IPedidosProveedoresService" type="tns:IPedidosProveedoresService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddPedidoProveedor">
+      <soap:operation soapAction="http://tempuri.org/IPedidosProveedoresService/AddPedidoProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatusPeidoProveedor">
+      <soap:operation soapAction="http://tempuri.org/IPedidosProveedoresService/ChangeStatusPeidoProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPedidosProveedores">
+      <soap:operation soapAction="http://tempuri.org/IPedidosProveedoresService/GetPedidosProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PedidosProveedoresService">
+    <wsdl:port name="BasicHttpBinding_IPedidosProveedoresService" binding="tns:BasicHttpBinding_IPedidosProveedoresService">
+      <soap:address location="http://localhost:1234/PedidosProveedoresService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

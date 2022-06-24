@@ -38,6 +38,24 @@
   <wsdl:message name="IClientesService_GetClienteByPedido_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetClienteByPedidoResponse" />
   </wsdl:message>
+  <wsdl:message name="IClientesService_GetClientes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientes" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_GetClientes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_ChangeStatusCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusCliente" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_ChangeStatusCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_UpdateBasicClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBasicClient" />
+  </wsdl:message>
+  <wsdl:message name="IClientesService_UpdateBasicClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBasicClientResponse" />
+  </wsdl:message>
   <wsdl:portType name="IClientesService">
     <wsdl:operation name="GetCliente">
       <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/GetCliente" message="tns:IClientesService_GetCliente_InputMessage" />
@@ -58,6 +76,18 @@
     <wsdl:operation name="GetClienteByPedido">
       <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/GetClienteByPedido" message="tns:IClientesService_GetClienteByPedido_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/GetClienteByPedidoResponse" message="tns:IClientesService_GetClienteByPedido_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/GetClientes" message="tns:IClientesService_GetClientes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/GetClientesResponse" message="tns:IClientesService_GetClientes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatusCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/ChangeStatusCliente" message="tns:IClientesService_ChangeStatusCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/ChangeStatusClienteResponse" message="tns:IClientesService_ChangeStatusCliente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBasicClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientesService/UpdateBasicClient" message="tns:IClientesService_UpdateBasicClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientesService/UpdateBasicClientResponse" message="tns:IClientesService_UpdateBasicClient_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IClientesService" type="tns:IClientesService">
@@ -100,6 +130,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetClienteByPedido">
       <soap:operation soapAction="http://tempuri.org/IClientesService/GetClienteByPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientes">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/GetClientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatusCliente">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/ChangeStatusCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBasicClient">
+      <soap:operation soapAction="http://tempuri.org/IClientesService/UpdateBasicClient" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

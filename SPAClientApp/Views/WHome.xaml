@@ -46,7 +46,7 @@
 
                             <StackPanel Orientation="Vertical" Background="#FF3F51B5">
                                 <materialDesign:PackIcon Kind="AccountCircle" Height="116" Width="113" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
-                                <Label Content="Asministrador" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Foreground="#DDFFEAEA"/>
+                                <Label x:Name="userLbl" Content="Asministrador" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Foreground="#DDFFEAEA"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#003F51B5" HorizontalAlignment="Center" FlowDirection="LeftToRight">
@@ -55,20 +55,18 @@
                                   Style="{StaticResource MaterialDesignPaperDarkButton}"
                                   ToolTip="Resource name: MaterialDesignPaperDarkButton"
                                   Content="Ver"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="{x:Null}" BorderBrush="White" Foreground="#DDFFFFFF" Height="28" HorizontalAlignment="Stretch" Width="68" />
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="{x:Null}" BorderBrush="White" Foreground="#DDFFFFFF" Height="28" HorizontalAlignment="Stretch" Width="68" Click="ConsultarUsuario" />
                                 <Button
                                     Margin="10,0,10,0"
                                   Style="{StaticResource MaterialDesignPaperDarkButton}"
                                   ToolTip="Resource name: MaterialDesignPaperDarkButton"
                                   Content="Editar"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="{x:Null}" BorderBrush="White" Foreground="#DDFFFFFF" Height="28" HorizontalAlignment="Center" Width="68" />
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="{x:Null}" BorderBrush="White" Foreground="#DDFFFFFF" Height="28" HorizontalAlignment="Center" Width="68" Click="UpdateUser" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="2" Background="White">
-                                <Button Content="Perfil" Background="White" BorderBrush="White" Foreground="#DD000000" HorizontalContentAlignment="Left"/>
-                                <Button Content="Almacén" Background="White" BorderBrush="White" Foreground="#DD000000" HorizontalContentAlignment="Left"/>
-                                <Button Content="Cambiar sesión" Background="White" Foreground="#DD0E0E0E" BorderBrush="#FFFBFBFB" HorizontalContentAlignment="Left"/>
-                                <Button Content="Cerrar programa" Background="White" BorderBrush="White" Foreground="#DD000000" HorizontalContentAlignment="Left"/>
+                                <Button Content="Cerrar sesión" Background="White" Foreground="#DD0E0E0E" BorderBrush="#FFFBFBFB" HorizontalContentAlignment="Left" Click="CerrarSesion"/>
+                                <Button Content="Cerrar programa" Background="White" BorderBrush="White" Foreground="#DD000000" HorizontalContentAlignment="Left" Click="CerrarPrograma"/>
                             </StackPanel>
                             <StackPanel Grid.Row="3" Background="White">
 
@@ -122,7 +120,7 @@
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerUsuarios">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">
@@ -252,7 +250,7 @@
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerPedidosProveedores">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">
@@ -278,11 +276,11 @@
                                     DockPanel.Dock="Right"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5">
+                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalAlignment="Bottom" Background="#FF3F51B5" Click="VerProveedores">
                                     <materialDesign:PackIcon Kind="eye" Height="23" Width="28" Foreground="#DDFFFFFF" />
                                 </Button>
                                 <StackPanel DockPanel.Dock="Right" Width="Auto" Margin="10,0,5,0">
-                                    <Label Content="REPORTES" FontWeight="Bold" FontSize="14"/>
+                                    <Label Content="PROVEEDORES" FontWeight="Bold" FontSize="14"/>
                                     <TextBlock Text="Solo contadores y administradores" TextWrapping="Wrap" Foreground="#DD000000" FontSize="10"/>
                                 </StackPanel>
                             </DockPanel>

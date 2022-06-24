@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="9c07ed80-90ab-4770-8835-74bd1143f2e0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1234/ProveedoresService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProveedoresService.xsd" MetadataType="Schema" ID="b14d9ca0-1649-4a2f-aa48-9bcf41202825" SourceId="1" SourceUrl="http://localhost:1234/ProveedoresService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ProveedoresService1.xsd" MetadataType="Schema" ID="5f5336cc-0c2b-4504-a65d-9f27818220dc" SourceId="1" SourceUrl="http://localhost:1234/ProveedoresService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ProveedoresService2.xsd" MetadataType="Schema" ID="504a968f-d7cf-4488-a6cf-27223dfba2be" SourceId="1" SourceUrl="http://localhost:1234/ProveedoresService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ProveedoresService.disco" MetadataType="Disco" ID="2853c29a-fc5c-48be-8441-fb8596894452" SourceId="1" SourceUrl="http://localhost:1234/ProveedoresService.svc?disco" />
+    <MetadataFile FileName="ProveedoresService.wsdl" MetadataType="Wsdl" ID="9d342c22-d7fe-4106-8469-4d233b8e7bb1" SourceId="1" SourceUrl="http://localhost:1234/ProveedoresService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

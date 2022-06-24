@@ -421,6 +421,24 @@ namespace SPAClientApp.ClientesService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientesService/GetClienteByPedido", ReplyAction="http://tempuri.org/IClientesService/GetClienteByPedidoResponse")]
         System.Threading.Tasks.Task<SPAClientApp.ClientesService.ECliente> GetClienteByPedidoAsync(int IdPedido);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientesService/GetClientes", ReplyAction="http://tempuri.org/IClientesService/GetClientesResponse")]
+        SPAClientApp.ClientesService.ECliente[] GetClientes(string status, string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientesService/GetClientes", ReplyAction="http://tempuri.org/IClientesService/GetClientesResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.ClientesService.ECliente[]> GetClientesAsync(string status, string nombre);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientesService/ChangeStatusCliente", ReplyAction="http://tempuri.org/IClientesService/ChangeStatusClienteResponse")]
+        SPAClientApp.ClientesService.AnswerMessage ChangeStatusCliente(int idCliente, string status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientesService/ChangeStatusCliente", ReplyAction="http://tempuri.org/IClientesService/ChangeStatusClienteResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.ClientesService.AnswerMessage> ChangeStatusClienteAsync(int idCliente, string status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientesService/UpdateBasicClient", ReplyAction="http://tempuri.org/IClientesService/UpdateBasicClientResponse")]
+        SPAClientApp.ClientesService.AnswerMessage UpdateBasicClient(SPAClientApp.ClientesService.ECliente cliente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientesService/UpdateBasicClient", ReplyAction="http://tempuri.org/IClientesService/UpdateBasicClientResponse")]
+        System.Threading.Tasks.Task<SPAClientApp.ClientesService.AnswerMessage> UpdateBasicClientAsync(SPAClientApp.ClientesService.ECliente cliente);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -488,6 +506,30 @@ namespace SPAClientApp.ClientesService {
         
         public System.Threading.Tasks.Task<SPAClientApp.ClientesService.ECliente> GetClienteByPedidoAsync(int IdPedido) {
             return base.Channel.GetClienteByPedidoAsync(IdPedido);
+        }
+        
+        public SPAClientApp.ClientesService.ECliente[] GetClientes(string status, string nombre) {
+            return base.Channel.GetClientes(status, nombre);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.ClientesService.ECliente[]> GetClientesAsync(string status, string nombre) {
+            return base.Channel.GetClientesAsync(status, nombre);
+        }
+        
+        public SPAClientApp.ClientesService.AnswerMessage ChangeStatusCliente(int idCliente, string status) {
+            return base.Channel.ChangeStatusCliente(idCliente, status);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.ClientesService.AnswerMessage> ChangeStatusClienteAsync(int idCliente, string status) {
+            return base.Channel.ChangeStatusClienteAsync(idCliente, status);
+        }
+        
+        public SPAClientApp.ClientesService.AnswerMessage UpdateBasicClient(SPAClientApp.ClientesService.ECliente cliente) {
+            return base.Channel.UpdateBasicClient(cliente);
+        }
+        
+        public System.Threading.Tasks.Task<SPAClientApp.ClientesService.AnswerMessage> UpdateBasicClientAsync(SPAClientApp.ClientesService.ECliente cliente) {
+            return base.Channel.UpdateBasicClientAsync(cliente);
         }
     }
 }
